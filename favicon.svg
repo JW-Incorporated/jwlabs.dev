@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="JW Labs">
+  <style>
+    rect { fill: #1a1a19 }
+    text { fill: #fbfbfa }
+    @media (prefers-color-scheme: dark) {
+      rect { fill: #ececea }
+      text { fill: #16161a }
+    }
+  </style>
+  <rect width="64" height="64" rx="13"/>
+  <text x="32" y="44" text-anchor="middle"
+        font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+        font-size="34" font-weight="650" letter-spacing="-1.5">JW</text>
+</svg>

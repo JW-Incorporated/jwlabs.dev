@@ -1,0 +1,52 @@
+/* One stylesheet, no dependencies, no external fonts. The app it fronts ships a
+   strict CSP that blocks remote fonts and scripts; the marketing site holds the
+   same line so the two cannot drift into different rules. */
+:root {
+  --bg: #fbfbfa; --fg: #1a1a19; --muted: #5c5c58; --rule: #e2e2dd;
+  --link: #1c4f8b; --card: #f2f2ee;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16161a; --fg: #ececea; --muted: #a3a39d; --rule: #2e2e34;
+    --link: #8ab4f8; --card: #1d1d22;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16161a; --fg: #ececea; --muted: #a3a39d; --rule: #2e2e34;
+  --link: #8ab4f8; --card: #1d1d22;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+a { color: var(--link); }
+a:hover { text-decoration-thickness: 2px; }
+.bar {
+  display: flex; gap: .75rem; align-items: baseline; flex-wrap: wrap;
+  padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--rule);
+}
+.bar .home { font-weight: 650; letter-spacing: -.01em; text-decoration: none; color: var(--fg); }
+.bar .crumb { color: var(--muted); font-size: .95rem; }
+main { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+h1 { font-size: 1.9rem; line-height: 1.2; letter-spacing: -.02em; margin: .2rem 0 1rem; }
+h2 { font-size: 1.28rem; margin: 2.2rem 0 .6rem; letter-spacing: -.01em; }
+h3 { font-size: 1.06rem; margin: 1.6rem 0 .4rem; }
+p, li { overflow-wrap: anywhere; }
+.lede { font-size: 1.12rem; color: var(--muted); }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+code { background: var(--card); border: 1px solid var(--rule); border-radius: 4px; padding: .1em .35em; font-size: .9em; }
+pre { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: .9rem; overflow-x: auto; }
+pre code { background: none; border: 0; padding: 0; }
+blockquote { margin: 1rem 0; padding: .4rem 0 .4rem 1rem; border-left: 3px solid var(--rule); color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .94rem; }
+th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+.cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin: 1.5rem 0; padding: 0; list-style: none; }
+.card { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 1.1rem 1.2rem; }
+.card h2 { margin: 0 0 .3rem; font-size: 1.1rem; }
+.card p { margin: .3rem 0 .6rem; color: var(--muted); font-size: .96rem; }
+footer { border-top: 1px solid var(--rule); color: var(--muted); font-size: .92rem; padding: 1.2rem 1.25rem 2.5rem; }
+footer p { max-width: 46rem; margin: 0 auto; }

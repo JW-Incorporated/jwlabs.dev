@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>4a — a podcast curator · JW Labs</title>
+<meta name="description" content="4a is a podcast curator. It picks four topic queues for you every day, one of them deliberately unlike the others.">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<body>
+<header class="bar"><a class="home" href="../">JW Labs</a><span class="crumb">· 4a</span></header>
+<main>
+
+<h1>4a</h1>
+<p class="lede">4a is a podcast curator. It picks four topic queues for you every
+day — and makes one of them deliberately unlike the other three, so the thing you
+did not know to ask for still reaches you.</p>
+
+<h2>What you actually get today</h2>
+<p>The daily picks are the app. You open it, you get four cards, you play or save
+what looks good, and 4a learns from what you take and what you skip. There is no
+feed to scroll and nothing to configure first.</p>
+<p>4a is also built to assemble episodes into a <em>foray</em> — an ordered
+sequence of segments cut from several episodes and played as one run. That player
+is written and works, but <strong>no foray is published yet</strong>, so it is not
+something a visitor can open today. We would rather say that here than let the
+word appear on this page as though it were a feature waiting for you.</p>
+
+<h2>Where it runs</h2>
+<p>4a is a deployed web app at <a href="https://jw-incorporated.github.io/foray/">https://jw-incorporated.github.io/foray/</a>. It needs no
+signup and no password, and it can be added to a phone's home screen. iOS and
+Android shells built from the same code exist and are in progress; neither is in
+a store.</p>
+<p>It is early software, and the <a href="../4a/support/">support page</a> says so
+plainly rather than pretending otherwise.</p>
+
+<h2>Two words, and which is which</h2>
+<p><strong>4a</strong> is the app. A <strong>foray</strong> is a thing the app
+makes — one assembled run of segments. It is a common noun, lowercase, and there
+can be many of them.</p>
+<p>The app was previously called Foray, which is why that word still appears in
+the web app's URL and in the names of its local database and its cache bucket.
+Renaming those would orphan data already sitting on a listener's device, so they
+keep the old name on purpose.</p>
+
+<h2>How playback works</h2>
+<p>Audio plays straight from each publisher's own servers. 4a never rehosts,
+proxies or transforms podcast audio, and there is no 4a server in the path
+between a listener and an episode. It can also hand an episode off to whichever
+podcast app a listener prefers.</p>
+<p>That design has a consequence worth stating on the way in rather than burying:
+because the request goes directly to the publisher's host, that host — and any
+measurement or ad-attribution service the publisher has put in front of their own
+audio — sees the listener's IP address and user-agent, and 4a never does.
+<a href="../4a/privacy/">§4 of the privacy policy</a> is exact about this,
+including who those third parties actually are and why the alternative would be
+worse.</p>
+
+<h2>What 4a keeps</h2>
+<p>Most of what 4a knows about a listener never leaves the device: topic
+interests, play positions, history, playlists and settings are stored locally
+and are not transmitted. Five kinds of event are sent to our database, against
+an anonymous account holding no name, email or phone number. There is no
+advertising, no ad tracking, no analytics SDK and no crash reporter in the app,
+and no third-party SDK of any kind.</p>
+<p>The <a href="../4a/privacy/">privacy policy</a> lists every stored key, every
+transmitted field and every host a device contacts. It is not written for this
+site: it is converted, word for word, from a snapshot of the copy that lives in
+the same repository that builds the app.</p>
+
+<h2>Pages a store needs</h2>
+<ul>
+  <li><a href="../4a/privacy/">Privacy policy</a></li>
+  <li><a href="../4a/support/">Support</a> — contact and FAQ</li>
+</ul>
+
+</main>
+<footer><p>JW Incorporated · <a href="mailto:wjduvall@gmail.com">wjduvall@gmail.com</a></p></footer>
+</body>
+</html>

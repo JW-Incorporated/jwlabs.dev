@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>4a — Support · JW Labs</title>
+<meta name="description" content="How to get help with 4a, how to delete your data, and answers to the questions people actually ask.">
+<link rel="stylesheet" href="../../style.css">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<body>
+<header class="bar"><a class="home" href="../../">JW Labs</a><span class="crumb">· <a href="../../4a/">4a</a></span><span class="crumb">· Support</span></header>
+<main>
+
+<h1>4a — Support</h1>
+<p class="lede">4a is a podcast curator: it picks four topic queues for you every
+day, one of them deliberately unlike the others. This page is how you get help
+with it.</p>
+
+<h2 id="help">Getting help</h2>
+<p>Email <a href="mailto:wjduvall@gmail.com">wjduvall@gmail.com</a>. There is no ticket system and no
+support team — one person reads that address and answers it, usually within a
+few days.</p>
+<p>What makes a report easy to act on:</p>
+<ul>
+  <li>What you were doing, and what happened instead.</li>
+  <li>The episode it happened on, if it was a specific one.</li>
+  <li>Which browser and which device. (The web app is the only released build —
+  see below.)</li>
+  <li>For anything to do with audio: open the drawer, choose <strong>Playback
+  diagnostics</strong>, copy it and paste it into the email. It records how each
+  long each load took, where playback stopped, and any control press that
+  failed. It holds no audio, no URLs and no account id. It exists because
+  two playback faults were once reported from a car with no measurements
+  attached, and there was nothing to diagnose them with.</li>
+</ul>
+
+<h2 id="delete-your-data">Deleting your data</h2>
+<p>Open the menu (☰) and choose <strong>Delete my data</strong>. The sheet lists
+what the deletion covers, and you confirm by typing <code>DELETE</code>, so one
+stray tap cannot trigger it. You do not need to email anyone, and emailing will
+not be faster.</p>
+<p><strong>It deletes</strong> everything 4a stored on your device — in both
+places it keeps things, <code>localStorage</code> and its IndexedDB database —
+and your rows on our server, including any note you typed into feedback. It
+deletes the server rows <em>first</em>, because the token on your device is the
+only thing that can reach them; if the server cannot be reached it tells you the
+rows were not deleted and leaves your device alone so you can try again. It will
+not report success for something it did not do.</p>
+<p><strong>It cannot delete</strong> the empty anonymous account row itself
+(removing that needs an administrative key that cannot ship inside a public web
+page, so what the button does instead is cut the link: your token is destroyed
+and the app starts a new anonymous account rather than re-attaching you to the
+old one), anything a publisher and their measurement services already saw when
+you played audio (we never received it and cannot reach it), or rows sent from a
+device whose storage you had already cleared by hand — without that token those
+rows cannot be identified by you or by us. That last one is the reason to use
+the button rather than your browser's site-data screen.</p>
+<p><a href="../../4a/privacy/#7-how-to-delete-your-data">§7 of the privacy policy</a> is the exact version of
+all of the above.</p>
+
+<h2 id="faq">Questions people actually ask</h2>
+
+<h3>Do I need an account?</h3>
+<p>No. There is no signup, no password, no email address and no profile. The app
+creates an anonymous account — an opaque id with no name attached — for the five
+kinds of event described in the privacy policy.</p>
+
+<h3>Why does the web app's URL say "foray"?</h3>
+<p>The app used to be called Foray. Renaming the URL, the local database and the
+cache bucket would break saved links and orphan data already on listeners'
+devices, so they keep the old name. Separately, and confusingly, "foray" is also
+what the app calls one assembled run of segments. The app is <strong>4a</strong>;
+a <strong>foray</strong> is a thing it makes, and none is published yet.</p>
+
+<h3>Does 4a play the audio itself?</h3>
+<p>Today it mostly hands an episode off to whichever podcast app you prefer, and
+that is the route from the daily cards. 4a also has its own player, used for
+forays, which streams straight from each publisher's own servers — but no foray
+is published yet, so you will not meet it. Either way <strong>4a never rehosts or
+proxies audio</strong>: the bytes come from the publisher, not from us.</p>
+
+<h3>Does it work offline?</h3>
+<p>The app shell and its catalogue are cached, so 4a opens and renders in a dead
+zone. Audio is never cached, so playing something needs a connection.</p>
+
+<h3>Is there advertising in 4a?</h3>
+<p>There is no ad code, no ad identifier and no ad SDK in the app. That is a
+statement about our code and not a claim that nobody observes your playback:
+publishers commonly put measurement and ad-attribution services in front of
+their own audio files, and your device follows those redirects when it plays.
+<a href="../../4a/privacy/">§4 of the privacy policy</a> names them and explains why
+we do not proxy around them.</p>
+
+<h3>When are the iOS and Android apps out?</h3>
+<p>No date. Shells for both exist and are in progress; neither is in a store.
+The web app is the shipping version today, and it works on a phone.</p>
+
+<h3>A pick was wrong for me. Can I say so?</h3>
+<p>Yes, and it is the most useful thing you can do. The thumbs take reason codes
+and a short note, and both are sent to us — they are the only signal that tells
+the curator it got something wrong. The note is free text you wrote and it is
+stored on our server, so do not type anything into it you would not want kept.</p>
+
+<h3>Is any of this final?</h3>
+<p>No. 4a is early, the catalogue changes, and features move. If something reads
+as broken it may well be, and <a href="mailto:wjduvall@gmail.com">wjduvall@gmail.com</a> is the way to
+tell us.</p>
+
+</main>
+<footer><p>JW Incorporated · <a href="mailto:wjduvall@gmail.com">wjduvall@gmail.com</a></p></footer>
+</body>
+</html>
