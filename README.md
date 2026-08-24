@@ -79,6 +79,24 @@ wrong document through:
 Google Play's declaration form and is **deliberately not published here.** The
 policy links to it; `build-md.mjs` renders that relative link as plain text.
 
+### One known wart: the snapshot is served
+
+Pages serves the branch root, so `src/4a-privacy-policy.md` is fetchable at
+`https://jwlabs.dev/src/4a-privacy-policy.md` — **including its `Status: DRAFT`
+banner and its nine `TODO(founder)` notes**, which is exactly the text
+`publishPolicy()` exists to keep off the published page. Accepted rather than
+fixed, on three grounds: the repository is public, so that text is readable at a
+`github.com` URL either way; nothing links to the path; and the published page's
+provenance blockquote already states which notes were removed, so finding the
+source confirms the disclosure rather than contradicting it.
+
+If that trade stops being acceptable, the fix is to move the five generated pages
+plus `style.css`, `favicon.svg`, `CNAME` and `.nojekyll` into `docs/` and switch
+Pages to `source.path: "/docs"` — then `build.mjs`, `src/` and this README stop
+being served at all. It was not done here because re-pointing the Pages source
+while the TLS certificate is provisioning risks delaying the one URL a store
+submission depends on.
+
 ## longlive has no privacy policy on this site, on purpose
 
 `/longlive/` is one sentence and a link to `longlivets.com`. longlive has its own
