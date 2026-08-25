@@ -5,11 +5,24 @@
 <meta name="color-scheme" content="light dark">
 <title>4a — Privacy Policy · JW Labs</title>
 <meta name="description" content="4a's privacy policy: every key stored on your device, every field transmitted, and every host your device contacts.">
+<meta name="author" content="JW Labs LLC">
 <link rel="stylesheet" href="../../style.css">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <body>
-<header class="bar"><a class="home" href="../../">JW Labs</a><span class="crumb">· <a href="../../4a/">4a</a></span><span class="crumb">· Privacy policy</span></header>
-<main>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+<div class="wrap">
+<p class="brand"><a class="home" href="../../">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span><span class="crumb">· <a href="../../4a/">4a</a></span><span class="crumb">· Privacy policy</span></p>
+<nav class="nav" aria-label="Primary">
+  <a href="../../about/">Company</a>
+  <a href="../../4a/" aria-current="page">4a</a>
+  <a href="../../longlive/">longlive</a>
+  <a href="../../engineering/">Engineering</a>
+  <a href="../../contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main id="main">
 <h1 id="4a-privacy-policy">4a — Privacy Policy</h1>
 <blockquote><strong>Published from source.</strong> This page is generated from <code>docs/legal/privacy-policy.md</code> in the <a href="https://github.com/JW-Incorporated/foray">foray repository</a> — the same repository that builds 4a — at commit <code>21ff5c5</code>, snapshotted 2026-08-24. The repository copy is authoritative; if the two ever differ, that one is right and this one is stale. Editorial notes addressed to the founder were removed at publication and §9 was completed with the publication facts. No other wording was changed.</blockquote>
 <p>Last updated: 2026-08-19 · Applies to: the <strong>4a</strong> web app (https://jw-incorporated.github.io/foray/) and the iOS/Android app built from the same code. The app was formerly Foray. That is why the word is still in this URL and in the names of the local database and the cache bucket §1 describes: renaming the database would orphan data already on your device, and renaming the other two would break saved links and make every listener re-download the app shell, for no benefit to you. Separately, a &quot;foray&quot; is what the app calls one assembled run of segments — that is the sense the <code>cp_foray:</code> keys in §1 use, and it is unchanged.</p>
@@ -88,12 +101,23 @@ traffic.megaphone.fm  traffic.omny.fm  www.buzzsprout.com  www.podtrac.com</code
 <h2 id="8-changes-to-this-policy">8. Changes to this policy</h2>
 <p>If the app starts collecting something new, this document and <code>data-safety.md</code> must be updated <strong>in the same change</strong>, and the store declarations resubmitted. <code>data-safety.md</code> § &quot;What would change these answers&quot; lists the specific changes that would invalidate a published declaration.</p>
 <h2 id="9-who-we-are-and-how-to-reach-us">9. Who we are, and how to reach us</h2>
-<p>4a is made and published by <strong>JW Incorporated</strong>, which is responsible for the data described above.</p>
+<p>4a is made and published by <strong>JW Labs LLC</strong>, which is responsible for the data described above.</p>
 <p><strong>How to reach us about privacy:</strong> <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a>. That address is read directly; there is no support queue in front of it.</p>
 <p><strong>To delete your data, use the app, not this address.</strong> §7 describes the in-app control, and it reaches everything we can reach — both storage layers on your device and all of your rows on our server — which an email cannot do faster or more completely. §7 is equally exact about the three things no deletion can reach. Write to us if the control reports that it could not finish.</p>
 <p><strong>Where this policy lives.</strong> It is published at <a href="https://jwlabs.dev/4a/privacy/">https://jwlabs.dev/4a/privacy/</a> and takes effect on the &quot;Last updated&quot; date at the top of this page.</p>
 <p><strong>What this document is, and is not.</strong> It was written by reading the shipped code, and it is accurate about what the app does. It is not a lawyer's opinion about sufficiency under any particular law, and it does not yet state a retention period for the event rows in §2, because no retention job has been built and we would rather say nothing than state a period we do not enforce.</p>
 </main>
-<footer><p>JW Incorporated · <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p></footer>
+<footer>
+<div class="wrap" itemscope itemtype="https://schema.org/Organization">
+<p class="assoc">This website is operated by <strong itemprop="name">JW Labs LLC</strong>,
+a California limited liability company. <a itemprop="url" href="../../">jwlabs.dev</a> is its domain, and
+<span itemprop="alternateName">JW Labs</span> is the short form of the same
+company, not a separate one.</p>
+<p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
+<p class="fnav"><a href="../../about/">Company</a> · <a href="../../contact/">Contact</a> ·
+<a href="../../terms/">Terms of use</a> · <a href="../../privacy/">Website privacy</a> ·
+<a href="../../4a/privacy/">4a privacy policy</a></p>
+</div>
+</footer>
 </body>
 </html>

@@ -3,39 +3,116 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>JW Labs</title>
-<meta name="description" content="JW Labs is the software studio of JW Incorporated. It builds 4a, a podcast curator, and longlive, a Taylor Swift fan app.">
+<title>JW Labs — JW Labs LLC</title>
+<meta name="description" content="JW Labs LLC is a California limited liability company. It builds 4a, a podcast curator, and longlive, a sourced timeline of Taylor Swift's twelve eras.">
+<meta name="author" content="JW Labs LLC">
 <link rel="stylesheet" href="./style.css">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <body>
-<header class="bar"><a class="home" href="./">JW Labs</a></header>
-<main>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+<div class="wrap">
+<p class="brand"><a class="home" href="./">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span></p>
+<nav class="nav" aria-label="Primary">
+  <a href="./about/">Company</a>
+  <a href="./4a/">4a</a>
+  <a href="./longlive/">longlive</a>
+  <a href="./engineering/">Engineering</a>
+  <a href="./contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main id="main">
 
 <h1>JW Labs</h1>
-<p class="lede">JW Labs is the software studio of JW Incorporated. It builds two
-apps.</p>
+<p class="lede"><strong>JW Labs LLC</strong> is a California limited liability company. It builds software that
+takes a large, messy body of real source material and makes it navigable — while
+keeping every claim attached to the thing it came from.</p>
 
 <ul class="cards">
   <li class="card">
     <h2><a href="./4a/">4a</a></h2>
-    <p>A podcast curator. It picks four topic queues for you every day, one of
-    them deliberately unlike the others.</p>
-    <p><a href="./4a/">About 4a</a> · <a href="./4a/privacy/">Privacy</a> ·
-    <a href="./4a/support/">Support</a></p>
+    <p>A podcast curator. It picks four topic queues for you every day and makes
+    one of them deliberately unlike the other three. Running now as a web app,
+    no signup.</p>
+    <p><a href="./4a/">About 4a</a> · <a href="./4a/support/">Support</a> ·
+    <a href="./4a/privacy/">Privacy policy</a></p>
   </li>
   <li class="card">
     <h2><a href="./longlive/">longlive</a></h2>
-    <p>A Taylor Swift fan app.</p>
+    <p>A time machine through Taylor Swift's twelve eras: a scrubbable timeline
+    where every moment is sourced and dated. Live on its own domain.</p>
     <p><a href="./longlive/">About longlive</a> ·
     <a href="https://longlivets.com/">longlivets.com</a></p>
   </li>
 </ul>
 
+<h2>The same problem twice</h2>
+<p>4a's raw material is 82,043 podcast episodes across 220 curated shows: hours of
+unindexed speech with no reliable table of contents and — on two shows out of
+three — no stable timeline either, because podcast advertising is stitched in per
+request and every listener receives a different file. Its job is to turn that into
+four things worth your attention today, and, where it assembles a run of segments
+cut from several episodes, to know exactly which <em>words</em> bound each cut, so
+that a boundary is a claim about content rather than a guess at a clock reading. It
+never rehosts, transforms or modifies a publisher's audio.</p>
+<p>longlive's raw material is a career's worth of scattered reporting, and its
+discipline is the same: every moment sourced and dated, and where a narrative is a
+widely-held fan interpretation rather than a confirmed fact, the timeline says so
+on the moment itself rather than in a disclaimer nobody reads.</p>
+<p>Different subjects, one shape — provenance under load. A lot of source
+material, a reader who wants a path through it, and a hard rule that nothing is
+asserted more confidently than its source supports. That rule is why 4a will skip
+a segment rather than play it forty seconds off.</p>
+
+<h2>How the work looks up close</h2>
+<p>We publish the engineering, at the level of detail we would want if we were
+reading somebody else's. Most of these end with something that does not work yet,
+or with a measurement that contradicted what we had assumed a week earlier.</p>
+<ul>
+  <li><a href="./engineering/segment-anchoring/">Anchoring a segment in audio nobody else receives</a>
+  — how a timestamp stops being an address and becomes a cache, and what it cost
+  to discover our own measuring instruments were lying to us twice in a row.</li>
+  <li><a href="./engineering/transcripts/">Where the transcripts are, and where they are not</a>
+  — the availability measurement that inverted the plan: a 19x gap, pointing the
+  wrong way.</li>
+  <li><a href="./engineering/curation/">Choosing four things a day</a> — why a
+  top-four list would have been the wrong shape, and what happened when we
+  measured whether a narrated version of a subject was even possible.</li>
+  <li><a href="./engineering/measurement/">Measuring things, including our own claims</a>
+  — a metric that read a perfect score, a join that returned a plausible zero, and
+  an index that lost and therefore did not ship.</li>
+  <li><a href="./engineering/privacy-by-construction/">Privacy by construction</a>
+  — the policy that makes 4a's privacy claims structural, and the exact place it
+  does not hold.</li>
+</ul>
+<p><a href="./engineering/">All five notes, with a guide to how the numbers are labelled</a>.</p>
+
+<h2>The company</h2>
+<p><strong>JW Labs LLC</strong> is a California limited liability company, formed on July 26, 2026, and it owns
+and operates this domain. It is two founders and a fleet of AI agents; there is no
+other staff, which is why there is no team page and why the address below reaches
+a person rather than a queue.</p>
+<p>Nothing we make is in the App Store or Google Play yet. 4a's web app is
+deployed and works; native iOS and Android shells are built from the same code and
+neither is in a store. <a href="./about/">More about the company</a>.</p>
+
 <h2>Contact</h2>
-<p>Email <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a>. It goes to one person, so it may
-take a few days, but it is read.</p>
+<p>Email <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a>. One address, read by a person, so
+it may take a few days — but it is read. <a href="./contact/">What to include</a>.</p>
 
 </main>
-<footer><p>JW Incorporated · <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p></footer>
+<footer>
+<div class="wrap" itemscope itemtype="https://schema.org/Organization">
+<p class="assoc">This website is operated by <strong itemprop="name">JW Labs LLC</strong>,
+a California limited liability company. <a itemprop="url" href="./">jwlabs.dev</a> is its domain, and
+<span itemprop="alternateName">JW Labs</span> is the short form of the same
+company, not a separate one.</p>
+<p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
+<p class="fnav"><a href="./about/">Company</a> · <a href="./contact/">Contact</a> ·
+<a href="./terms/">Terms of use</a> · <a href="./privacy/">Website privacy</a> ·
+<a href="./4a/privacy/">4a privacy policy</a></p>
+</div>
+</footer>
 </body>
 </html>

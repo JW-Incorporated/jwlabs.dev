@@ -1,15 +1,47 @@
 # jwlabs.dev
 
-The company website for JW Incorporated, served by GitHub Pages from this
+The company website for **JW Labs LLC**, served by GitHub Pages from this
 repository's default branch root.
 
 ```
-/                 JW Labs — the company, and what it makes
-/4a/              4a, the podcast curator
-/4a/privacy/      4a's privacy policy      (store-required URL)
-/4a/support/      contact + FAQ            (Apple-required URL)
-/longlive/        longlive, linking out to longlivets.com
+/                                          the company, what it makes, and why
+/about/                                    the company, the entity, the principles
+/contact/                                  the one address, and what to include
+/engineering/                              index of the notes, and the number labels
+/engineering/segment-anchoring/            per-request ad stitching, and content anchors
+/engineering/transcripts/                  transcript availability, corpus, ASR cost
+/engineering/curation/                     four queues, classification, narration coverage
+/engineering/measurement/                  five ways a number lied to us
+/engineering/privacy-by-construction/      the CSP, and where it does not hold
+/terms/                                    terms of use, site + 4a
+/privacy/                                  this website's privacy notice
+/4a/                                       4a, the podcast curator
+/4a/privacy/                               4a's privacy policy      (store-required URL)
+/4a/support/                               contact + FAQ            (Apple-required URL)
+/longlive/                                 longlive, linking out to longlivets.com
 ```
+
+## Read this before editing any page
+
+The legal entity is **JW Labs LLC**, a California limited liability company
+formed 2026-07-26. It has ONE definition, `ORG` in `build-md.mjs`, and
+`build.mjs` **fails the build** if the string `JW Incorporated` appears in any
+generated page — that name is not a company, and a site that used it got this
+company's Apple Developer Program organization enrollment rejected on
+2026-08-24. Do not reintroduce it, and do not write copy that puts a
+relationship between "JW Labs" and anything else: the short form and the legal
+name are the same company.
+
+The GitHub **organisation** is separately named `JW-Incorporated`, so repository
+and Pages URLs legitimately contain that spelling. The build's check is for the
+spaced form only.
+
+**[`docs/apple-enrollment-website.md`](docs/apple-enrollment-website.md) is the
+brief for this whole site**: Apple's verbatim requirements, the 15-item checklist
+derived from them, what Apple does *not* require (no postal address — and there
+must never be one on this site), the facts still wanted from the founder, and the
+post-deploy verification commands. Read it before adding, removing or rewriting a
+page.
 
 ## Build
 
@@ -18,8 +50,23 @@ node build.mjs
 ```
 
 No dependencies, no `package.json`, no lockfile, no CI step. `build.mjs` writes
-the five `index.html` files in place and they are committed, because GitHub Pages
-serves the branch and there is no build server in the path.
+the fifteen `index.html` files in place and they are committed, because GitHub
+Pages serves the branch and there is no build server in the path.
+
+The build is also the test suite. It fails, rather than publishing, on: a
+`<script>` tag; any element that would fetch a subresource from another origin; a
+remote CSS reference; a surviving `href="/…"`; the string `JW Incorporated`; an
+unsubstituted `{{PLACEHOLDER}}`; a shape change in the upstream privacy policy;
+**a dead internal link; or a fragment link pointing at an id that does not
+exist.** The last two matter because Apple's enrollment requirement is that the
+site be "functional", and a 404 behind the navigation is the cheapest possible way
+to fail that. The final line of output is the count:
+
+```
+15 pages, 270 internal links all resolve, 41 off-site links not fetched.
+```
+
+Off-site links are counted, not fetched — this is a build, not a crawler.
 
 **No dependencies, no scripts, no remote origins.** Every page is one HTML file
 plus the same-origin `style.css`. There is no `<script>` tag anywhere and nothing
@@ -69,8 +116,9 @@ curl -sS https://jwlabs.dev/ | grep -o 'mailto:[^"]*'     # must be the real add
 
 | File | What it is |
 |---|---|
-| `build.mjs` | The generator. Holds every page's copy, and the privacy-policy publication transform. |
-| `build-md.mjs` | Dependency-free Markdown→HTML for the subset the legal documents use. Escapes anything it does not understand, so an unhandled construct degrades to visible text rather than to injected markup. Relative links deliberately degrade to plain text rather than to a 404. |
+| `build.mjs` | The generator. Holds the copy for the short structural pages (home, `/4a/`, `/longlive/`), pulls the long-form pages out of `src/*.md`, runs the privacy-policy publication transform, asserts everything listed above, and link-checks the result. |
+| `build-md.mjs` | Dependency-free Markdown→HTML for the subset these documents use. Escapes anything it does not understand, so an unhandled construct degrades to visible text rather than to injected markup. Relative links deliberately degrade to plain text rather than to a 404. Also holds the shared chrome (`page()`) and the four single-source facts: `MAIL`, `ORG`, `ORG_FORM`, `ORG_FORMED`. |
+| `src/about.md`, `src/contact.md`, `src/engineering.md`, `src/eng-*.md`, `src/terms.md`, `src/site-privacy.md` | The long-form pages, as prose. Rendered by the same `mdToHtml` the privacy policy uses, so there is one renderer and not two. `{{MAIL}}`, `{{ORG}}`, `{{STUDIO}}`, `{{ORG_FORM}}` and `{{ORG_FORMED}}` are substituted at build time and a leftover placeholder fails the build. Links inside them are written root-relative (`/about/`) and rewritten to the page's own depth. |
 | `style.css` | The whole stylesheet. System font stack; light/dark via `prefers-color-scheme`, with a `[data-theme]` override block kept for the day something can set it. Nothing sets it today — there is no script, by constraint — so in practice the OS decides. |
 | `src/4a-privacy-policy.md` | A **snapshot** of `docs/legal/privacy-policy.md` from the [foray repo](https://github.com/JW-Incorporated/foray). See below. |
 | `favicon.svg` | Same-origin SVG favicon, so a first visit does not 404 on `/favicon.ico`. Inverts with the OS theme. |
@@ -126,12 +174,21 @@ fixed, on three grounds: the repository is public, so that text is readable at a
 provenance blockquote already states which notes were removed, so finding the
 source confirms the disclosure rather than contradicting it.
 
-If that trade stops being acceptable, the fix is to move the five generated pages
-plus `style.css`, `favicon.svg`, `CNAME` and `.nojekyll` into `docs/` and switch
-Pages to `source.path: "/docs"` — then `build.mjs`, `src/` and this README stop
-being served at all. It was not done here because re-pointing the Pages source
-while the TLS certificate is provisioning risks delaying the one URL a store
-submission depends on.
+Every other `src/*.md` is now served the same way, and that part is harmless —
+they are the same prose as the rendered pages, minus the chrome. The `docs/`
+directory is served too, which means
+`docs/apple-enrollment-website.md` — an internal working document about an Apple
+rejection — is fetchable. Nothing links to it, and its content is candid rather
+than embarrassing, but be aware of it before writing anything in there you would
+not want a reviewer to read.
+
+If that trade stops being acceptable, the fix is to move the fifteen generated
+pages plus `style.css`, `favicon.svg`, `CNAME` and `.nojekyll` into a served
+subdirectory and re-point Pages at it — then `build.mjs`, `src/`, `docs/` and this
+README stop being served at all. It was not done here because re-pointing the
+Pages source while an enrollment re-review is pending risks breaking the one URL
+that review depends on. Note the name collision if you do: Pages'
+`source.path: "/docs"` option cannot be used while `docs/` holds internal notes.
 
 ## longlive has no privacy policy on this site, on purpose
 
@@ -153,12 +210,16 @@ A      @    185.199.111.153
 CNAME  www  jw-incorporated.github.io
 ```
 
-**Every record is DNS-only — grey cloud, `"proxied": false`.** This is the one
-Cloudflare-specific trap worth writing down: the orange-cloud proxy sits in front
-of the origin and prevents GitHub Pages from completing its ACME challenge, so
-the certificate never issues and the site serves a browser warning instead. The
-proxy can be switched on later, once Pages holds a certificate, and nothing here
-needs it.
+**The apex records are proxied — orange cloud — and must stay that way.** This
+paragraph used to say the opposite, and it was stale: it described the state
+during certificate provisioning, when the orange-cloud proxy was what prevented
+GitHub Pages from completing its ACME challenge. That challenge never completed
+anyway, which is why the section above exists — Cloudflare is now the only thing
+presenting a valid certificate for this domain, so turning the clouds grey brings
+back `ERR_CERT_COMMON_NAME_INVALID` on an HSTS-preloaded TLD, i.e. an unreachable
+site. Verified served through the proxy on 2026-08-25 (`server: cloudflare`,
+`CF-RAY` present, GitHub's `x-github-request-id` still on the response behind
+it).
 
 **Nothing on this site depends on the custom domain.** Every path is relative
 (`./`, `../`, `../../`), computed per page by `up()` in `build.mjs`, so the site
