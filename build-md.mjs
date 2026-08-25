@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 /* The one public contact address. It lives here rather than in build.mjs
    because the shared footer below needs it, and a second copy over there is
    how the two drifted apart the first time. build.mjs imports this. */
-export const MAIL = "help@jwlabs.dev";
+export const MAIL = "help@jwlabs.ai";
 
 export const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")

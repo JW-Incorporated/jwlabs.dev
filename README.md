@@ -11,7 +11,7 @@ The **repository** is still named `jwlabs.dev`, so repository and Pages URLs
 legitimately keep that spelling, the same way the GitHub organisation is
 legitimately spelled `JW-Incorporated`.
 
-**The contact address is still `help@jwlabs.dev`, deliberately.** Cloudflare
+**The contact address is still `help@jwlabs.ai`, deliberately.** Cloudflare
 Email Routing is configured on the `jwlabs.dev` zone only, so `help@jwlabs.ai`
 would accept nothing and drop mail silently. An address that discards what is
 sent to it is worse than an address whose domain does not match the website's, so
@@ -263,7 +263,7 @@ To check the served page rather than the built one:
 
 ```
 curl -sS https://jwlabs.ai/ | grep -c '<script'          # must be 0
-curl -sS https://jwlabs.ai/ | grep -o 'mailto:[^"]*'     # must be help@jwlabs.dev
+curl -sS https://jwlabs.ai/ | grep -o 'mailto:[^"]*'     # must be help@jwlabs.ai
 curl -so /dev/null -w '%{http_code}\n' https://jwlabs.ai/README.md   # must be 404
 curl -so /dev/null -w '%{http_code} %{redirect_url}\n' https://jwlabs.dev/4a/support/
                                             # must be 301 -> https://jwlabs.ai/4a/support/
@@ -375,7 +375,7 @@ state; `node build.mjs` will be green throughout.
 
     ```
     curl -sS https://jwlabs.ai/ | grep -c '<script'                    # must be 0
-    curl -sS https://jwlabs.ai/ | grep -o 'mailto:[^"]*' | sort -u     # help@jwlabs.dev only
+    curl -sS https://jwlabs.ai/ | grep -o 'mailto:[^"]*' | sort -u     # help@jwlabs.ai only
     ```
 
     `[email protected]` in that output means Email Address Obfuscation is on
@@ -396,7 +396,7 @@ state; `node build.mjs` will be green throughout.
     `x-github-request-id` still present behind them. If the GitHub header is gone,
     Cloudflare is answering from somewhere that is not the origin.
 
-13. **Send a test message to `help@jwlabs.dev` and confirm it arrives.** The
+13. **Send a test message to `help@jwlabs.ai` and confirm it arrives.** The
     address did not change, but the account it is routed through did just have its
     zones rearranged around it, and a silently dead contact address on a site whose
     purpose is to be contactable is the worst outcome available here.
@@ -422,7 +422,7 @@ state; `node build.mjs` will be green throughout.
   certificate should cover the domain from the moment the zone is active, so this
   should be invisible; if it is not, `.ai` gives a click-through warning rather
   than the unreachable site `.dev` would have given.
-- **`help@jwlabs.dev` is unaffected**, and must stay that way. Email Routing and
+- **`help@jwlabs.ai` is unaffected**, and must stay that way. Email Routing and
   the MX records are on the old zone, and the old zone keeps them. **Do not delete
   the `jwlabs.dev` zone.** Deleting it takes out the redirect and the company's
   only published email address in a single move.
@@ -591,7 +591,7 @@ with a separate answer, and nobody has looked yet.
 
 **The `jwlabs.dev` zone stays.** It keeps its DNS records, because a Cloudflare
 redirect rule can only fire for a hostname that resolves to Cloudflare, and it
-keeps its MX records, because Email Routing for `help@jwlabs.dev` lives there and
+keeps its MX records, because Email Routing for `help@jwlabs.ai` lives there and
 that is still the published contact address. Deleting the old zone would take out
 the forward and the company's only mailbox at the same time.
 
