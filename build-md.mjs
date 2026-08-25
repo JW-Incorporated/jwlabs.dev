@@ -146,14 +146,14 @@ export function mdToHtml(md) {
    STUDIO is the short form of ORG, not a second entity and not a trade name, so
    never write copy that puts a relationship between them. jwlabs.dev is JW Labs
    LLC's domain and that is the whole of the story.
-   See docs/apple-enrollment-website.md. */
+   See the foray repo's docs/apple-enrollment-website.md. */
 export const ORG = "JW Labs LLC";
 export const STUDIO = "JW Labs";
 /* Entity type and jurisdiction, which is the strongest single association
    signal we can publish. NO POSTAL ADDRESS, anywhere, ever: the registered
    address is a founder's home address, and Apple verifies the organization's
    address through the D-U-N-S record, not through this site (see
-   docs/apple-enrollment-website.md §2b). Do not add one, and do not add a
+   the foray repo's docs/apple-enrollment-website.md §2b). Do not add one, and do not add a
    city-and-state-only version either. */
 export const ORG_FORM = "a California limited liability company";
 export const ORG_FORMED = "July 26, 2026";
