@@ -1,7 +1,7 @@
 # Contact
 
 One address, for everything: [{{MAIL}}](mailto:{{MAIL}}). It is a real mailbox on
-this domain, and it is read by a person rather than routed into a ticket system.
+this domain, and what you send reaches the people who build the software.
 
 Support for [4a](/4a/), a bug report, a security finding, a podcast you would like
 added or removed, a question about privacy, or
@@ -9,13 +9,12 @@ added or removed, a question about privacy, or
 
 ## What to expect
 
-{{ORG}} is two founders and no support staff, so the honest promise is a few days
-rather than a few hours. Every message is read. If a message needs a decision from
-both founders it can take longer, and if that happens you will get an
-acknowledgement rather than silence.
+Every message is read, and the answer comes from somebody who can change the code
+rather than from a script. If a question needs a decision before it can be answered
+properly, you get an acknowledgement rather than silence.
 
-There is no telephone line and no live chat. We would rather say that than
-publish a number nobody answers.
+Email is the channel. There is nothing between you and the answer — no phone tree,
+no chat widget, no ticket number.
 
 ## Writing about a problem in 4a
 
@@ -55,7 +54,7 @@ no lawyer; the answer is yes.
 
 Same address, with `security` in the subject line. [The security page](/security/)
 says what to include, what is in and out of scope, and what we can and cannot
-promise — deliberately modest, because there is one person reading.
+promise.
 
 ## Writing about accessibility
 

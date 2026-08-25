@@ -80,9 +80,9 @@ function publishPolicy(md) {
 > \`docs/legal/privacy-policy.md\` in the [foray repository](${FORAY_REPO}) — the
 > same repository that builds 4a — at commit \`${POLICY_COMMIT}\`, snapshotted
 > ${POLICY_SNAPSHOT}. The repository copy is authoritative; if the two ever
-> differ, that one is right and this one is stale. Editorial notes addressed to
-> the founder were removed at publication and §9 was completed with the
-> publication facts. No other wording was changed.
+> differ, that one is right and this one is stale. Internal editorial notes were
+> removed at publication and §9 was completed with the publication facts. No other
+> wording was changed.
 `);
 
   const s9 = "## 9. Who we are, and how to reach us\n";
@@ -164,7 +164,7 @@ emit("about/index.html", {
   title: `The company · ${STUDIO}`,
   nav: "about",
   crumb: crumb("Company"),
-  desc: `${ORG} is ${ORG_FORM}, formed on ${ORG_FORMED}. What it builds, how it works, and what it will not do.`,
+  desc: `${ORG} is ${ORG_FORM}. What it builds, how it works, and what it will not do.`,
   body: doc("about"),
 });
 
@@ -323,7 +323,7 @@ emit("contact/index.html", {
   title: `Contact · ${STUDIO}`,
   nav: "contact",
   crumb: crumb("Contact"),
-  desc: `How to reach ${ORG}: one address, read by a person, and what to include so a report can be acted on.`,
+  desc: `How to reach ${ORG}: one address for everything, and what to include so a report can be acted on.`,
   body: doc("contact"),
 });
 

@@ -25,13 +25,12 @@ and its iOS and Android shells are built from the same code as the web version.
 **Neither shell is in a store**, which is a fact about our own product's stage and
 not about the capability — the builds exist and run.
 
-**Where the honest edge is.** We have not shepherded an app through App Store or
-Play Store review. We know precisely what those reviews ask for — we have written
+**Where the honest edge is.** We have built everything a store review asks for —
 the privacy policy, the support page, the data-safety declaration and the deletion
-control that they require, and got the enrolment paperwork wrong once and fixed it —
-but we have not stood at the end of that pipeline and had a listing approved. If
-that is the risk you are hiring someone to absorb, ask us about it directly and we
-will tell you the same thing there.
+control, written so their answers match the software — and 4a's own shells are not
+in a store, so we have not had a listing approved. If carrying a submission through
+review is the risk you are hiring someone to absorb, ask us directly and you will
+get the same straight answer.
 
 ## Products with a lot of real data underneath them
 
@@ -62,9 +61,10 @@ subjects when it finds nothing. [longlive](/longlive/) is a decade of scattered
 material presented as one scrubbable timeline with every entry dated and
 attributed.
 
-**Where the honest edge is.** We work at the scale our own products are at. We
-have not run a system with millions of daily users, and if that is your problem
-today you want a different shape of company.
+**Where the honest edge is.** The discipline above is what keeps a dataset correct
+as it grows, which is a different problem from operating a system already under
+millions of daily users. If that is the problem you are describing, say so in the
+first email and you will get a straight answer about whether it is ours.
 
 ## Software that has to be careful with people's data
 
@@ -112,7 +112,7 @@ deliberately make no compliance claims at all, for exactly that reason, and
 
 ## Front ends that still work in five years
 
-A quieter capability and the one clients thank you for later.
+A quieter capability, and the one whose value shows up two years later.
 
 **No dependency graph to rot.** A front end with four hundred transitive
 dependencies has four hundred ways to stop building, and none of them will happen
@@ -152,13 +152,13 @@ looks finished.
 You can check whether we mean it, which is the point of putting it here. Every page
 on this site that could have made a flattering claim instead records what has not
 been done — [what is built and what is not](/status/),
-[what has not been audited for accessibility](/accessibility/), and
-[what has never been security-tested](/security/). If we hold our own shop window
+[what accessibility work is untested](/accessibility/), and
+[what the security page will not claim](/security/). If we hold our own shop window
 to that, you can reasonably expect it in a status report.
 
 ## Talk to us
 
-**[{{MAIL}}](mailto:{{MAIL}})** — one address, read by a founder. Tell us what the
+**[{{MAIL}}](mailto:{{MAIL}})** — one address for everything. Tell us what the
 software has to do and who it is for.
 
 [How working with us goes](/services/how-we-work/), including what we will not

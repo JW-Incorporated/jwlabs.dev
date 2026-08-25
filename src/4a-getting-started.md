@@ -101,7 +101,7 @@ knowing before a flight.
 ## It is early software
 
 4a is new, the library changes, and features move. If something reads as broken it
-may well be, and one email address reaches a person who can fix it:
+may well be, and one email address reaches the people who can fix it:
 [{{MAIL}}](mailto:{{MAIL}}).
 
 [The support page](/4a/support/) says what to include so a report can actually be

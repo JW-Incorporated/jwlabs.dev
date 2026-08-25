@@ -5,18 +5,19 @@
 the kind of problem we are good at.
 
 **If you have something to build, write to [{{MAIL}}](mailto:{{MAIL}}).** That
-address reaches a founder, not a form.
+address reaches the people who would do the work, not a form.
 
-## What we are
+## How we deliver
 
-A small engineering company: **two founders and a fleet of AI agents.** No
-account managers, no bench, no delivery layer between the person you email and the
-person who writes the code.
+**No delivery layer between the person you email and the person who writes the
+code.** No account managers, no relay, no handover. The work is heavily leveraged
+with a fleet of AI agents under close direction, which is what makes the path from
+a decision to working software short.
 
-That shape is the offer rather than an apology for it. It means the conversation
-about what to build and the work of building it happen in the same place, and it
-means you are talking to people who will still be here when the thing needs
-changing.
+That shape is the offer. The conversation about what to build and the work of
+building it happen in the same place, a change of direction costs a conversation
+rather than a planning cycle, and you are talking to people who will still be here
+when the thing needs changing.
 
 It also means we are not the right answer to every question, and
 [we say which ones](#when-we-are-the-wrong-choice).
@@ -56,23 +57,19 @@ reports honestly when it cannot finish.
 **[longlive](https://longlivets.com/) is live** on its own domain — a scrubbable,
 filterable timeline over a decade of sourced material.
 
-**This website** is the small version of the same taste: no script, no
-dependencies, no external requests, built by one file.
+**This website** is the same taste at its simplest: no script, no dependencies, no
+external requests, built by one file.
 
-**What we have not done**, said plainly because you will ask and because a services
-page that dodges it is not worth reading: **{{ORG}} has no published client work and
-no shipped app-store listing yet.** The company was formed on {{ORG_FORMED}}.
-Nothing above is a case study, because there are no clients to name, and we are not
-going to dress our own products up as somebody else's.
-
-What we have instead is two real products you can open, and
+What that adds up to is software you can open and inspect yourself rather than a
+description of it, and
 [a page that says exactly what is built and what is not](/status/).
 
 ## How working with us goes
 
 [The longer version is here](/services/how-we-work/). The short version:
 
-**You email a founder.** Same address as everything else on this site.
+**You email the people who would build it.** Same address as everything else on
+this site.
 
 **We tell you if it is not for us.** Quickly, and with a reason. That happens more
 often than a company trying to fill a pipeline would admit to.
@@ -93,16 +90,11 @@ and we would rather deliver a shorter list of things that actually work.
 Genuinely, and this is not modesty — sending you elsewhere costs us one email and
 sending you into the wrong engagement costs both of us months.
 
-- **You need a team of ten by next month.** We are two people. Scale is not the
-  thing we sell.
 - **You need staff augmentation** — bodies inside your process, on your tooling, at
   your standup. That is a real service and it is not ours.
 - **You want a fixed-price fixed-scope build of something nobody has specified
   yet.** We will not quote that, because the only way to hit it is to cut the part
   you cared about.
-- **You want the appearance of a bigger vendor** — a logo wall, a reference list, a
-  procurement-friendly org chart. We do not have those and will not manufacture
-  them.
 - **The thing you need is design.** We can build an interface and we care about
   how it feels, but we are engineers.
 
@@ -127,7 +119,7 @@ knowing before you hire us.
 
 ## Get in touch
 
-**[{{MAIL}}](mailto:{{MAIL}})** — one address, read by a person. Tell us what the
+**[{{MAIL}}](mailto:{{MAIL}})** — one address for everything. Tell us what the
 software has to do and who it is for. A paragraph is plenty for a first email.
 
-[What to include, and how long to expect to wait](/contact/).
+[What to include](/contact/).

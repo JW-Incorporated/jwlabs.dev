@@ -47,7 +47,7 @@ show you the content and tell you its status than let the word "foray" sit on
 
 [What is built and what is not](/status/) keeps that kind of thing in one list.
 
-## The one we threw away
+## The one we cut
 
 There were four. The first, an earlier assembly of the barbecue subject, ran **61
 minutes across 32 stretches** and was superseded by the 22-minute version you can
@@ -56,17 +56,15 @@ read here.
 It was cut for a reason worth publishing: it wandered. A foray about the history of
 cooking over fire spent long stretches on griddle and bakestone cookery, Welsh
 cakes and eighteenth-century tavern dinners — all genuinely interesting, none of it
-the promised subject. The founder's verdict on reading it was that it had drifted
-off plot, and he was right.
+the promised subject. On review it had drifted off its own plot, so it did not ship.
 
 So the replacement covers **eight beats of a forty-beat history rather than
 everything the sources could support**, and it names that constraint in its own
 title. Three times shorter, and it is about barbecue.
 
-We keep the long one rather than deleting it, because "here is the version that was
-too long and here is why" is more useful to us than a clean archive. And an
-assembled run that is *nearly* on topic is the characteristic failure of this whole
-idea, so it is worth having one on file.
+We keep the long one on file rather than deleting it. An assembled run that is
+*nearly* on topic is the characteristic failure this idea has to beat, so the
+editorial standard is worth being able to point at.
 
 ## What the descriptions are, and are not
 

@@ -75,10 +75,10 @@ feature in the present tense, and
 
 ## The company
 
-**{{ORG}}** is {{ORG_FORM}}, formed on {{ORG_FORMED}}, and it owns and operates
-this domain. It is two founders and a fleet of AI agents; there is no other staff,
-which is why there is no team page and why the address below reaches a person rather
-than a queue.
+**{{ORG}}** is {{ORG_FORM}}, and it owns and operates this domain. It builds with a
+short path from decision to shipped code: whoever decides what to build is whoever
+writes it, so a change of direction costs a conversation rather than a planning
+cycle.
 
 Nothing we make is in the App Store or Google Play yet. 4a's web app is deployed and
 works; native iOS and Android shells are built from the same code and neither is in

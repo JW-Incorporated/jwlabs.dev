@@ -1,7 +1,7 @@
 # The company
 
-{{ORG}} is {{ORG_FORM}}, formed on {{ORG_FORMED}}. It builds software, it owns and
-operates this domain, and "{{STUDIO}}" is the short form of its name. There is one
+{{ORG}} is {{ORG_FORM}}. It builds software, it owns and operates this domain,
+and "{{STUDIO}}" is the short form of its name. There is one
 company on this page and it is the same one in every sentence.
 
 ## What it does
@@ -35,17 +35,17 @@ asserted more confidently than its source supports.
 
 ## How it works
 
-{{ORG}} is **two founders and a fleet of AI agents. There is no other staff.**
+{{ORG}} builds with **a short path from decision to shipped code**, heavily
+leveraged with a fleet of AI agents under close direction.
 
-Worth stating plainly, because it explains several things about this site that would
-otherwise look like omissions: there is no team page, no office photograph, no press
-list and no phone tree, and the contact address goes to a person rather than to a
-queue.
+Whoever decides what to build is whoever writes it. A change of direction costs a
+conversation rather than a planning cycle, a question about the software is answered
+by whoever wrote that part of it, and work that is worth doing starts the same week
+it is decided.
 
-It also explains what the company organises itself around. Two people cannot
-out-staff anybody, so the work goes where being small and being careful beats being
-large: reading a problem all the way to the bottom, and refusing to ship the version
-that only looks finished.
+That is what the company organises itself around: reading a problem all the way to
+the bottom, moving on it quickly, and refusing to ship the version that only looks
+finished.
 
 ## What we will not do
 
@@ -105,12 +105,10 @@ people's data, and front ends built to still work in five years.
 [What we build](/services/what-we-build/) describes each of those properly,
 including where the honest edge of the capability is.
 [How working with us goes](/services/how-we-work/) covers the rest, including what
-we will not quote for and the fact that there is no published client work to show
-you yet.
+we will not quote for.
 
 ## Contact
 
-One address, read by a person: [{{MAIL}}](mailto:{{MAIL}}). The
-[contact page](/contact/) says what to include and how long to expect to wait.
-There is no postal address on this site and no telephone line; email is the channel,
-and it reaches the company.
+One address for everything: [{{MAIL}}](mailto:{{MAIL}}). The
+[contact page](/contact/) says what to include. Email is the channel, and it reaches
+the company.

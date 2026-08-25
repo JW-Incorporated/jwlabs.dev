@@ -7,8 +7,8 @@ and a conformance claim nobody has verified is worse than no claim at all.
 
 **If something on this site or in [4a](/4a/) is unusable for you, write to
 [{{MAIL}}](mailto:{{MAIL}}).** Tell us what you were trying to do and what
-assistive technology you use if you are comfortable saying. That address reaches a
-person who can change the code.
+assistive technology you use if you are comfortable saying. Reports go straight to
+the people who can change the code.
 
 ## What this website is, structurally
 
@@ -109,14 +109,14 @@ Two things we can say without testing, because they are structural:
   screen reader or a switch.
 
 If you use 4a with assistive technology, a report to [{{MAIL}}](mailto:{{MAIL}})
-is worth more to us than most feature requests, and we will say so honestly if a
-fix is going to take a while.
+is worth more to us than most feature requests, and you will get a straight answer
+about what we intend to do.
 
 ## Why the honest version
 
-We could have written a page claiming conformance with a standard nobody here has
-tested against. It would have read better and it would have been a false statement
-about a review that has not happened — the same reason
+We could have written a page claiming conformance with a standard nothing here has
+been tested against. It would have read better and it would have been a false
+statement about a review that has not happened — the same reason
 [the privacy notice](/privacy/) records what it cannot claim instead of claiming
 it, and the same reason [one page](/status/) lists what is built and what is not.
 

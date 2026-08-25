@@ -114,7 +114,7 @@ publisher's file as the publisher serves it.
 
 ## Suggest a show
 
-If something is missing, [{{MAIL}}](mailto:{{MAIL}}) reaches a person. A feed URL
+If something is missing, send it to [{{MAIL}}](mailto:{{MAIL}}). A feed URL
 and one line about why it is good is enough. We do not promise to add everything,
 and we will say so rather than going quiet.
 
