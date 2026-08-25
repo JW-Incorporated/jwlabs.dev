@@ -1,10 +1,28 @@
-# jwlabs.dev
+# jwlabs.ai
 
 The company website for **JW Labs LLC**, served by GitHub Pages from the
 **`docs/` folder** of this repository's default branch.
 
+**The primary domain is `jwlabs.ai`.** `jwlabs.dev` was primary until the cutover
+below, and its only remaining job is to redirect to `jwlabs.ai` — a Cloudflare
+rule on the old zone, not anything in this repository. See [the cutover
+runbook](#the-cutover-runbook) for the order of operations and what to verify.
+The **repository** is still named `jwlabs.dev`, so repository and Pages URLs
+legitimately keep that spelling, the same way the GitHub organisation is
+legitimately spelled `JW-Incorporated`.
+
+**The contact address is still `help@jwlabs.ai`, deliberately.** Cloudflare
+Email Routing is configured on the `jwlabs.dev` zone only, so `help@jwlabs.ai`
+would accept nothing and drop mail silently. An address that discards what is
+sent to it is worse than an address whose domain does not match the website's, so
+`MAIL` in `build-md.mjs` was left alone at cutover and the site publishes a
+`.dev` address on a `.ai` site on purpose. Moving it is a **follow-up gated on
+Email Routing existing on the `jwlabs.ai` zone** and on somebody having sent a
+test message to it and received it — not on this cutover, and not on anybody's
+sense of tidiness.
+
 **`docs/` is public. The root of this repository is not.** Every file under
-`docs/` is a URL on jwlabs.dev; nothing outside it is served at all. That
+`docs/` is a URL on jwlabs.ai; nothing outside it is served at all. That
 division is load-bearing — see [What is served, and what is
 not](#what-is-served-and-what-is-not) — and the rule for anything you add is the
 short version of it: **if you put a file in `docs/`, you have published it.**
@@ -132,11 +150,14 @@ exist.** The last two matter because Apple's enrollment requirement is that the
 site be "functional", and a 404 behind the navigation is the cheapest possible way
 to fail that. It also fails on **a missing or wrong `docs/CNAME` or
 `docs/.nojekyll`** — Pages reads both from the directory it serves, and losing
-the first unsets the custom domain and 404s every URL. The last two lines of
+the first unsets the custom domain and 404s every URL. The `CNAME` guard checks
+its *content*, not just its presence, and the expected value is spelled out in
+`build.mjs`: changing the domain means changing the file and the guard together,
+in one commit, or the build fails. The last two lines of
 output are the count and that check:
 
 ```
-26 pages, 739 internal links all resolve, 76 off-site links not fetched.
+26 pages, 737 internal links all resolve, 76 off-site links not fetched.
 docs/CNAME and docs/.nojekyll present. Pages source must be set to the docs/ folder.
 ```
 
@@ -150,34 +171,56 @@ build otherwise. The reason is not taste: the app this site fronts ships a stric
 CSP that blocks remote fonts and scripts, and the site holds the same line so the
 two cannot drift into different rules.
 
-## How this is served, and the three settings that matter
+## How this is served, and the four settings that matter
 
-GitHub Pages is the origin. **Cloudflare sits in front of it, and that is not
-optional** — GitHub never issued a certificate for `jwlabs.dev` (five days at
-`authorization_created`, and remove/re-add did not shake it loose), so the origin
-still presents `CN=*.github.io`. Cloudflare terminates TLS with a real
-certificate for the domain instead. `.dev` is HSTS-preloaded, so a certificate
-error here is not a click-through warning: the site is simply unreachable.
+GitHub Pages is the origin and **Cloudflare sits in front of it.** Four settings
+decide whether that works, and not one of them is in this repository.
 
-Three settings are load-bearing — the first on GitHub, the other two consequences
-of the arrangement above, on Cloudflare — and **none of them is visible from this
-repository.** Nothing you can read here will tell you one is wrong; the site is
-just down, or quietly serving something it should not:
+**Why the proxy was load-bearing on `jwlabs.dev`, and what to check on
+`jwlabs.ai`.** GitHub never issued a certificate for `jwlabs.dev` — five days at
+`authorization_created`, and remove/re-add did not shake it loose — so the origin
+still presents `CN=*.github.io`, and Cloudflare's edge certificate is the only
+valid certificate that domain has. **Whether that repeats on `jwlabs.ai` is not
+known, and has to be verified at cutover rather than assumed in either
+direction.** GitHub may issue for the new domain, in which case the proxy stops
+being the only thing holding TLS up and becomes a preference; or it may stall the
+same way, in which case the proxy is load-bearing again and turning the clouds
+grey takes the site down. Do not write down which of those is true here until
+somebody has looked: check whether Pages reports a certificate and offers
+*Enforce HTTPS*, and what a request actually gets with the record grey-clouded.
+
+**`.ai` is not HSTS-preloaded. `.dev` is.** That is a real reduction in cutover
+risk, and it is the reason this move is safer than the original launch was. On
+`.dev`, a certificate error was an unreachable site: the browser refused the
+connection before rendering anything, with no way for a visitor to proceed and no
+way to tell anyone "click through the warning". On `.ai` the same error is an
+interstitial a visitor can click past, and one that can be diagnosed in a browser
+rather than only with `curl`. It is not licence to ship a broken certificate — it
+is the difference between a bad hour and a total outage.
+
+Four settings are load-bearing — the first on GitHub, the rest on Cloudflare —
+and **none of them is visible from this repository.** Nothing you can read here
+will tell you one is wrong; the site is just down, or quietly serving something it
+should not:
 
 1. **GitHub Pages source: branch `main`, folder `/docs`.** Not `/ (root)`. On
    root, every file in the repository answers HTTP 200 — see [What is served,
    and what is not](#what-is-served-and-what-is-not) for the three exposures that
    caused. This setting and `docs/CNAME` are a pair: Pages reads `CNAME` from the
    directory it serves, so pointing the source at root while the file sits in
-   `docs/` unsets the custom domain, and every jwlabs.dev URL 404s behind
+   `docs/` unsets the custom domain, and every jwlabs.ai URL 404s behind
    Cloudflare with nothing in this repository to explain why. `node build.mjs`
    asserts the file is in the right place; it cannot see the setting.
 
 2. **DNS records proxied (orange cloud), SSL/TLS mode `Full`.** Not `Flexible`
    — Cloudflare would speak HTTP to Pages, Pages redirects to HTTPS, and the
    result is a redirect loop. Not `Full (strict)` — it validates the origin
-   certificate, sees `*.github.io` against `jwlabs.dev`, and returns 526. Turning
-   the clouds grey brings back `ERR_CERT_COMMON_NAME_INVALID`.
+   certificate, sees `*.github.io` against the custom domain, and returns 526.
+   On `jwlabs.dev`, turning the clouds grey brought back
+   `ERR_CERT_COMMON_NAME_INVALID`; whether that is still true of `jwlabs.ai`
+   depends on the open certificate question above, so keep them orange until
+   somebody has checked. This is a **per-zone** setting, and a new zone starts at
+   Cloudflare's default, which is not `Full`.
 
 3. **Scrape Shield → Email Address Obfuscation OFF.** On, it rewrites every
    `mailto:` into a `/cdn-cgi/l/email-protection#<hex>` link, replaces the visible
@@ -188,15 +231,204 @@ just down, or quietly serving something it should not:
    disappears without JavaScript, and `/4a/privacy/` and `/4a/support/` exist
    precisely so an App Store reviewer can find that address.
 
-   **Rocket Loader** must stay off for the same reason.
+   **Rocket Loader** must stay off for the same reason. Both are **per-zone**:
+   they were turned off on `jwlabs.dev`, and that does nothing whatsoever for
+   `jwlabs.ai`. Turn them off again on the new zone.
+
+4. **The `jwlabs.dev` → `jwlabs.ai` redirect is a Cloudflare rule on the OLD
+   zone, and there is no trace of it in this repository.** GitHub Pages supports
+   exactly one custom domain per repository, and `docs/CNAME` spends it on
+   `jwlabs.ai`, so Pages cannot serve `jwlabs.dev` as well — it answers requests
+   for the old hostname with a 404 from GitHub's edge. The forward therefore lives
+   entirely in Cloudflare, on the `jwlabs.dev` zone: a **301 that preserves path
+   and query** — either a Page Rule matching `jwlabs.dev/*` and forwarding to
+   `https://jwlabs.ai/$1`, or the equivalent Redirect Rule built on
+   `http.request.uri`. Which mechanism is used does not matter; preserving the
+   path does.
+
+   **Nothing here creates that rule, asserts it, or notices when it goes away.**
+   `node build.mjs` prints a clean 26 pages with the old domain completely dark.
+   If the rule is deleted or misconfigured, every link anybody has ever shared to
+   `jwlabs.dev` — including whatever is currently filed in App Store Connect and
+   the Play Console — starts 404ing, and the first symptom is a complaint from
+   outside.
+
+   The rule also needs the old zone's **DNS records left in place.** Cloudflare
+   can only answer for a hostname that resolves to it, so a proxied record has to
+   exist for `jwlabs.dev` even though nothing is behind it any more. Deleting the
+   A records because "the site moved" breaks the redirect exactly as thoroughly as
+   deleting the rule.
 
 To check the served page rather than the built one:
 
 ```
-curl -sS https://jwlabs.dev/ | grep -c '<script'          # must be 0
-curl -sS https://jwlabs.dev/ | grep -o 'mailto:[^"]*'     # must be the real address
-curl -so /dev/null -w '%{http_code}\n' https://jwlabs.dev/README.md   # must be 404
+curl -sS https://jwlabs.ai/ | grep -c '<script'          # must be 0
+curl -sS https://jwlabs.ai/ | grep -o 'mailto:[^"]*'     # must be help@jwlabs.ai
+curl -so /dev/null -w '%{http_code}\n' https://jwlabs.ai/README.md   # must be 404
+curl -so /dev/null -w '%{http_code} %{redirect_url}\n' https://jwlabs.dev/4a/support/
+                                            # must be 301 -> https://jwlabs.ai/4a/support/
 ```
+
+## The cutover runbook
+
+`jwlabs.ai` was purchased on 2026-08-25 and, at the time this was written, **has
+no nameservers.** It is a name and nothing else. The steps below are ordered, and
+the order is the only thing keeping the site up.
+
+**Do not merge the cutover branch until steps 1–4 are done.** That is the whole
+risk in this change. The moment `docs/CNAME` says `jwlabs.ai` on the default
+branch, Pages drops `jwlabs.dev` as its custom domain and starts answering for
+`jwlabs.ai` instead — and if `jwlabs.ai` does not resolve yet, the site is at no
+working domain at all: the old URLs 404 from GitHub and the new ones do not
+resolve, for as long as DNS takes. Nothing in this repository can detect that
+state; `node build.mjs` will be green throughout.
+
+**Before merging.**
+
+1. **Point `jwlabs.ai` at Cloudflare.** Add the zone, take the two assigned
+   nameservers, set them at the registrar, and wait for the zone to read Active.
+   Registrar propagation is the long pole and is not under anyone here's control:
+   allow hours, not minutes.
+2. **Create the DNS records on the new zone**, matching what the old one has:
+   four A records at the apex for GitHub Pages — `185.199.108.153`,
+   `185.199.109.153`, `185.199.110.153`, `185.199.111.153` — and a `www` CNAME to
+   `jw-incorporated.github.io`. **Proxied: orange cloud.**
+3. **Set the new zone's per-zone settings**, none of which carry over from
+   `jwlabs.dev`: SSL/TLS mode `Full` (not `Flexible`, not `Full (strict)` — see
+   the section above for why each of those breaks), Scrape Shield → **Email
+   Address Obfuscation OFF**, and **Rocket Loader OFF**.
+4. **Confirm resolution.** `dig +short jwlabs.ai` must answer, and must answer
+   with Cloudflare addresses rather than the four GitHub ones — proxied records
+   return Cloudflare's, and that is how you know the proxy is on.
+
+**Merge, then immediately.**
+
+5. **Check Settings → Pages.** GitHub normally picks the custom domain up from
+   `docs/CNAME`; if it has not, set it to `jwlabs.ai` by hand. **Leave the Pages
+   *source* alone** — branch `main`, folder `/docs`. Nothing about this cutover
+   requires touching it, and moving it to root re-creates three exposures
+   documented under [What is served, and what is
+   not](#what-is-served-and-what-is-not).
+6. **Create the redirect on the `jwlabs.dev` zone.** A 301 that preserves path
+   and query: a Page Rule on `jwlabs.dev/*` forwarding to `https://jwlabs.ai/$1`
+   is the shortest route, and a Redirect Rule on `http.request.uri` does the same
+   job. Leave the old zone's proxied DNS records in place, or the rule has no
+   hostname to fire on.
+   This is the step that closes the outage window on the old domain, so do it now
+   rather than after the verification below.
+7. **Settle the certificate question.** Watch whether Pages provisions a
+   certificate for `jwlabs.ai`, and record the answer in the section above,
+   replacing the "not known" wording with what actually happened. Until then
+   assume Cloudflare's edge certificate is the only valid one and keep the clouds
+   orange.
+
+**Then verify — all of it, not a sample.**
+
+8. **Every page must return 200 on the new domain.** The last two are
+   store-required URLs that a reviewer can fetch at any time without warning:
+
+   ```
+   curl -so /dev/null -w '%{http_code}  %{url_effective}\n' \
+     https://jwlabs.ai/ \
+     https://jwlabs.ai/about/ \
+     https://jwlabs.ai/services/ \
+     https://jwlabs.ai/services/what-we-build/ \
+     https://jwlabs.ai/services/how-we-work/ \
+     https://jwlabs.ai/4a/ \
+     https://jwlabs.ai/4a/features/ \
+     https://jwlabs.ai/4a/getting-started/ \
+     https://jwlabs.ai/4a/sample/ \
+     https://jwlabs.ai/4a/library/ \
+     https://jwlabs.ai/4a/your-data/ \
+     https://jwlabs.ai/4a/faq/ \
+     https://jwlabs.ai/4a/for-podcasters/ \
+     https://jwlabs.ai/longlive/ \
+     https://jwlabs.ai/status/ \
+     https://jwlabs.ai/contact/ \
+     https://jwlabs.ai/glossary/ \
+     https://jwlabs.ai/security/ \
+     https://jwlabs.ai/accessibility/ \
+     https://jwlabs.ai/terms/ \
+     https://jwlabs.ai/privacy/ \
+     https://jwlabs.ai/style.css \
+     https://jwlabs.ai/favicon.svg \
+     https://jwlabs.ai/4a/privacy/ \
+     https://jwlabs.ai/4a/support/
+   ```
+
+9. **The repository root must still be unserved.** All of these must be 404:
+
+   ```
+   curl -so /dev/null -w '%{http_code}\n' https://jwlabs.ai/README.md
+   curl -so /dev/null -w '%{http_code}\n' https://jwlabs.ai/build.mjs
+   curl -so /dev/null -w '%{http_code}\n' https://jwlabs.ai/build-md.mjs
+   curl -so /dev/null -w '%{http_code}\n' https://jwlabs.ai/src/4a-privacy-policy.md
+   ```
+
+   The last one is the one that matters most: it is the faithful snapshot, with
+   its `Status: DRAFT` banner and nine `TODO(founder)` notes intact, and it
+   answered 200 once already. A cutover is exactly the kind of change during which
+   somebody "fixes" the Pages source.
+
+10. **No script, and the real address, on the served page** — the two things
+    Cloudflare can break from outside the repository:
+
+    ```
+    curl -sS https://jwlabs.ai/ | grep -c '<script'                    # must be 0
+    curl -sS https://jwlabs.ai/ | grep -o 'mailto:[^"]*' | sort -u     # help@jwlabs.ai only
+    ```
+
+    `[email protected]` in that output means Email Address Obfuscation is on
+    for the new zone.
+
+11. **The old domain forwards, with the path kept.** A bare-apex redirect that
+    drops the path would turn every deep link into a home-page visit, which is
+    worse than a 404 because nothing reports it:
+
+    ```
+    curl -sI https://jwlabs.dev/4a/privacy/ | head -n 3   # 301 -> https://jwlabs.ai/4a/privacy/
+    curl -sI https://jwlabs.dev/4a/support/ | head -n 3   # 301 -> https://jwlabs.ai/4a/support/
+    curl -sI https://jwlabs.dev/           | head -n 3    # 301 -> https://jwlabs.ai/
+    ```
+
+12. **Still served through the proxy, still reaching Pages behind it.** The
+    response should carry `server: cloudflare` and a `CF-RAY`, with GitHub's
+    `x-github-request-id` still present behind them. If the GitHub header is gone,
+    Cloudflare is answering from somewhere that is not the origin.
+
+13. **Send a test message to `help@jwlabs.ai` and confirm it arrives.** The
+    address did not change, but the account it is routed through did just have its
+    zones rearranged around it, and a silently dead contact address on a site whose
+    purpose is to be contactable is the worst outcome available here.
+
+14. **Update the places that store the old URL.** App Store Connect and the Play
+    Console each hold a privacy-policy URL and a support URL, and both are
+    `jwlabs.dev/4a/...` today. The redirect keeps them working, but a store listing
+    that resolves through a redirect is a listing that breaks the day somebody
+    tidies up Cloudflare — change them to `jwlabs.ai` once step 8 is clean. Also
+    re-check anything else that names the old domain outside this repository.
+
+**What breaks at the moment of cutover, and for how long.**
+
+- **`https://jwlabs.dev/…` stops being served the instant `main` carries the new
+  `CNAME`.** GitHub 404s the old hostname because Pages has one custom domain and
+  it is now the other one. That stays broken until the Cloudflare redirect rule in
+  step 6 exists. The window is entirely under our control and should be minutes —
+  it is the reason step 6 comes before all the verification.
+- **`https://jwlabs.ai/…` works only after steps 1–4**, which is why they are
+  before the merge and not after. Merging first turns a minutes-long window into a
+  DNS-propagation-long one, on both domains at once.
+- **The certificate for `jwlabs.ai` may lag** behind the DNS. Cloudflare's edge
+  certificate should cover the domain from the moment the zone is active, so this
+  should be invisible; if it is not, `.ai` gives a click-through warning rather
+  than the unreachable site `.dev` would have given.
+- **`help@jwlabs.ai` is unaffected**, and must stay that way. Email Routing and
+  the MX records are on the old zone, and the old zone keeps them. **Do not delete
+  the `jwlabs.dev` zone.** Deleting it takes out the redirect and the company's
+  only published email address in a single move.
+- **The site will visibly publish a `.dev` address on a `.ai` site** until Email
+  Routing exists on the new zone. That is a deliberate, documented mismatch, not
+  an oversight — see the note at the top of this file before "fixing" it.
 
 ## What is served, and what is not
 
@@ -328,8 +560,13 @@ because it is submitted to a store as a factual declaration. Do not add one here
 
 ## DNS
 
-`docs/CNAME` claims the apex `jwlabs.dev`. The zone is on Cloudflare and points at
-GitHub Pages' four apex addresses, plus a `www` alias:
+`docs/CNAME` claims the apex `jwlabs.ai`, and Pages allows exactly one custom
+domain per repository, so that claim is exclusive: `jwlabs.dev` cannot be served
+from here as well, which is why its forward is a Cloudflare rule and not a second
+`CNAME` file.
+
+The `jwlabs.ai` zone is on Cloudflare and points at GitHub Pages' four apex
+addresses, plus a `www` alias:
 
 ```
 A      @    185.199.108.153
@@ -339,21 +576,30 @@ A      @    185.199.111.153
 CNAME  www  jw-incorporated.github.io
 ```
 
-**The apex records are proxied — orange cloud — and must stay that way.** This
-paragraph used to say the opposite, and it was stale: it described the state
-during certificate provisioning, when the orange-cloud proxy was what prevented
-GitHub Pages from completing its ACME challenge. That challenge never completed
-anyway, which is why the section above exists — Cloudflare is now the only thing
-presenting a valid certificate for this domain, so turning the clouds grey brings
+**The apex records are proxied — orange cloud — and must stay that way until
+somebody has checked whether they still have to be.** This paragraph once said
+the opposite and was stale: it described the state during certificate
+provisioning, when the orange-cloud proxy was what prevented GitHub Pages from
+completing its ACME challenge. That challenge never completed on `jwlabs.dev`
+anyway, which is why the section above exists — Cloudflare became the only thing
+presenting a valid certificate for that domain, so turning the clouds grey brought
 back `ERR_CERT_COMMON_NAME_INVALID` on an HSTS-preloaded TLD, i.e. an unreachable
 site. Verified served through the proxy on 2026-08-25 (`server: cloudflare`,
-`CF-RAY` present, GitHub's `x-github-request-id` still on the response behind
-it).
+`CF-RAY` present, GitHub's `x-github-request-id` still on the response behind it)
+— on the old domain. Whether GitHub issues for `jwlabs.ai` is a separate question
+with a separate answer, and nobody has looked yet.
+
+**The `jwlabs.dev` zone stays.** It keeps its DNS records, because a Cloudflare
+redirect rule can only fire for a hostname that resolves to Cloudflare, and it
+keeps its MX records, because Email Routing for `help@jwlabs.ai` lives there and
+that is still the published contact address. Deleting the old zone would take out
+the forward and the company's only mailbox at the same time.
 
 **Nothing on this site depends on the custom domain.** Every path is relative
 (`./`, `../`, `../../`), computed per page by `up()` in `build.mjs`, so the site
-renders identically at `https://jwlabs.dev/` and at
-`https://jw-incorporated.github.io/jwlabs.dev/`. That is deliberate: it means the
-site can be reviewed the moment it is pushed rather than only after DNS
-propagates. Do not "simplify" those to `/`-rooted paths — `build.mjs` asserts
+renders identically at `https://jwlabs.ai/` and at
+`https://jw-incorporated.github.io/jwlabs.dev/` — the repository name, which the
+domain change does not touch. That is deliberate: it means the site can be
+reviewed the moment it is pushed rather than only after DNS propagates, and it is
+what makes this cutover a DNS-and-`CNAME` change rather than a content change. Do not "simplify" those to `/`-rooted paths — `build.mjs` asserts
 that no `href="/…"` survives, and will fail the build if one does.

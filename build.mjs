@@ -1,4 +1,4 @@
-/* Builds jwlabs.dev. Run: node build.mjs
+/* Builds jwlabs.ai. Run: node build.mjs
    No dependencies, no package.json, no build step beyond this file. Every page
    is a single self-contained HTML file with one same-origin stylesheet and no
    script tag at all -- the app this site fronts ships a strict CSP that blocks
@@ -28,8 +28,10 @@ const POLICY_SNAPSHOT = "2026-08-24";
 
 const crumb = (...parts) => parts.map((p) => `<span class="crumb">· ${p}</span>`).join("");
 const link = (href, text) => `<a href="${href}">${text}</a>`;
-/* Pages are addressed relatively so the site works both at jwlabs.dev and at
-   jw-incorporated.github.io/jwlabs.dev/ before the apex DNS records exist. */
+/* Pages are addressed relatively so the site works both at jwlabs.ai and at
+   jw-incorporated.github.io/jwlabs.dev/ -- the repository is still named
+   jwlabs.dev, so the Pages URL keeps that spelling -- before the apex DNS
+   records for the new domain exist. */
 const up = (depth) => (depth === 0 ? "./" : "../".repeat(depth));
 
 /* ---------------------------------------------------------------- privacy ---
@@ -104,7 +106,7 @@ more completely. §7 is equally exact about the three things no deletion can
 reach. Write to us if the control reports that it could not finish.
 
 **Where this policy lives.** It is published at
-[https://jwlabs.dev/4a/privacy/](https://jwlabs.dev/4a/privacy/) and takes
+[https://jwlabs.ai/4a/privacy/](https://jwlabs.ai/4a/privacy/) and takes
 effect on the "Last updated" date at the top of this page.
 
 **What this document is, and is not.** It was written by reading the shipped
@@ -351,7 +353,7 @@ emit("accessibility/index.html", {
 emit("terms/index.html", {
   title: `Terms of use · ${STUDIO}`,
   crumb: crumb("Terms of use"),
-  desc: `Terms of use for jwlabs.dev and for 4a, between you and ${ORG}.`,
+  desc: `Terms of use for jwlabs.ai and for 4a, between you and ${ORG}.`,
   body: doc("terms"),
 });
 
@@ -461,9 +463,9 @@ console.log(`\n${written.size} pages, ${checked} internal links all resolve, ${o
    branch root. Both are committed static files rather than build output, so the
    build does not create them -- but it does refuse to finish without them,
    because the failure they cause is silent and total: a missing or misplaced
-   CNAME unsets the custom domain, and every jwlabs.dev URL 404s behind
+   CNAME unsets the custom domain, and every jwlabs.ai URL 404s behind
    Cloudflare with nothing in this repository to show why. */
-for (const [name, want] of [["CNAME", "jwlabs.dev"], [".nojekyll", ""]]) {
+for (const [name, want] of [["CNAME", "jwlabs.ai"], [".nojekyll", ""]]) {
   let got;
   try { got = readFileSync(`${OUT}/${name}`, "utf8"); }
   catch { throw new Error(`${OUT}/${name} is missing. Pages reads it from the served root, which is ${OUT}/.`); }

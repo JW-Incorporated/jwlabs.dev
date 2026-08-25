@@ -1,6 +1,6 @@
 # Website privacy notice
 
-**Effective August 25, 2026.** This notice covers **this website**, `jwlabs.dev`,
+**Effective August 25, 2026.** This notice covers **this website**, `jwlabs.ai`,
 operated by {{ORG}}, {{ORG_FORM}}.
 
 It does not cover the 4a app, which has its own, much longer and much more exact
@@ -41,9 +41,9 @@ we will take it.
 ## What our hosting providers see
 
 We do not have a server. This site is served as static files by **GitHub Pages**,
-with **Cloudflare** in front of it terminating TLS. Cloudflare is not optional
-here — GitHub never issued a certificate for this domain, so Cloudflare is what
-makes `https://jwlabs.dev` reachable at all.
+with **Cloudflare** in front of it terminating TLS. Cloudflare is not incidental
+here — it is the edge that answers `https://jwlabs.ai`, so it sees every request
+before GitHub does.
 
 Like every web server on the internet, those two receive what your browser sends
 in order to answer the request: your IP address, your user agent, the page you

@@ -30,7 +30,7 @@ cookies tells us nothing.
 
 ## In scope
 
-- **`jwlabs.dev`** — this website.
+- **`jwlabs.ai`** — this website.
 - **[4a](/4a/)** — the deployed web app, and the native shells for iOS and
   Android. Neither shell is in a store; both are built from the same code as the
   web app, so a finding in one is usually a finding in all three.

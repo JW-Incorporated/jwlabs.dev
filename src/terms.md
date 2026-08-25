@@ -3,7 +3,7 @@
 **Effective August 25, 2026.**
 
 These terms are an agreement between you and **{{ORG}}**, {{ORG_FORM}} ("we", "us", "our"). They govern your use of this website,
-`jwlabs.dev`, and of **4a**, our podcast curator. By using either one you accept
+`jwlabs.ai`, and of **4a**, our podcast curator. By using either one you accept
 them. If you do not accept them, do not use them.
 
 They do **not** govern longlive. longlive is published at

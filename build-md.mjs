@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 /* The one public contact address. It lives here rather than in build.mjs
    because the shared footer below needs it, and a second copy over there is
    how the two drifted apart the first time. build.mjs imports this. */
-export const MAIL = "help@jwlabs.dev";
+export const MAIL = "help@jwlabs.ai";
 
 export const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -144,7 +144,7 @@ export function mdToHtml(md) {
    terms that the domain must be "associated with your organization", and the
    site had been naming a company -- "JW Incorporated" -- that does not exist.
    STUDIO is the short form of ORG, not a second entity and not a trade name, so
-   never write copy that puts a relationship between them. jwlabs.dev is JW Labs
+   never write copy that puts a relationship between them. jwlabs.ai is JW Labs
    LLC's domain and that is the whole of the story.
    See the foray repo's docs/apple-enrollment-website.md. */
 export const ORG = "JW Labs LLC";
@@ -212,7 +212,7 @@ ${body}
 <footer>
 <div class="wrap" itemscope itemtype="https://schema.org/Organization">
 <p class="assoc">This website is operated by <strong itemprop="name">${ORG}</strong>,
-${ORG_FORM}. <a itemprop="url" href="${b}">jwlabs.dev</a> is its domain, and
+${ORG_FORM}. <a itemprop="url" href="${b}">jwlabs.ai</a> is its domain, and
 <span itemprop="alternateName">${STUDIO}</span> is the short form of the same
 company, not a separate one.</p>
 <p>Contact <a itemprop="email" href="mailto:${MAIL}">${MAIL}</a></p>
