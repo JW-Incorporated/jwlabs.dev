@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Security and responsible disclosure · JW Labs</title>
+<meta name="description" content="How to report a security problem to JW Labs LLC, what is in and out of scope, what is structural rather than promised, and what we do not have.">
+<meta name="author" content="JW Labs LLC">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+<div class="wrap">
+<p class="brand"><a class="home" href="../">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span><span class="crumb">· Security</span></p>
+<nav class="nav" aria-label="Primary">
+  <a href="../about/">Company</a>
+  <a href="../services/">Services</a>
+  <a href="../4a/">4a</a>
+  <a href="../longlive/">longlive</a>
+  <a href="../status/">What is built</a>
+  <a href="../contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<h1 id="security-and-responsible-disclosure">Security and responsible disclosure</h1>
+<p class="lede">If you have found a security problem in anything JW Labs LLC runs, we would like to hear about it, and this page is how.</p>
+<p><strong>Report it to <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a>.</strong> Put <code>security</code> somewhere in the subject line. That address is read by a person rather than a queue, so expect days rather than hours — and see <a href="#what-we-promise-and-what-we-do-not">what we can and cannot promise</a> below, which is deliberately modest.</p>
+<p>There is <strong>no bug bounty and no payment.</strong> We are <a href="../about/">two founders</a>; a programme we could not fund would be worse than none. We will credit you by name or handle if you want that and are happy to be told not to.</p>
+<h2 id="what-to-include">What to include</h2>
+<p>The same things that make <a href="../contact/">any report</a> actionable, plus the specifics:</p>
+<ul><li><strong>What you found, and what an attacker could do with it.</strong> The impact matters more than the mechanism, because it decides the order things get fixed in.</li><li><strong>How to reproduce it.</strong> A URL, a request, a sequence of steps. If it needs a specific browser or device, say which.</li><li><strong>Whether you have told anyone else</strong>, and whether you intend to publish. We will not ask you to stay quiet indefinitely; we would like to know the clock we are on.</li></ul>
+<p>Please do not send us the output of an automated scanner with no analysis. We will read it, but a list of missing headers on a static site with no script and no cookies costs us a day and tells us nothing.</p>
+<h2 id="in-scope">In scope</h2>
+<ul><li><strong><code>jwlabs.dev</code></strong> — this website.</li><li><strong><a href="../4a/">4a</a></strong> — the deployed web app, and the native shells for iOS and Android. Neither shell is in a store; both are built from the same code as the web app, so a finding in one is usually a finding in all three.</li><li><strong><a href="../longlive/">longlive</a></strong> — reports can come to the same address and we will route them. Anything specific to that timeline's own content or corrections belongs on its own site.</li><li><strong>The public repositories</strong> the products are built from.</li></ul>
+<h2 id="out-of-scope-and-where-those-reports-should-go-instead">Out of scope, and where those reports should go instead</h2>
+<p>These are not ours to fix, and reporting them to us wastes your time:</p>
+<ul><li><strong>Podcast publishers' own servers, CDNs and audio hosts.</strong> 4a plays audio straight from a publisher's own host and never proxies it, so those hosts — and any measurement service a publisher has put in front of their own files — are outside anything we control. <a href="../4a/privacy/">The privacy policy</a> is exact about who they are.</li><li><strong>Our hosting and DNS providers' own infrastructure.</strong> A vulnerability in a static-site host or a CDN should go to that vendor, who runs a disclosure programme and can actually fix it. If the <em>configuration</em> is ours and it is wrong, that is in scope.</li><li><strong>Missing hardening headers with no demonstrated impact on a site that runs no script and sets no cookie.</strong> If you can show impact, that is a finding and we want it. If the claim is that the header is absent, we already know.</li><li><strong>Social engineering, physical access, and anything requiring us to be phished.</strong></li></ul>
+<h2 id="what-is-structural-rather-than-promised">What is structural rather than promised</h2>
+<p>This section exists because the useful thing to tell a security researcher is not what we intend, it is what the design makes impossible. Each of these is checkable and most of them are enforced by something that fails a build.</p>
+<p><strong>This website has no script at all.</strong> No inline script, no bundled script, no analytics, no tag manager, no remote font, no remote image, no cookie, and no login anywhere on it. A link you choose to follow is the only thing on any page that names another host. That is checked mechanically on every build rather than reviewed by eye, and a page that broke the rule would not be published.</p>
+<p><strong>4a talks to a very short list of origins, and the browser enforces it.</strong> Its Content Security Policy is short enough to print, which is what makes &quot;there is no third-party code in here&quot; a property of the software rather than a promise in a document.</p>
+<p><strong>No third-party SDKs in 4a.</strong> No advertising code, no ad identifier, no analytics library, no crash reporter. None, rather than few.</p>
+<p><strong>The public client key is public by design.</strong> 4a's browser code carries the publishable key for its database, as every client-side application of that shape does. The control that actually matters is the per-row access rule on the database side — and those rules are <strong>written to specification and not yet verified against the live project.</strong> We are telling you that because it is true, because <a href="../status/#written-and-not-yet-verified">the status page says the same thing</a>, and because it is the most likely place for a real finding.</p>
+<p><strong>Nothing collected that a listener did not send.</strong> Most of what 4a knows stays on the device. Five kinds of event reach our database, against an anonymous account holding no name, email or phone number, so there is no identity store to breach into a person.</p>
+<p><strong>The build automation is keyless.</strong> The pipeline that refreshes content holds no credentials. That is a standing constraint rather than a happy accident, and it means there is no long-lived secret in that path to steal.</p>
+<h2 id="what-we-do-not-have">What we do not have</h2>
+<p>Stated plainly, because a security page that lists only strengths is not information.</p>
+<ul><li><strong>No external penetration test or security audit has been performed</strong> on this website, on 4a, or on the repositories. Not &quot;we are between audits&quot; — none has happened.</li><li><strong>No formal vulnerability disclosure programme, no service-level agreement, and no PGP key.</strong> One email address, read by a person.</li><li><strong>No third-party compliance attestation of any kind</strong>, and we do not claim to comply with any particular framework. The same rule applies to privacy: see <a href="../privacy/">the website privacy notice</a> and <a href="../4a/privacy/">the 4a privacy policy</a>, both of which record what they cannot claim rather than claiming it, and <a href="../status/">what is not decided yet</a>.</li><li><strong>No security team.</strong> The person who reads the report is the person who writes the fix.</li></ul>
+<h2 id="what-we-promise-and-what-we-do-not">What we promise, and what we do not</h2>
+<p><strong>We will:</strong> read your report, tell you whether we can reproduce it, tell you what we intend to do about it and roughly when, and tell you when it is fixed. If we decide not to fix something, we will say that instead of going quiet.</p>
+<p><strong>We will not:</strong> promise a response time we cannot hold, dispute a finding to avoid fixing it, or ask you to sign anything before we will read your email.</p>
+<p><strong>On legal risk to you:</strong> we have no interest in pursuing anyone who reports a problem to us in good faith, and we will not. That is a statement of intent from the company, and it is deliberately not dressed up as a legal safe harbour — nobody here is a lawyer, <a href="../terms/">our terms</a> say as much, and a paragraph of pseudo-legal comfort language we could not stand behind would be worth less to you than this sentence.</p>
+<p>What &quot;good faith&quot; means here is the ordinary thing: work against your own account and your own data, do not degrade the service for anyone else, do not access another person's data — and if you accidentally do, stop and tell us — and give us a chance to fix it before publishing.</p>
+</main>
+<footer>
+<div class="wrap" itemscope itemtype="https://schema.org/Organization">
+<p class="assoc">This website is operated by <strong itemprop="name">JW Labs LLC</strong>,
+a California limited liability company. <a itemprop="url" href="../">jwlabs.dev</a> is its domain, and
+<span itemprop="alternateName">JW Labs</span> is the short form of the same
+company, not a separate one.</p>
+<p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
+<p class="fnav"><a href="../about/">Company</a> · <a href="../services/">Services</a> ·
+<a href="../status/">What is built</a> · <a href="../4a/sample/">Sample content</a> ·
+<a href="../glossary/">Glossary</a> · <a href="../contact/">Contact</a></p>
+<p class="fnav"><a href="../terms/">Terms of use</a> · <a href="../privacy/">Website privacy</a> ·
+<a href="../4a/privacy/">4a privacy policy</a> · <a href="../security/">Security</a> ·
+<a href="../accessibility/">Accessibility</a></p>
+</div>
+</footer>
+</body>
+</html>

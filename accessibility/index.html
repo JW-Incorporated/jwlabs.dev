@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Accessibility · JW Labs</title>
+<meta name="description" content="What we have done about accessibility, the measured contrast ratios, and - the reason the page is worth reading - what has not been tested.">
+<meta name="author" content="JW Labs LLC">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+<div class="wrap">
+<p class="brand"><a class="home" href="../">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span><span class="crumb">· Accessibility</span></p>
+<nav class="nav" aria-label="Primary">
+  <a href="../about/">Company</a>
+  <a href="../services/">Services</a>
+  <a href="../4a/">4a</a>
+  <a href="../longlive/">longlive</a>
+  <a href="../status/">What is built</a>
+  <a href="../contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<h1 id="accessibility">Accessibility</h1>
+<p class="lede">This page says what we have actually done about accessibility, what we have measured, and what we have not tested. The last part is the reason the page is worth reading: an accessibility statement that lists only strengths is marketing, and a conformance claim nobody has verified is worse than no claim at all.</p>
+<p><strong>If something on this site or in <a href="../4a/">4a</a> is unusable for you, write to <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a>.</strong> Tell us what you were trying to do and what assistive technology you use if you are comfortable saying. That address reaches a person who can change the code.</p>
+<h2 id="what-this-website-is-structurally">What this website is, structurally</h2>
+<p>Most of the accessibility of this site is a consequence of decisions taken for other reasons, which is the best kind.</p>
+<p><strong>There is no JavaScript on any page.</strong> Not deferred, not inline, not bundled: the build refuses to publish a page that contains a script tag. So nothing on this site can fail to initialise, nothing depends on a framework hydrating, no content appears after a delay, and no interactive control is a <code>&lt;div&gt;</code> pretending to be a button. Every page is HTML that is complete the moment it arrives.</p>
+<p><strong>There is nothing to dismiss.</strong> No cookie banner, because <a href="../privacy/">no cookie is set</a>. No newsletter interstitial, no chat widget, no consent modal, no notification prompt. Nothing takes focus away from where you put it.</p>
+<p><strong>There are no images</strong>, other than a small icon in the browser tab. Every page is text, headings, lists, tables and links. That is partly an accessibility outcome and mostly a consequence of the same rule: an image would have to be hosted here, and a decorative one would be weight for nothing.</p>
+<p><strong>No animation and no motion</strong>, anywhere. There is nothing that moves, nothing that autoplays, nothing that scrolls on its own. We do not honour a reduced-motion preference so much as have nothing to reduce.</p>
+<h2 id="the-specifics">The specifics</h2>
+<div class=scroll><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Language</td><td><code>&lt;html lang=&quot;en&quot;&gt;</code> on every page.</td></tr><tr><td>Landmarks</td><td>A real <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code> and <code>&lt;footer&gt;</code> per page. One <code>&lt;main&gt;</code>, one <code>&lt;h1&gt;</code>, headings in order without skipped levels.</td></tr><tr><td>Skip link</td><td>First focusable element on every page, jumping to <code>#main</code>. It is positioned off-screen rather than <code>display: none</code>, deliberately — <code>display: none</code> removes it from the tab order and defeats the point.</td></tr><tr><td>Focus</td><td>A visible 2px outline with an offset on every focusable element, via <code>:focus-visible</code>. The browser default is not relied on.</td></tr><tr><td>Current page</td><td>The active navigation item carries <code>aria-current=&quot;page&quot;</code> <strong>and</strong> is distinguished by weight and an underline — never by colour alone.</td></tr><tr><td>Text sizing</td><td>Everything is in relative units. Text scales with the browser's own font-size setting, and <code>text-size-adjust</code> is pinned so mobile browsers do not silently re-scale it.</td></tr><tr><td>Reflow</td><td>One column, one measure, no fixed-width layout. Long unbroken strings wrap rather than force a horizontal scrollbar.</td></tr><tr><td>Wide content</td><td>Tables and code blocks scroll <strong>inside their own container</strong>, so a wide table never makes the whole page scroll sideways.</td></tr><tr><td>Light and dark</td><td>The colour scheme follows the operating system, and an explicit theme choice overrides it in both directions. Both themes are defined; neither is an afterthought applied on top of the other.</td></tr><tr><td>Semantics</td><td>Tables use <code>&lt;thead&gt;</code>, <code>&lt;th&gt;</code> and real header cells. Nothing uses a table for layout.</td></tr></tbody></table></div>
+<h2 id="contrast-measured">Contrast, measured</h2>
+<p>Every text-and-background pair used on this site, in both themes, with the contrast ratio computed from the actual hex values in the stylesheet:</p>
+<div class=scroll><table><thead><tr><th>Pair</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td>Body text on page background</td><td>16.82 : 1</td><td>15.25 : 1</td></tr><tr><td>Body text on a card</td><td>15.52 : 1</td><td>14.19 : 1</td></tr><tr><td>Links on page background</td><td>7.98 : 1</td><td>8.56 : 1</td></tr><tr><td>Links on a card</td><td>7.36 : 1</td><td>7.96 : 1</td></tr><tr><td>Secondary text on page background</td><td>6.49 : 1</td><td>7.12 : 1</td></tr><tr><td>Secondary text on a card</td><td>5.98 : 1</td><td>6.62 : 1</td></tr></tbody></table></div>
+<p><strong>Measured</strong>, by computing relative luminance from the stylesheet's own values. The lowest pair on the site is <strong>5.98 : 1</strong>, which is above the 4.5 : 1 threshold normally applied to body text. Four of the twelve pairs fall below 7 : 1, so <strong>we do not claim the stricter enhanced level</strong> — the secondary-text colour is the one that would have to change, and we would rather publish the number than adjust the claim.</p>
+<h2 id="what-has-not-been-tested">What has not been tested</h2>
+<ul><li><strong>No formal audit against any accessibility standard has been performed</strong>, by us or by anyone else. There is no conformance report and no accessibility conformance statement, and this page is not one.</li><li><strong>No screen-reader testing beyond spot checks.</strong> The structure is built to be navigable by landmark and heading, and that is a design intent rather than a verified result. If you use a screen reader and something here is wrong, you will know before we do.</li><li><strong>No testing with voice control, switch access, or a screen magnifier.</strong></li><li><strong>Zoom and reflow are untested at specific thresholds.</strong> The layout is a single column in relative units, which is the shape that reflows well; we have not verified it at the particular viewport width and zoom level the guidelines specify.</li></ul>
+<h2 id="4a">4a</h2>
+<p><a href="../4a/">4a</a> is a different and harder case, and we are not going to blur the two.</p>
+<p>The web app is the shipping version. It is early software, it has an audio player and interactive controls, and <strong>its accessibility has not been audited or tested with assistive technology.</strong> We are not going to describe it as accessible on the strength of the website's properties, because they are different codebases with different problems — a static document with no script is an easy case and a media player is one of the hardest.</p>
+<p>Two things we can say without testing, because they are structural:</p>
+<ul><li><strong>Nothing in 4a is gated behind an account</strong>, a signup, a password, an email verification or a CAPTCHA. There is no sign-in flow to fail at. <a href="../4a/your-data/">What 4a knows about you</a> explains why.</li><li><strong>There is no infinite scroll, no autoplay chain, no streak and no notification bait</strong>, and that is a product principle rather than a current state. Those patterns are hostile to everybody, and disproportionately so to anyone using a screen reader or a switch.</li></ul>
+<p>If you use 4a with assistive technology, a report to <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a> is worth more to us than most feature requests, and we will say so honestly if a fix is going to take a while.</p>
+<h2 id="why-the-honest-version">Why the honest version</h2>
+<p>We could have written a page claiming conformance with a standard nobody here has tested against. It would have read better and it would have been a false statement about a review that has not happened — the same reason <a href="../privacy/">the privacy notice</a> records what it cannot claim instead of claiming it, and the same reason <a href="../status/">one page</a> lists what is built and what is not.</p>
+<p>A person who needs this page to be accurate is not helped by it being flattering.</p>
+</main>
+<footer>
+<div class="wrap" itemscope itemtype="https://schema.org/Organization">
+<p class="assoc">This website is operated by <strong itemprop="name">JW Labs LLC</strong>,
+a California limited liability company. <a itemprop="url" href="../">jwlabs.dev</a> is its domain, and
+<span itemprop="alternateName">JW Labs</span> is the short form of the same
+company, not a separate one.</p>
+<p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
+<p class="fnav"><a href="../about/">Company</a> · <a href="../services/">Services</a> ·
+<a href="../status/">What is built</a> · <a href="../4a/sample/">Sample content</a> ·
+<a href="../glossary/">Glossary</a> · <a href="../contact/">Contact</a></p>
+<p class="fnav"><a href="../terms/">Terms of use</a> · <a href="../privacy/">Website privacy</a> ·
+<a href="../4a/privacy/">4a privacy policy</a> · <a href="../security/">Security</a> ·
+<a href="../accessibility/">Accessibility</a></p>
+</div>
+</footer>
+</body>
+</html>

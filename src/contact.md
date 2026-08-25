@@ -3,6 +3,10 @@
 One address, for everything: [{{MAIL}}](mailto:{{MAIL}}). It is a real mailbox on
 this domain, and it is read by a person rather than routed into a ticket system.
 
+Support for [4a](/4a/), a bug report, a security finding, a podcast you would like
+added or removed, a question about privacy, or
+[work you would like us to build](/services/) — all of it goes to the same place.
+
 ## What to expect
 
 {{ORG}} is two founders and no support staff, so the honest promise is a few days
@@ -28,9 +32,36 @@ happened instead of what you expected. After that:
   from a car with no measurements attached, and there was nothing to diagnose them
   with.
 
-The [4a support page](/4a/support/) answers the questions people actually ask,
-including how to delete your data — which is a button in the app, and emailing us
-will not make it happen faster or more completely.
+The [4a support page](/4a/support/) is the fuller version of this, and
+[the questions page](/4a/faq/) answers what people actually ask — including how to
+delete your data, which is a button in the app, and emailing us will not make it
+happen faster or more completely.
+
+## Writing about engineering work
+
+If you have software you want built, say what it has to do and who it is for. A
+paragraph is plenty for a first email, and you will get a real answer from someone
+who read it — including a straight "this is not for us, and here is why" if that is
+the answer. [What we build](/services/what-we-build/) and
+[how working with us goes](/services/how-we-work/).
+
+## Writing about a podcast
+
+If you host a show and want it added, removed, or described differently,
+[there is a page for you](/4a/for-podcasters/). Removal requests need no reason and
+no lawyer; the answer is yes.
+
+## Writing about a security problem
+
+Same address, with `security` in the subject line. [The security page](/security/)
+says what to include, what is in and out of scope, and what we can and cannot
+promise — deliberately modest, because there is one person reading.
+
+## Writing about accessibility
+
+If something on this site or in 4a is unusable with assistive technology, that
+report is worth more to us than most feature requests.
+[What has and has not been tested](/accessibility/).
 
 ## Writing about privacy or data
 
@@ -38,6 +69,9 @@ Send it to the same address. [4a's privacy policy](/4a/privacy/) is exact about
 what the app stores, what it transmits and which hosts a device contacts, and
 §7 describes the in-app deletion control and the three things no deletion can
 reach. If that control reports that it could not finish, that is worth an email.
+
+[What 4a knows about you](/4a/your-data/) is the same thing in plain language, in
+about three minutes.
 
 This website's own privacy notice is [here](/privacy/). It is short, because the
 site sets no cookie, runs no script and has no analytics.

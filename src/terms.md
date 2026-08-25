@@ -64,8 +64,7 @@ Consequences you should understand:
 - **We do not remove advertising.** 4a contains no ad detection and no ad
   skipping. Where the software chooses a bounded region of an episode it does so
   for editorial reasons; that some advertising falls outside a chosen region is
-  incidental and is not a feature. The mechanics are described in our
-  [engineering notes](/engineering/segment-anchoring/).
+  incidental and is not a feature.
 - **We do not control what a publisher sees.** Because your device fetches audio
   directly, the publisher's hosts and any measurement service in front of them
   receive the request — including your IP address and user agent. We never
@@ -74,6 +73,8 @@ Consequences you should understand:
 
 If you are a publisher and you want your feed handled differently or removed, write
 to [{{MAIL}}](mailto:{{MAIL}}) and we will deal with it.
+[The page for podcasters](/4a/for-podcasters/) sets out the whole position in plain
+English, including how to have a show removed. The answer is yes.
 
 ## 4. Your data, and the feedback you send
 
