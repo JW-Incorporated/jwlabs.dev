@@ -136,6 +136,39 @@ export function mdToHtml(md) {
   return out.join("\n");
 }
 
+/* The legal entity, spelled the way it appears on the D-U-N-S record, and the
+   short form used as the wordmark. ONE copy of each, for the same reason MAIL
+   has one copy.
+
+   These are not decoration. The 2026-08-24 Apple enrollment rejection said in
+   terms that the domain must be "associated with your organization", and the
+   site had been naming a company -- "JW Incorporated" -- that does not exist.
+   STUDIO is the short form of ORG, not a second entity and not a trade name, so
+   never write copy that puts a relationship between them. jwlabs.dev is JW Labs
+   LLC's domain and that is the whole of the story.
+   See docs/apple-enrollment-website.md. */
+export const ORG = "JW Labs LLC";
+export const STUDIO = "JW Labs";
+/* Entity type and jurisdiction, which is the strongest single association
+   signal we can publish. NO POSTAL ADDRESS, anywhere, ever: the registered
+   address is a founder's home address, and Apple verifies the organization's
+   address through the D-U-N-S record, not through this site (see
+   docs/apple-enrollment-website.md §2b). Do not add one, and do not add a
+   city-and-state-only version either. */
+export const ORG_FORM = "a California limited liability company";
+export const ORG_FORMED = "July 26, 2026";
+
+/* Primary navigation. Real navigation was one of the things the site did not
+   have: five pages, no nav, and a home page that was the only route to any of
+   them. Paths are relative to `base`. */
+const NAV = [
+  ["about/", "Company", "about"],
+  ["4a/", "4a", "4a"],
+  ["longlive/", "longlive", "longlive"],
+  ["engineering/", "Engineering", "engineering"],
+  ["contact/", "Contact", "contact"],
+];
+
 /* The shared chrome. `crumb` is trusted markup supplied by the build script;
    everything else is escaped. No <script>, no remote origin: the app this site
    fronts ships a strict CSP, and the site holds the same line.
@@ -144,22 +177,49 @@ export function mdToHtml(md) {
    paths would break every link and the stylesheet at
    jw-incorporated.github.io/jwlabs.dev/, which is where the site lives until the
    apex DNS records exist -- so the site would be unverifiable exactly during the
-   window when you most want to look at it. */
-export function page({ title, base = "./", crumb = "", desc = "", body }) {
+   window when you most want to look at it.
+
+   The Organization microdata in the footer is the one machine-readable
+   statement that this domain belongs to this legal entity. It is attributes
+   only -- no JSON-LD, because that would need a <script> tag. */
+export function page({ title, base = "./", crumb = "", desc = "", body, nav = "" }) {
+  const b = esc(base);
+  const links = NAV.map(([href, label, key]) =>
+    `<a href="${b}${href}"${key === nav ? ' aria-current="page"' : ""}>${label}</a>`).join("\n  ");
   return `<!doctype html>
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>${esc(title)}</title>${desc ? `\n<meta name="description" content="${esc(desc)}">` : ""}
-<link rel="stylesheet" href="${esc(base)}style.css">
-<link rel="icon" href="${esc(base)}favicon.svg" type="image/svg+xml">
+<meta name="author" content="${ORG}">
+<link rel="stylesheet" href="${b}style.css">
+<link rel="icon" href="${b}favicon.svg" type="image/svg+xml">
 <body>
-<header class="bar"><a class="home" href="${esc(base)}">JW Labs</a>${crumb}</header>
-<main>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+<div class="wrap">
+<p class="brand"><a class="home" href="${b}">${STUDIO}</a> <span class="tag"><strong>${ORG}</strong> · a software studio</span>${crumb}</p>
+<nav class="nav" aria-label="Primary">
+  ${links}
+</nav>
+</div>
+</header>
+<main id="main">
 ${body}
 </main>
-<footer><p>JW Incorporated · <a href="mailto:${MAIL}">${MAIL}</a></p></footer>
+<footer>
+<div class="wrap" itemscope itemtype="https://schema.org/Organization">
+<p class="assoc">This website is operated by <strong itemprop="name">${ORG}</strong>,
+${ORG_FORM}. <a itemprop="url" href="${b}">jwlabs.dev</a> is its domain, and
+<span itemprop="alternateName">${STUDIO}</span> is the short form of the same
+company, not a separate one.</p>
+<p>Contact <a itemprop="email" href="mailto:${MAIL}">${MAIL}</a></p>
+<p class="fnav"><a href="${b}about/">Company</a> · <a href="${b}contact/">Contact</a> ·
+<a href="${b}terms/">Terms of use</a> · <a href="${b}privacy/">Website privacy</a> ·
+<a href="${b}4a/privacy/">4a privacy policy</a></p>
+</div>
+</footer>
 </body>
 </html>
 `;

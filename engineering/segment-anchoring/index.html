@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Anchoring a segment in audio nobody else receives · JW Labs</title>
+<meta name="description" content="Podcast advertising is stitched per request, so every listener receives a different file. How a segment boundary stops being a timestamp and becomes a claim about content.">
+<meta name="author" content="JW Labs LLC">
+<link rel="stylesheet" href="../../style.css">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+<div class="wrap">
+<p class="brand"><a class="home" href="../../">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span><span class="crumb">· <a href="../../engineering/">Engineering</a></span><span class="crumb">· Segment anchoring</span></p>
+<nav class="nav" aria-label="Primary">
+  <a href="../../about/">Company</a>
+  <a href="../../4a/">4a</a>
+  <a href="../../longlive/">longlive</a>
+  <a href="../../engineering/" aria-current="page">Engineering</a>
+  <a href="../../contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<h1 id="anchoring-a-segment-in-audio-nobody-else-receives">Anchoring a segment in audio nobody else receives</h1>
+<p class="lede">A timestamp in a podcast episode is not an address. It is a claim about one copy of one file, and on most popular shows that copy was assembled for a single request and will never exist again. This is the problem underneath the harder half of <a href="../../4a/">4a</a>, what it cost to measure it properly, and the shape of the answer.</p>
+<h2 id="what-the-product-needs">What the product needs</h2>
+<p>4a assembles a <em>foray</em>: an ordered run of segments cut from several real episodes and played back to back. A segment is a bounded <code>start</code> → <code>end</code> region of one episode.</p>
+<p>Two constraints on how it may be played, and neither is negotiable:</p>
+<p><strong>Seek and stop against the publisher's original file.</strong> No concatenated derived artefact, no re-encoding, no proxying, no rehosting. 4a sets the media element's source to the publisher's own enclosure URL, seeks to <code>start</code>, and stops at <code>end</code>. There is no JW Labs server in the path between a listener and an episode.</p>
+<p><strong>No ad detection, ever.</strong> Nothing in this system identifies where an advertisement is. That an advertisement happens to fall outside a chosen segment is incidental and is never presented as a feature. Copy follows the mechanism: no user-facing language may imply that we produce a new audio file or remove anything.</p>
+<p>Those two rules make the engineering much harder, and we keep them because the alternative is a product built on somebody else's copyright.</p>
+<h2 id="why-the-timestamp-does-not-survive">Why the timestamp does not survive</h2>
+<p>Dynamic ad insertion stitches advertisements into an episode <strong>per request</strong>. The same episode GUID serves different bytes to different listeners, with a total duration that moves by one to four minutes between copies.</p>
+<p>A listener's <em>own</em> copy is stable, which is why resume works. But a boundary authored anywhere else is, by definition, a claim about a <em>foreign</em> copy's timeline. And an authored segment boundary is foreign by construction.</p>
+<p><strong>Measured, 2026-08-11:</strong> of 1,309 playable items in the catalogue, <strong>903 — sixty-nine per cent — are on shows we suspect of dynamic ad insertion.</strong> When the work was first scoped it was 64%. It is going the wrong way.</p>
+<p>The failure mode is not cosmetic. Cut in the wrong place and you open mid-sentence, mid-advertisement, or forty seconds into somebody else's answer to a question the listener never heard.</p>
+<h2 id="our-measuring-instruments-lied-to-us-twice">Our measuring instruments lied to us. Twice.</h2>
+<p>Before the design, the size of the displacement had to be measured. Two successive attempts to measure it were each defeated by the thing being measured, and both are worth telling, because a bad number here does not announce itself.</p>
+<h3 id="first-head-requests-lie">First: <code>HEAD</code> requests lie</h3>
+<p>The obvious way to compare a declared duration against a delivered file is to ask the host how big the file is. The first version of the scan did exactly that, reported <strong>18 of 18 shows byte-stable</strong>, and was completely wrong. An ad-inserting host answers <code>HEAD</code> with the <em>ad-free master's</em> <code>Content-Length</code> while a real <code>GET</code> delivers the assembled file.</p>
+<blockquote>Stuff You Should Know's <code>HEAD</code> says 35,549,607 bytes. Its download is 44,961,612.</blockquote>
+<p>The method was replaced with a two-byte ranged <code>GET</code>, reading the true total out of the <code>Content-Range</code> header. Cheap, and it looked correct.</p>
+<h3 id="then-the-ranged-get-lies-too">Then: the ranged <code>GET</code> lies too</h3>
+<p>On one host, a probe grid — ranged versus unranged, crossed with two client identities — produced four answers, three of which agreed with each other and were all wrong. Only the unranged request from the ordinary client identity was served the assembled file.</p>
+<div class=scroll><table><thead><tr><th>what was asked</th><th>bytes reported</th></tr></thead><tbody><tr><td>three of the four probe cells</td><td>67,510,022</td></tr><tr><td>unranged, ordinary client identity</td><td>68,884,898</td></tr></tbody></table></div>
+<p>The difference is 1,374,876 bytes, which at 96 kbps is <strong>114.6 seconds</strong> of audio that three of four measurement methods could not see. And the smaller figure is not a rounding artefact — it is the master, to a fraction of a second:</p>
+<pre><code>67,510,022 bytes x 8 / 96,000 bps = 5,625.8 s
+feed declares                       5,626   s</code></pre>
+<p>The lesson we took from this is not &quot;use unranged GETs&quot;. It is that on this problem, <strong>an instrument that agrees with the metadata is more suspicious than one that disagrees with it</strong>, because the metadata describes a file nobody receives.</p>
+<h2 id="what-the-displacement-actually-is">What the displacement actually is</h2>
+<p>Eight episodes across four shows were then downloaded in full and decoded, which is the only method nothing can lie to. <strong>Measured, 2026-08-15:</strong></p>
+<div class=scroll><table><thead><tr><th>show</th><th>feed says</th><th>transcript ends</th><th>audio really is</th><th>delta</th></tr></thead><tbody><tr><td>Stuff You Should Know</td><td>36.98 m</td><td>36.88 m</td><td>46.93 m</td><td>+10.0 min</td></tr><tr><td>Stuff You Should Know</td><td>47.48 m</td><td>47.37 m</td><td>55.72 m</td><td>+8.4 min</td></tr><tr><td>Odd Lots</td><td>66.43 m</td><td>66.00 m</td><td>76.67 m</td><td>+10.7 min</td></tr><tr><td>Odd Lots</td><td>59.67 m</td><td>59.15 m</td><td>67.92 m</td><td>+8.8 min</td></tr><tr><td>This Podcast Will Kill You</td><td>78.78 m</td><td>78.31 m</td><td>86.27 m</td><td>+8.0 min</td></tr><tr><td>This Podcast Will Kill You</td><td>72.63 m</td><td>72.17 m</td><td>80.13 m</td><td>+8.0 min</td></tr><tr><td>Being an Engineer</td><td>50.28 m</td><td>51.68 m</td><td>50.30 m</td><td>+0.8 s</td></tr><tr><td>Being an Engineer</td><td>39.25 m</td><td>39.79 m</td><td>39.26 m</td><td>+0.3 s</td></tr></tbody></table></div>
+<p>Note what the feed and the publisher's own transcript agree on in every row: <strong>both describe the ad-free program.</strong> The publisher's transcript is a timeline of a file nobody receives. And note the last two rows — a show with no dynamic insertion is accurate to under a second, which is what makes the other six diagnosable rather than merely noisy.</p>
+<h2 id="the-arithmetic-stated-properly">The arithmetic, stated properly</h2>
+<p>Let <code>cum(t)</code> be the injected advertising time occurring before content-time <code>t</code> in a given copy. It is a non-decreasing step function: flat between breaks, jumping by a pod's length at each break, bounded above by that copy's total delta.</p>
+<ul><li><strong>Pre-roll only.</strong> Every break is at <code>t = 0</code>, so <code>cum(t)</code> is the same constant everywhere. One calibration fixes every timestamp in the episode, no matter how large the constant is.</li><li><strong>Mid-rolls.</strong> The error at any point is our cumulative advertising time before that point minus the listener's: <code>err(t) = cum_ours(t) - cum_theirs(t)</code>. Author from a publisher transcript and <code>cum_ours</code> is identically zero, so the content we want sits <strong>later</strong> in the listener's file — by an amount that <strong>grows through the episode</strong>.</li></ul>
+<p>Now put the numbers next to the segment length. Our target segment band is <strong>75–180 seconds, centred around 110</strong>, and the observed median across extracted segments is 62 seconds. An eight-minute divergence is three to eight segment lengths wide.</p>
+<p><strong>So the error can exceed the length of the segment itself.</strong> A two-minute segment displaced by eight minutes is not a slightly-off cut. It is a different story, told by a different person, possibly inside an advertisement.</p>
+<h3 id="a-duration-check-can-detect-but-cannot-locate">A duration check can detect but cannot locate</h3>
+<p>The tempting shortcut is to compare the observed duration with the declared one and correct by the difference. It does not work, and the reason is structural: one scalar cannot invert a piecewise-constant offset function with <code>k</code> unknown break positions and <code>k</code> unknown pod lengths. <strong>Duration match is a detector, not a locator.</strong> Two shows with an identical total delta — one pre-roll-only, one with six mid-rolls — are indistinguishable from outside the file, and they need completely different corrections.</p>
+<h3 id="why-120-seconds-and-why-that-threshold-is-distribution-free">Why 120 seconds, and why that threshold is distribution-free</h3>
+<p>There is one regime where ignorance is affordable. Because <code>cum(t)</code> is bounded above by the copy's total delta, <strong>a total delta of 120 seconds or less bounds the error at every point in the episode at 120 seconds or less — whatever the advertising distribution is.</strong></p>
+<p>That is the crux. Below the threshold we do not need to know, and do not need to discover, whether we are looking at one pre-roll or six mid-rolls. Above it, the distribution decides the outcome, and the distribution is exactly what a byte or duration measurement cannot see.</p>
+<h3 id="the-measurement-that-weakened-our-own-conclusion">The measurement that weakened our own conclusion</h3>
+<p>The threshold argument assumed the delta is a property of the episode. It is not.</p>
+<p>Gastropod, &quot;Out of the Fire, Into the Frying Pan&quot;, declared duration 2,501.0 seconds, probed twice from <strong>the same client, hours apart</strong>:</p>
+<div class=scroll><table><thead><tr><th>probe</th><th>decoded duration</th><th>bytes</th><th>delta vs feed</th></tr></thead><tbody><tr><td>1</td><td>2,567.1 s</td><td>41,146,837</td><td>+66.1 s</td></tr><tr><td>2</td><td>2,533.7 s</td><td>40,612,263</td><td>+32.7 s</td></tr></tbody></table></div>
+<p>Both probes decode at about 128.2 kbps, and the byte difference over that bitrate is <code>534,574 x 8 / 128,200 = 33.4 s</code> — exactly the duration spread. So the spread is real delivered audio, not a decoder or metadata artefact.</p>
+<p><strong>The delta is a property of the request, not of the episode.</strong> Nothing in the project had measured that before — not because measurements had been careless, but because <em>no episode had ever been measured twice</em>. Per-episode probes tell you about episodes; repeated probes of one episode tell you about the stitch, and only the second bounds anything.</p>
+<p>The rule that came out of it is one line long, and the last clause is the important one:</p>
+<pre><code>delta_max = max delta over N probes of the SAME episode, N &gt;= 2
+pad        = delta_max + margin,  margin &gt;= the observed spread between probes
+admit if   pad &lt;= 120 s</code></pre>
+<p><strong>N = 1 bounds nothing.</strong></p>
+<h2 id="what-we-rejected-and-why">What we rejected, and why</h2>
+<p>The obvious external source of truth is the Podcasting 2.0 <code>&lt;podcast:chapters&gt;</code> tag. It fails on two independent grounds, and the structural one is fatal on its own.</p>
+<p><strong>Structural.</strong> A chapters tag points at a <em>static JSON file at a fixed URL</em> — the same bytes for every listener. There is no per-listener mechanism, and the chapters fetch is an uncorrelated request the ad stitcher cannot associate with any particular stitch. So a chapters file is authored against the un-stitched master and drifts exactly like our own timestamps. It is not a second opinion; it is the same foreign timeline with extra steps.</p>
+<p><strong>Measured</strong>, across the live feeds of all 213 curated shows (209 fetched, 2026-08-11): only <strong>10 shows — 4.8% — publish chapters at all.</strong> Broken out, 5.1% of ad-inserting shows and 4.1% of the rest, so the coverage is not merely thin, it is uncorrelated with where it would be needed. Acquired publishes chapters on 1 of its 216 episodes. The same probe found <code>&lt;podcast:transcript&gt;</code> at roughly three times the chapter coverage on ad-inserting shows.</p>
+<h2 id="the-answer-stop-storing-a-time">The answer: stop storing a time</h2>
+<p>The decision is to <strong>stop treating a boundary as a time and start treating it as a place in the content, with time as a cache.</strong></p>
+<p>Every segment stores two things:</p>
+<ul><li>a <strong>timeline cache</strong> — <code>start_sec</code>, <code>end_sec</code>, and the <code>reference_duration_sec</code> of the copy those numbers were read from; and</li><li><strong>content anchors</strong> — <code>start_anchor</code> and <code>end_anchor</code>, the verbatim eight to twelve words of transcript text at each edge. For example, a boundary in a fusion-physics segment is anchored on <code>so the Lawson criterion is really a statement about</code>.</li></ul>
+<p>Playback then walks a ladder, and the rung it lands on is reported honestly rather than assumed:</p>
+<ol><li><strong>A locally downloaded file</strong> — exact. The timeline is frozen; there is nothing to drift.</li><li><strong>Not an ad-inserting show</strong> — exact, straight from <code>start_sec</code>.</li><li><strong>Ad-inserting, but the observed duration is within tolerance of the reference</strong> — exact. The cache is live.</li><li><strong>Ad-inserting and the duration has drifted</strong> — resolve the anchor against a transcript of the copy actually in hand.</li><li><strong>Anchor unresolvable</strong> — the seek is <em>approximate</em>, and the segment is <strong>skipped rather than played at the wrong place.</strong></li></ol>
+<p>Four reasons this is the right trade, in the order they convinced us:</p>
+<p><strong>The anchor is free at authoring time.</strong> Extraction already reads a transcript in order to choose a boundary at all. Capturing the words at each edge costs nothing extra.</p>
+<p><strong>It makes the output durable.</strong> A segment stored as bare timestamps is scoped to one copy of one file, and it rots the moment the publisher re-uploads, re-encodes or changes ad load. A segment stored with anchors is a claim about <em>content</em>, and stays true. If an effort spends two days extracting segments, that output should not have a shelf life measured in ad campaigns.</p>
+<p><strong>It degrades honestly.</strong> Every failure path lands on &quot;skip this segment&quot;, never on &quot;play the wrong forty seconds&quot;.</p>
+<p><strong>It reuses the existing seam.</strong> One function is already the single chokepoint every seek path consults. This adds a branch to it, not an architecture.</p>
+<h2 id="verbatim-means-verbatim-and-it-is-enforced">Verbatim means verbatim, and it is enforced</h2>
+<p>An anchor that has been paraphrased is worse than no anchor, because it produces a boundary that can never be resolved and <strong>it fails silently at playback</strong>. So the validator rejects rather than repairs.</p>
+<p>Both sides of the comparison are canonicalised — Unicode NFKC, lowercased, apostrophes elided, every other run of non-alphanumeric characters collapsed to one space — and compared as a whole-word subsequence. That forgives artefacts of <em>how text was written down</em>: case, doubled spaces, hyphenation, smart quotes, <code>that's</code> matching <code>thats</code>. It rejects every artefact of <em>rewriting</em>: <code>that is</code> for <code>that's</code>, <code>30</code> for <code>thirty</code>, a synonym, a changed tense.</p>
+<p>Two further guards, each earned:</p>
+<ul><li><strong>An anchor under four words is not a location.</strong> It is a phrase that will occur eleven times in the episode.</li><li><strong>An anchor whose every occurrence sits more than 120 seconds from the timestamp it claims</strong> means the timeline cache is junk even though the words are real.</li></ul>
+<h2 id="what-this-does-not-solve">What this does not solve</h2>
+<p>Segments fall into two tiers, and only one of them is playable today.</p>
+<p><strong>PADDABLE</strong> — the pad needed is 120 seconds or less. Usable now.</p>
+<p><strong>LOCATE-REQUIRED</strong> — the pad needed exceeds 120 seconds. These shows are <strong>authored but not played.</strong> Authoring does not wait for playback; playback waits for a locate step. Stuff You Should Know, Odd Lots and This Podcast Will Kill You are all in this tier, which is to say some of the best material in the catalogue is in it.</p>
+<p>The locate step is designed and not built. The plan is windowed automatic speech recognition: since <code>cum(t)</code> lies between zero and the total delta, the content authored at <code>t</code> lies somewhere in <code>[t, t + total]</code> in the listener's file, so <strong>the search window is exactly the total delta wide.</strong> Sized honestly for a two-minute segment on a Stuff You Should Know episode, that is about 13.6 minutes of audio to transcribe instead of 47 — roughly a 3.5x saving. (An earlier draft of that estimate said 12 minutes, which was a point estimate where an upper bound was required.)</p>
+<p>And one more limit, which is the paragraph we would most want a reader to take away, because it argues against our own design:</p>
+<blockquote><strong>The honest cost of the pad correction is that the guarantee weakens from deterministic to probabilistic, and nothing we have measured bounds the tail.</strong> With the delta fixed per episode, &quot;total under 120 seconds bounds the error everywhere&quot; was arithmetic. With the delta varying per request, we bound the listener's load only by sampling our own, so the claim becomes: displacement stays within the pad for any copy whose load is no worse than the worst we sampled, plus the margin. When a copy exceeds that, the payload is truncated by however much it exceeds it — and the one spread we have measured is 33.4 seconds, up to a third of a 110-second segment. Do not read this as &quot;a few seconds&quot;. It is still a materially better failure than a confident cut at an unknown place, but it is a probabilistic argument now and should not be dressed as a bound.</blockquote>
+<h2 id="one-side-finding-because-it-is-too-good-to-leave-out">One side finding, because it is too good to leave out</h2>
+<p>While measuring ad load across a sample of 70 US shows by chart rank (69 yielded a measurement), the data answered a question nobody had asked:</p>
+<p><strong>Chart ranks 1–25 are 33% ad-free (9 of 27). Ranks 26–200 are 71% ad-free (30 of 42).</strong> Yates-corrected chi-squared 8.22 on 1 degree of freedom, <code>p &lt; 0.01</code>, and the effect survives restriction to the stronger byte-ratio method alone (41% versus 72%).</p>
+<p>Chart rank predicts ad injection. Which means a gate on ad injection is a gate on fame — and any system that can only handle clean timelines will quietly build a catalogue of obscure shows and call it curation. That is a product problem discovered by an engineering measurement, and it is the reason the LOCATE-REQUIRED tier gets built rather than written off.</p>
+<h2 id="status">Status</h2>
+<p>Rungs 1, 2, 3 and 5 of the playback ladder are implemented and tested. Rung 4 — the locate step — exists as a named, callable, tested <em>absence</em>: the function is there, it is wired in, and it reports that it cannot resolve. The pad rung is implemented and defaults to off. Four forays exist in the catalogue and <strong>all four are drafts; no foray is published</strong>, so a visitor to 4a today will not meet this machinery. It is being built ahead of the thing that needs it, on purpose: extraction and playback decouple, and cataloguing can produce durable, correct output for days before a single foray is playable.</p>
+<hr>
+<p><em>Written from the project's own architecture decision records and measurement logs, which live in the public <a href="https://github.com/JW-Incorporated/foray">foray repository</a> alongside the code they describe. Numbers labelled measured were observed on real feeds and real audio on the dates given; the windowed-ASR saving is an estimate and is labelled as one.</em></p>
+</main>
+<footer>
+<div class="wrap" itemscope itemtype="https://schema.org/Organization">
+<p class="assoc">This website is operated by <strong itemprop="name">JW Labs LLC</strong>,
+a California limited liability company. <a itemprop="url" href="../../">jwlabs.dev</a> is its domain, and
+<span itemprop="alternateName">JW Labs</span> is the short form of the same
+company, not a separate one.</p>
+<p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
+<p class="fnav"><a href="../../about/">Company</a> · <a href="../../contact/">Contact</a> ·
+<a href="../../terms/">Terms of use</a> · <a href="../../privacy/">Website privacy</a> ·
+<a href="../../4a/privacy/">4a privacy policy</a></p>
+</div>
+</footer>
+</body>
+</html>

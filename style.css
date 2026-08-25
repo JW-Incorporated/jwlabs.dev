@@ -23,18 +23,56 @@ body {
 }
 a { color: var(--link); }
 a:hover { text-decoration-thickness: 2px; }
-.bar {
-  display: flex; gap: .75rem; align-items: baseline; flex-wrap: wrap;
-  padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--rule);
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+
+/* Keyboard skip link. Off-screen until focused -- not display:none, which would
+   take it out of the tab order and defeat the point. */
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--bg); color: var(--fg); padding: .6rem .9rem;
+  border: 1px solid var(--rule); border-radius: 0 0 8px 0; z-index: 2;
 }
-.bar .home { font-weight: 650; letter-spacing: -.01em; text-decoration: none; color: var(--fg); }
+.skip:focus { left: 0; }
+
+/* One measure, shared by the masthead, the content column and the footer, so
+   the three line up on a wide screen. */
+.wrap { max-width: 46rem; margin: 0 auto; }
+
+.bar { padding: .95rem 1.25rem 1rem; border-bottom: 1px solid var(--rule); }
+.brand { display: flex; gap: .5rem; align-items: baseline; flex-wrap: wrap; margin: 0 0 .6rem; }
+.bar .home {
+  font-weight: 650; letter-spacing: -.01em; text-decoration: none;
+  color: var(--fg); font-size: 1.06rem;
+}
+/* The domain-to-organization association, on every page, as the first text on
+   the page. See docs/apple-enrollment-website.md item 3. */
+.bar .tag { color: var(--muted); font-size: .95rem; }
+.bar .tag strong { color: var(--fg); font-weight: 600; }
 .bar .crumb { color: var(--muted); font-size: .95rem; }
+.nav { display: flex; flex-wrap: wrap; gap: .1rem 1rem; font-size: .95rem; }
+.nav a {
+  color: var(--muted); text-decoration: none;
+  padding: .1rem 0; border-bottom: 2px solid transparent;
+}
+.nav a:hover { color: var(--fg); border-bottom-color: var(--rule); }
+.nav a[aria-current="page"] { color: var(--fg); font-weight: 600; border-bottom-color: var(--link); }
+
 main { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
 h1 { font-size: 1.9rem; line-height: 1.2; letter-spacing: -.02em; margin: .2rem 0 1rem; }
 h2 { font-size: 1.28rem; margin: 2.2rem 0 .6rem; letter-spacing: -.01em; }
 h3 { font-size: 1.06rem; margin: 1.6rem 0 .4rem; }
+h4 { font-size: 1rem; margin: 1.3rem 0 .3rem; color: var(--muted); }
 p, li { overflow-wrap: anywhere; }
+ul, ol { padding-left: 1.35rem; }
 .lede { font-size: 1.12rem; color: var(--muted); }
+/* A pulled-aside box for a caveat or a status statement. Used where a page
+   would otherwise imply that something unbuilt is built. */
+.note {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+  padding: .9rem 1.1rem; margin: 1.6rem 0; font-size: .97rem;
+}
+.note > :first-child { margin-top: 0; }
+.note > :last-child { margin-bottom: 0; }
 hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
 code { background: var(--card); border: 1px solid var(--rule); border-radius: 4px; padding: .1em .35em; font-size: .9em; }
 pre { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: .9rem; overflow-x: auto; }
@@ -48,5 +86,9 @@ th { color: var(--muted); font-weight: 600; }
 .card { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 1.1rem 1.2rem; }
 .card h2 { margin: 0 0 .3rem; font-size: 1.1rem; }
 .card p { margin: .3rem 0 .6rem; color: var(--muted); font-size: .96rem; }
-footer { border-top: 1px solid var(--rule); color: var(--muted); font-size: .92rem; padding: 1.2rem 1.25rem 2.5rem; }
-footer p { max-width: 46rem; margin: 0 auto; }
+footer { border-top: 1px solid var(--rule); color: var(--muted); font-size: .92rem; padding: 1.4rem 1.25rem 2.6rem; }
+footer p { margin: 0 0 .5rem; }
+footer p:last-child { margin-bottom: 0; }
+/* Not muted: this is the sentence a verification reviewer is looking for. */
+footer .assoc { color: var(--fg); }
+footer .fnav a { white-space: nowrap; }
