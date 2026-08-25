@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>4a - every feature · JW Labs</title>
+<meta name="description" content="The full tour of what 4a does: the four daily queues, the Stretch queue, playlists in your own words, feedback with reasons, family mode, diagnostics and deletion.">
+<meta name="author" content="JW Labs LLC">
+<link rel="stylesheet" href="../../style.css">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+<div class="wrap">
+<p class="brand"><a class="home" href="../../">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span><span class="crumb">· <a href="../../4a/">4a</a></span><span class="crumb">· Features</span></p>
+<nav class="nav" aria-label="Primary">
+  <a href="../../about/">Company</a>
+  <a href="../../services/">Services</a>
+  <a href="../../4a/" aria-current="page">4a</a>
+  <a href="../../longlive/">longlive</a>
+  <a href="../../status/">What is built</a>
+  <a href="../../contact/">Contact</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<h1 id="4a-feature-by-feature">4a, feature by feature</h1>
+<p class="lede">The full tour. <a href="../../4a/">The overview</a> is the short version; this is everything the app actually does, what each thing is for, and where each one has a limit worth knowing about.</p>
+<p>Everything described here is in the shipping web app unless the page says otherwise, and where something exists but is not reachable yet, it says so in the same sentence.</p>
+<h2 id="the-four-daily-queues">The four daily queues</h2>
+<p><strong>What it is.</strong> Four cards, once a day. Each card is a queue of episodes on one subject rather than a single episode.</p>
+<p><strong>What each card tells you before you tap it:</strong></p>
+<ul><li>the number of episodes and the <strong>total running time</strong> of the queue;</li><li>the shows it draws from, <strong>by name</strong> — &quot;All from <em>X</em>&quot;, or &quot;From <em>X</em> and <em>Y</em>&quot;, or &quot;From <em>X</em>, <em>Y</em>, and four more&quot;;</li><li>the <strong>first episode's title</strong>, quoted, so no card is a mystery;</li><li>a <code>Stretch</code> badge, on exactly one of the four.</li></ul>
+<p><strong>Who it suits.</strong> Anyone who has decided that the problem is not a shortage of podcasts. If what you want is a search box over everything ever made, the app you already have is better at that than we will ever be.</p>
+<p><strong>The limit.</strong> Four is not configurable. It is a product decision, not a default, and the reason is that &quot;how many recommendations would you like&quot; is a question nobody has a good answer to at nine in the morning.</p>
+<h2 id="new-suggestions">New suggestions</h2>
+<p>A refresh control in the top bar. If none of the four appeal, replace them.</p>
+<p>Deliberately a button rather than an infinite scroll: a scroll rewards indefinite browsing and a button rewards deciding. It is the same set of ideas either way; only the incentive is different.</p>
+<h2 id="the-stretch-queue">The Stretch queue</h2>
+<p><strong>What it is.</strong> The fourth queue, drawn from subjects <em>adjacent to</em> your demonstrated interests rather than inside them. Badged, with a label that says plainly it is outside your usual topics and that this is on purpose.</p>
+<p><strong>Why it is badged at all.</strong> A recommender that slips something unfamiliar in and hopes you do not notice is optimising for a click. Telling you means you can choose to be in the mood for it — and it means a miss reads as <em>an experiment that did not land</em> rather than as <em>the app getting worse.</em></p>
+<p><strong>Two rules that make it real:</strong></p>
+<ul><li><strong>It ignores your skip rate for the region it is exploring.</strong> A slot that backs off when ignored is a slower route to the same three shows.</li><li><strong>It must state its bridge</strong> — the reason this is next to that — in a single short line.</li></ul>
+<p><strong>The limit, stated honestly.</strong> Today's adjacency is derived from the subject structure rather than from a learned similarity model, which is a real simplification: it is good at &quot;next-door subject&quot; and less good at &quot;different subject, same shape of curiosity&quot;. <a href="../../status/">What is built and what is not</a> keeps that kind of thing in one place.</p>
+<h2 id="continue-where-you-left-off">Continue where you left off</h2>
+<p>If you started something long and did not finish it, a <strong>Continue</strong> strip appears at the top with the episode's artwork and title. There is a <strong>✓</strong> on it to say <em>done with this</em> and clear it — which also counts as a signal that you liked it enough to finish.</p>
+<p>It expires on its own after a while rather than following you around forever, and it only appears for something long enough that resuming is actually the point.</p>
+<h2 id="jump-back-in">Jump back in</h2>
+<p>Where a run of segments was left part-way through, 4a offers to resume at the exact position — labelled with the timestamp, so you know where you are going before you tap.</p>
+<h2 id="build-me-a-playlist-in-your-own-words">Build me a playlist, in your own words</h2>
+<p><strong>What it is.</strong> One text field under the four cards. Type what you want and 4a assembles a queue from the library.</p>
+<p><strong>What it does with a query.</strong> It interprets it into subjects and constraints, and if the strict reading finds too little it <strong>relaxes</strong> the query rather than returning nothing. Then it tells you which of three things happened:</p>
+<div class=scroll><table><thead><tr><th>Outcome</th><th>What you get</th></tr></thead><tbody><tr><td>It worked</td><td>A queue, saved as a playlist</td></tr><tr><td><strong>Thin</strong></td><td>The queue, flagged as thin, rather than padded to look full</td></tr><tr><td>Nothing</td><td><strong>Suggestions for adjacent subjects that do have something in them</strong></td></tr></tbody></table></div>
+<p>That last row is the one worth dwelling on. An empty result is a dead end, and a dead end is the moment people close an app. Being told <em>&quot;not that, but these three are close and are not empty&quot;</em> keeps the session alive without pretending.</p>
+<p><strong>One honest failure message.</strong> If your device has genuinely run out of storage, the playlist cannot be saved, and 4a says exactly that and what to do about it — that removing a playlist you have finished with frees enough room. It does not silently drop the playlist and it does not blame you for a full disk.</p>
+<h2 id="playlists">Playlists</h2>
+<p>Queues you build are kept. The menu lists your five most recent one tap away, and a full playlists view holds the rest.</p>
+<h2 id="saving-things">Saving things</h2>
+<p>A star on any episode. Saved items are yours, kept on your device, and saving something is also a signal — it tells the picker you were interested even if you did not press play right then.</p>
+<h2 id="telling-it-when-it-is-wrong">Telling it when it is wrong</h2>
+<p>The single most useful thing you can do in 4a, and the only signal that carries <em>why</em>.</p>
+<p><strong>Thumbs, with reasons.</strong> A thumbs-up commits immediately — an up-vote has nothing to explain. A thumbs-down opens a short sheet, because &quot;not for me&quot; on its own is nearly useless to something trying to learn, and the moment you have just been annoyed is the one moment you will say why.</p>
+<p>The reasons are specific on purpose:</p>
+<div class=scroll><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Not into this topic</td><td>Just not this show</td></tr><tr><td>Heard this already</td><td>Bad audio quality</td></tr><tr><td>Too surface-level</td><td>Too in-the-weeds</td></tr><tr><td>Leans too far left</td><td>Leans too far right</td></tr><tr><td>Didn't like the voice</td><td></td></tr></tbody></table></div>
+<p>You can pick more than one, add a short note in your own words, and the button tells you what it will do — <em>Tune my picks</em> once you have chosen something, <em>Pick at least one</em> before that. A second tap on a vote clears it, in either direction, so undoing does not force the sheet open again.</p>
+<p><strong>Why the list looks like that.</strong> &quot;Too surface-level&quot; and &quot;too in-the-weeds&quot; are opposite complaints about the same episode from two different people, and a recommender that cannot tell them apart will average them into mush. So will &quot;not into this topic&quot; versus &quot;just not this show&quot; — one of those should change what subject you get tomorrow and the other should not.</p>
+<p><strong>Where you meet it.</strong> Thumbs with reasons live on the segments of an assembled run, and <strong>no such run is published yet</strong>, so this is a feature of the player rather than of today's daily cards. For the daily picks, what teaches the app is what you open, what you skip, what you save, and what you mark done. If a pick was wrong and you want to say so in words, <a href="../../4a/support/">email us</a> — a person reads it.</p>
+<p><strong>The note is stored on our server.</strong> It is free text you wrote, so do not type anything into it you would not want kept. <a href="../../4a/your-data/">What 4a knows about you</a> is exact about this.</p>
+<h2 id="more-like-this-less-like-this">More like this, less like this</h2>
+<p>Direct controls to nudge a subject up or down, for when you know what you want and would rather say it than demonstrate it over three weeks.</p>
+<h2 id="family-mode">Family mode</h2>
+<p><strong>What it is.</strong> A switch in the menu. On, it hides episodes rated explicit — and also the whole comedy category, because older comedy items in the library predate per-episode ratings and we would rather over-hide than under-hide.</p>
+<p><strong>Why the second half matters.</strong> That is a deliberately blunt rule and we are telling you it is blunt. A parent handing a phone to a child is not helped by a filter that is <em>mostly</em> right, and &quot;we hid a category we could not vouch for&quot; is a better failure than &quot;we let one through&quot;.</p>
+<h2 id="choose-which-app-things-open-in">Choose which app things open in</h2>
+<p>Also in the menu: whether an episode hands off to Apple Podcasts or to a show page in another player. Your subscriptions and your history stay where they are.</p>
+<h2 id="speed-control-and-segment-navigation">Speed control, and segment navigation</h2>
+<p>In 4a's own player: playback speed, and <strong>next segment / previous segment</strong> for moving through an assembled run rather than scrubbing blindly through an hour.</p>
+<h2 id="playback-diagnostics">Playback diagnostics</h2>
+<p><strong>What it is.</strong> A menu item that shows what the player measured on this device — seam gaps, load deadlines, and any control press that did not do what it should. There is a button to copy it into a bug report and a button to clear the record.</p>
+<p><strong>Two things about it.</strong> It holds no audio, no episode addresses and no account identifier. And <strong>it is stored on your device only and is never sent anywhere</strong> — it goes to us only if you copy it into an email yourself.</p>
+<p><strong>Why it exists.</strong> Two playback faults were once reported from a car, with no measurements attached, and there was nothing to diagnose them with. Now there is, and it belongs to you rather than to us.</p>
+<h2 id="delete-my-data">Delete my data</h2>
+<p><strong>What it is.</strong> A menu item that deletes what 4a has, confirmed by typing <code>DELETE</code>, so one stray tap cannot trigger it. There is also a <strong>clear this device only</strong> option, if you would rather leave the server rows alone.</p>
+<p>Before you confirm, the sheet lists exactly what it covers:</p>
+<ul><li><strong>This device:</strong> every 4a key, in both places it stores things.</li><li><strong>Our server:</strong> the events this device sent, and its account rows.</li><li><strong>Your anonymous account row stays.</strong> It holds no name, email or phone number.</li><li><strong>Publisher and ad hosts saw your IP as audio played. We cannot delete that.</strong></li></ul>
+<p>It deletes the server rows <strong>first</strong>, because the token on your device is the only thing that can reach them. If the server cannot be reached it tells you the rows were not deleted and leaves your device alone so you can try again. <strong>It will not report success for something it did not do.</strong></p>
+<p>You do not need to email anyone, and emailing will not be faster. <a href="../../4a/your-data/">What 4a knows about you</a> has the whole picture, including the three things no deletion can reach.</p>
+<h2 id="works-offline-up-to-a-point">Works offline, up to a point</h2>
+<p>The app itself and its library listing are cached, so 4a opens and renders in a dead zone or on a plane. <strong>Audio is never cached</strong>, so playing something needs a connection. We would rather be exact about that than let you find out on the Underground.</p>
+<h2 id="add-it-to-your-home-screen">Add it to your home screen</h2>
+<p>On a phone, 4a can be installed to the home screen from the browser and behaves like an app after that — its own icon, its own window, no browser furniture. <a href="../../4a/getting-started/">Getting started</a> has the steps for each platform.</p>
+<h2 id="light-and-dark">Light and dark</h2>
+<p>4a follows your device's appearance setting. There is nothing to configure.</p>
+<h2 id="what-there-is-not">What there is not</h2>
+<p>An honest feature page needs this section.</p>
+<ul><li><strong>No account, no login, no password, no email verification.</strong></li><li><strong>No advertising, no ad identifier, no advertising SDK.</strong></li><li><strong>No analytics library, no crash reporter, no third-party SDK of any kind.</strong></li><li><strong>No push notifications.</strong> 4a never asks for permission to interrupt you. (It does put ordinary playback controls on your lock screen while something is playing, which is the opposite thing.)</li><li><strong>No social features.</strong> No following, no sharing feed, no comments, no profile.</li><li><strong>No paid tier, no subscription, no in-app purchase.</strong> There is nothing to buy and no upsell.</li><li><strong>No published foray yet.</strong> The player is written; the content is not published.</li><li><strong>Not in any app store.</strong> The web app is the shipping version.</li></ul>
+</main>
+<footer>
+<div class="wrap" itemscope itemtype="https://schema.org/Organization">
+<p class="assoc">This website is operated by <strong itemprop="name">JW Labs LLC</strong>,
+a California limited liability company. <a itemprop="url" href="../../">jwlabs.dev</a> is its domain, and
+<span itemprop="alternateName">JW Labs</span> is the short form of the same
+company, not a separate one.</p>
+<p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
+<p class="fnav"><a href="../../about/">Company</a> · <a href="../../services/">Services</a> ·
+<a href="../../status/">What is built</a> · <a href="../../4a/sample/">Sample content</a> ·
+<a href="../../glossary/">Glossary</a> · <a href="../../contact/">Contact</a></p>
+<p class="fnav"><a href="../../terms/">Terms of use</a> · <a href="../../privacy/">Website privacy</a> ·
+<a href="../../4a/privacy/">4a privacy policy</a> · <a href="../../security/">Security</a> ·
+<a href="../../accessibility/">Accessibility</a></p>
+</div>
+</footer>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>longlive · JW Labs</title>
-<meta name="description" content="longlive is a time machine through Taylor Swift's twelve eras: a scrubbable timeline where every moment is sourced and dated. It lives at longlivets.com.">
+<meta name="description" content="longlive is a time machine through Taylor Swift's twelve eras: a scrubbable, filterable timeline where every moment is sourced and dated. It lives at longlivets.com.">
 <meta name="author" content="JW Labs LLC">
 <link rel="stylesheet" href="../style.css">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -15,49 +15,56 @@
 <p class="brand"><a class="home" href="../">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span><span class="crumb">· longlive</span></p>
 <nav class="nav" aria-label="Primary">
   <a href="../about/">Company</a>
+  <a href="../services/">Services</a>
   <a href="../4a/">4a</a>
   <a href="../longlive/" aria-current="page">longlive</a>
-  <a href="../engineering/">Engineering</a>
+  <a href="../status/">What is built</a>
   <a href="../contact/">Contact</a>
 </nav>
 </div>
 </header>
 <main id="main">
-
-<h1>longlive</h1>
-<p class="lede">longlive is a time machine through Taylor Swift's eras — a
-scrubbable timeline where every moment is sourced and dated, back through all
-twelve of them. It lives at
-<a href="https://longlivets.com/">longlivets.com</a>.</p>
-
-<h2>What it is</h2>
-<p>You drag through an era and the moments come with you: music, fashion, tours,
-relationships, the small cameos, the documented details. A ridge above the
-timeline shows where the most happened, so a decade of a career has a shape you
-can see before you have read a word of it. Entries run from the obvious career
-milestones down to the kind of detail a fan account would have to reconstruct
-from six sources.</p>
-<p>The discipline is the same one behind <a href="../4a/">4a</a>, applied to a
-different pile of material: <strong>every moment is sourced and dated</strong>,
-and where a story is a widely-discussed fan interpretation rather than a confirmed
-fact, the site says so on the moment itself rather than in a footer nobody reads.
-That distinction is the whole reason the project is interesting to build — see
-<a href="../about/">what the company does</a> — because a timeline that quietly
-mixes reporting with theory is just a rumour with dates on it.</p>
-<p>longlive is an independent, fan-made project. It is not affiliated with,
-endorsed by, or connected to Taylor Swift or her representatives. It was
-previously called swift2.</p>
-
-<h2>Where to go for it</h2>
-<p>Everything about longlive lives on its own domain, including its privacy
-policy and its terms of use: <a href="https://longlivets.com/">longlivets.com</a>.
-That site is authoritative about the product, and this page deliberately does not
-restate its details — <strong>nobody here should be documenting another site's
-data practices second-hand.</strong></p>
-<p>longlive is built by JW Labs LLC, the same company that makes 4a. Company-level
-correspondence can come to <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a>; anything specific
-to the timeline itself, including a correction, belongs on longlivets.com.</p>
-
+<h1 id="longlive">longlive</h1>
+<p class="lede">longlive is a time machine through Taylor Swift's eras — a scrubbable timeline where every moment is sourced and dated, back through all twelve of them.</p>
+<p>It lives on its own domain: <strong><a href="https://longlivets.com/">longlivets.com</a></strong>.</p>
+<h2 id="what-you-do-with-it">What you do with it</h2>
+<p><strong>You drag through time and the moments come with you.</strong> The timeline is a scrubber: pull it and an era unspools underneath, moment by moment, each one dated and attributed. Above it sits a ridge that bulges where the most happened, so a decade of a career has a shape you can see before you have read a word of it.</p>
+<p>The site's own instruction is the clearest description of the interaction there is: <em>drag to scrub through the era. The ridge bulges where the most happened.</em></p>
+<h2 id="filters-for-the-thing-you-actually-came-for">Filters, for the thing you actually came for</h2>
+<p>Nobody arrives wanting <em>everything</em>. The timeline filters down to the strand you care about:</p>
+<div class=scroll><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Music</strong></td><td>Releases, songs, the recorded work</td></tr><tr><td><strong>Videos</strong></td><td>The visual output</td></tr><tr><td><strong>Fashion</strong></td><td>What was worn, when, and where</td></tr><tr><td><strong>Tour</strong></td><td>Dates, shows, the road</td></tr><tr><td><strong>Relationship</strong></td><td>The documented, and the widely-discussed</td></tr><tr><td><strong>Lore</strong></td><td>The rest of the story a fan actually cares about</td></tr></tbody></table></div>
+<p>Or <strong>All</strong>, which is the default and the one to scrub through when you do not know what you are looking for yet.</p>
+<h2 id="threads">Threads</h2>
+<p>The timeline is chronological. A <strong>thread</strong> is the other axis: <em>one storyline at a time, across every era.</em></p>
+<p>Pick a thread and the site pulls the moments belonging to that story out of ten years of chronology and lays them end to end — so a narrative that was scattered across four eras reads as a single line. Each has a follow control to stay with it.</p>
+<p>This is the feature that answers the question a timeline cannot: not <em>what happened in 2019</em>, but <em>how did this particular thing develop.</em></p>
+<h2 id="eggs">Eggs</h2>
+<p><em>The secrets she plants.</em> Fan-culture's word for a deliberately placed clue, and a category the timeline treats as its own — because the interesting thing about an egg is not only what it was, but when it was planted and what it later turned out to point at.</p>
+<h2 id="every-moment-is-sourced-and-dated">Every moment is sourced and dated</h2>
+<p>This is the discipline the whole project is built on, and it is the same one behind <a href="../4a/">4a</a>: <strong>nothing is asserted more confidently than its source supports.</strong></p>
+<p>Entries carry their date and their attribution. And where a story is a widely-discussed <strong>fan interpretation</strong> rather than a confirmed fact, the timeline says so <strong>on the moment itself</strong> — marked <em>unconfirmed</em>, right there, rather than in a disclaimer at the bottom of the page that nobody reads.</p>
+<p>That distinction is the entire reason the project is worth building. A timeline that quietly mixes reporting with theory is a rumour with dates on it. One that marks the difference lets you enjoy the theory <em>as</em> a theory, which is what a fan wanted in the first place.</p>
+<h2 id="what-a-moment-actually-looks-like">What a moment actually looks like</h2>
+<p>Rather than describe the format, here are two real entries from the timeline, in the shape the site shows them.</p>
+<hr>
+<p><strong>October 3, 2025</strong> · <em>Career-defining</em> · <strong>Music</strong></p>
+<blockquote><strong>The Life of a Showgirl arrives: 12 tracks, Max Martin and Shellback, one guest.</strong> Written and recorded in Sweden between European Eras Tour dates — her first full album with Max Martin and Shellback since <em>1989</em> and <em>reputation</em>.</blockquote>
+<hr>
+<p><strong>August 24, 2026</strong> · <strong>Relationship</strong></p>
+<blockquote><strong>Adam Scott on the wedding: &quot;at its core, it just felt like a regular wedding&quot;.</strong> The actor, a guest at the July 3 wedding, told <em>TODAY</em> that for all the Madison Square Garden scale — &quot;more people than were at my wedding&quot; — the night felt ordinary, and that everyone teared up.</blockquote>
+<hr>
+<p>Four things are doing work in each of those, and they are the whole format:</p>
+<ul><li><strong>A date</strong>, precise to the day, which is what makes the timeline scrubbable at all.</li><li><strong>A category</strong> — the filters above — so the same era reads differently depending on what you came for.</li><li><strong>A short line that says what happened</strong>, written to be read at scrubbing speed rather than to be comprehensive.</li><li><strong>A second line with the substance and the attribution</strong>: who reported it, and where. The first entry names the collaborators and the recording circumstances; the second names the outlet.</li></ul>
+<p>And where an entry is a <strong>theory rather than a fact</strong>, it is marked <strong>Unconfirmed</strong>, on the moment, in the same place your eye already is. That is the one piece of formatting the whole project rests on: a reader scrubbing quickly should never have to wonder which of these two things they are looking at.</p>
+<h2 id="the-rest-of-the-site">The rest of the site</h2>
+<p>longlivets.com also carries <strong>Mood</strong>, <strong>Clownbot</strong>, <strong>Community</strong> and <strong>Merch</strong> sections. They are best met there rather than described second-hand here — that site is the authoritative one about its own product, and this page deliberately does not restate its details.</p>
+<p>Its privacy policy and terms of use live there too, for the same reason.</p>
+<h2 id="what-it-is-not">What it is not</h2>
+<p><strong>longlive is an independent, fan-made project.</strong> It is <strong>not affiliated with, endorsed by, or connected to Taylor Swift or her representatives.</strong> The site says so itself, in as many words, and adds the necessary companion: all narratives are widely-discussed fan interpretations, not confirmed fact.</p>
+<p>It was previously called swift2, which is why that name turns up in older references.</p>
+<h2 id="who-builds-it">Who builds it</h2>
+<p>longlive is built by <strong>JW Labs LLC</strong>, the same company that makes <a href="../4a/">4a</a> — <a href="../about/">different subject, same shape of problem</a>: a large, scattered body of real source material, a reader who wants a path through it, and a hard rule about provenance.</p>
+<p>Company-level correspondence can come to <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a>. Anything specific to the timeline itself — including a correction, which is welcome — belongs on <a href="https://longlivets.com/">longlivets.com</a>.</p>
 </main>
 <footer>
 <div class="wrap" itemscope itemtype="https://schema.org/Organization">
@@ -66,9 +73,12 @@ a California limited liability company. <a itemprop="url" href="../">jwlabs.dev<
 <span itemprop="alternateName">JW Labs</span> is the short form of the same
 company, not a separate one.</p>
 <p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
-<p class="fnav"><a href="../about/">Company</a> · <a href="../contact/">Contact</a> ·
-<a href="../terms/">Terms of use</a> · <a href="../privacy/">Website privacy</a> ·
-<a href="../4a/privacy/">4a privacy policy</a></p>
+<p class="fnav"><a href="../about/">Company</a> · <a href="../services/">Services</a> ·
+<a href="../status/">What is built</a> · <a href="../4a/sample/">Sample content</a> ·
+<a href="../glossary/">Glossary</a> · <a href="../contact/">Contact</a></p>
+<p class="fnav"><a href="../terms/">Terms of use</a> · <a href="../privacy/">Website privacy</a> ·
+<a href="../4a/privacy/">4a privacy policy</a> · <a href="../security/">Security</a> ·
+<a href="../accessibility/">Accessibility</a></p>
 </div>
 </footer>
 </body>

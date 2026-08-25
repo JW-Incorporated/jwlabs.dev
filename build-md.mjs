@@ -163,9 +163,10 @@ export const ORG_FORMED = "July 26, 2026";
    them. Paths are relative to `base`. */
 const NAV = [
   ["about/", "Company", "about"],
+  ["services/", "Services", "services"],
   ["4a/", "4a", "4a"],
   ["longlive/", "longlive", "longlive"],
-  ["engineering/", "Engineering", "engineering"],
+  ["status/", "What is built", "status"],
   ["contact/", "Contact", "contact"],
 ];
 
@@ -215,9 +216,12 @@ ${ORG_FORM}. <a itemprop="url" href="${b}">jwlabs.dev</a> is its domain, and
 <span itemprop="alternateName">${STUDIO}</span> is the short form of the same
 company, not a separate one.</p>
 <p>Contact <a itemprop="email" href="mailto:${MAIL}">${MAIL}</a></p>
-<p class="fnav"><a href="${b}about/">Company</a> · <a href="${b}contact/">Contact</a> ·
-<a href="${b}terms/">Terms of use</a> · <a href="${b}privacy/">Website privacy</a> ·
-<a href="${b}4a/privacy/">4a privacy policy</a></p>
+<p class="fnav"><a href="${b}about/">Company</a> · <a href="${b}services/">Services</a> ·
+<a href="${b}status/">What is built</a> · <a href="${b}4a/sample/">Sample content</a> ·
+<a href="${b}glossary/">Glossary</a> · <a href="${b}contact/">Contact</a></p>
+<p class="fnav"><a href="${b}terms/">Terms of use</a> · <a href="${b}privacy/">Website privacy</a> ·
+<a href="${b}4a/privacy/">4a privacy policy</a> · <a href="${b}security/">Security</a> ·
+<a href="${b}accessibility/">Accessibility</a></p>
 </div>
 </footer>
 </body>

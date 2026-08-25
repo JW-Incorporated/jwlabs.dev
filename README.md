@@ -6,20 +6,73 @@ repository's default branch root.
 ```
 /                                          the company, what it makes, and why
 /about/                                    the company, the entity, the principles
+/services/                                 engineering and app development
+/services/what-we-build/                   four capability areas, and their honest edges
+/services/how-we-work/                     the engagement, and what we will not quote for
+/4a/                                       4a, the daily podcast picker
+/4a/features/                              every feature, in detail
+/4a/getting-started/                       opening it, installing it, the first week
+/4a/sample/                                what a foray looks like -- sample content index
+/4a/sample/barbecue/                       sample foray, 21:56, six shows
+/4a/sample/startup-capital/                sample foray, 51:22, seven shows
+/4a/sample/plate-tectonics/                sample foray, 40:20, one show, eleven episodes
+/4a/library/                               what is in the library, and what is not
+/4a/your-data/                             plain-language privacy, and deletion
+/4a/faq/                                   the questions people actually ask
+/4a/support/                               how to get help          (Apple-required URL)
+/4a/for-podcasters/                        publishers: what we do, and removal
+/4a/privacy/                               4a's privacy policy      (store-required URL)
+/longlive/                                 longlive, linking out to longlivets.com
+/status/                                   what is built and what is not
 /contact/                                  the one address, and what to include
-/engineering/                              index of the notes, and the number labels
-/engineering/segment-anchoring/            per-request ad stitching, and content anchors
-/engineering/transcripts/                  transcript availability, corpus, ASR cost
-/engineering/curation/                     four queues, classification, narration coverage
-/engineering/measurement/                  five ways a number lied to us
-/engineering/privacy-by-construction/      the CSP, and where it does not hold
+/glossary/                                 terms a user would meet
+/security/                                 responsible disclosure
+/accessibility/                            accessibility statement, incl. what is untested
 /terms/                                    terms of use, site + 4a
 /privacy/                                  this website's privacy notice
-/4a/                                       4a, the podcast curator
-/4a/privacy/                               4a's privacy policy      (store-required URL)
-/4a/support/                               contact + FAQ            (Apple-required URL)
-/longlive/                                 longlive, linking out to longlivets.com
 ```
+
+## The site is feature-led and user-facing. Keep it that way.
+
+**Founder direction, 2026-08-25:**
+
+> "Don't give away the game here, just talk about the features the apps offer and
+> maybe add a JW Labs LLC services page describing the company as engineers and app
+> developers. Dont share our internal decisions or how the sausage is made"
+
+An earlier version of this site carried six long engineering notes -- segment
+anchoring, transcript acquisition, classification methodology, measurement
+discipline. **They were removed.** That material is the company's actual advantage
+and Apple's enrollment requirement never asked how anything works.
+
+So, for anything you add:
+
+- **Describe the RESULT, never the mechanism.** "It finds the interesting stretch of
+  an episode and skips the rest" is a feature. How it locates that stretch is the
+  game.
+- **No architecture decisions, no methodology, no measurement write-ups, no internal
+  process, no incident post-mortems.** Do not mine `docs/adr/`, `docs/research/`,
+  `docs/curation/`, `CLAUDE.md` or the `transcript-farm` repo for this site.
+- **Publish far fewer numbers than an engineering page would.** Where you do publish
+  a quantity, label it measured / estimated / projected / designed and date it.
+- **Sample content is the best kind of substance**: it demonstrates the product and
+  gives nothing away. `/4a/sample/` is three real assembled forays from
+  `data/forays.json`, described in OUR OWN words.
+
+### Copyright rules for sample content -- not optional
+
+1. **Never reproduce song lyrics**, in any form, in any quantity, for any reason.
+   This applies to `/longlive/` specifically.
+2. **No podcast transcript text.** The `start_anchor` / `end_anchor` fields in
+   `data/segments.json` ARE transcript text. Do not publish them. Describe a
+   segment in our own words instead -- the `why` field is our editorial line and is
+   safe.
+3. **Naming shows, episodes, hosts and publishers is fine and correct.** Attribution
+   is a courtesy we should extend.
+4. **No podcast cover art or album art.** Third-party images, and `build.mjs`
+   forbids remote images regardless.
+5. **Do not imply endorsement.** Every sample page carries an explicit line saying
+   the shows named are independent, are not partners, and have not endorsed us.
 
 ## Read this before editing any page
 
@@ -50,8 +103,8 @@ node build.mjs
 ```
 
 No dependencies, no `package.json`, no lockfile, no CI step. `build.mjs` writes
-the fifteen `index.html` files in place and they are committed, because GitHub
-Pages serves the branch and there is no build server in the path.
+every `index.html` in place and they are committed, because GitHub Pages serves the
+branch and there is no build server in the path.
 
 The build is also the test suite. It fails, rather than publishing, on: a
 `<script>` tag; any element that would fetch a subresource from another origin; a
@@ -63,7 +116,7 @@ site be "functional", and a 404 behind the navigation is the cheapest possible w
 to fail that. The final line of output is the count:
 
 ```
-15 pages, 270 internal links all resolve, 41 off-site links not fetched.
+26 pages, 739 internal links all resolve, 76 off-site links not fetched.
 ```
 
 Off-site links are counted, not fetched — this is a build, not a crawler.
@@ -116,9 +169,9 @@ curl -sS https://jwlabs.dev/ | grep -o 'mailto:[^"]*'     # must be the real add
 
 | File | What it is |
 |---|---|
-| `build.mjs` | The generator. Holds the copy for the short structural pages (home, `/4a/`, `/longlive/`), pulls the long-form pages out of `src/*.md`, runs the privacy-policy publication transform, asserts everything listed above, and link-checks the result. |
+| `build.mjs` | The generator. Holds structure and metadata only -- titles, descriptions, breadcrumbs, emit order -- pulls every page's prose out of `src/*.md`, runs the privacy-policy publication transform, asserts everything listed above, and link-checks the result. No prose lives in this file. |
 | `build-md.mjs` | Dependency-free Markdown→HTML for the subset these documents use. Escapes anything it does not understand, so an unhandled construct degrades to visible text rather than to injected markup. Relative links deliberately degrade to plain text rather than to a 404. Also holds the shared chrome (`page()`) and the four single-source facts: `MAIL`, `ORG`, `ORG_FORM`, `ORG_FORMED`. |
-| `src/about.md`, `src/contact.md`, `src/engineering.md`, `src/eng-*.md`, `src/terms.md`, `src/site-privacy.md` | The long-form pages, as prose. Rendered by the same `mdToHtml` the privacy policy uses, so there is one renderer and not two. `{{MAIL}}`, `{{ORG}}`, `{{STUDIO}}`, `{{ORG_FORM}}` and `{{ORG_FORMED}}` are substituted at build time and a leftover placeholder fails the build. Links inside them are written root-relative (`/about/`) and rewritten to the page's own depth. |
+| `src/*.md` (except `4a-privacy-policy.md`) | Every page's prose, one file per page. Rendered by the same `mdToHtml` the privacy policy uses, so there is one renderer and not two. `{{MAIL}}`, `{{ORG}}`, `{{STUDIO}}`, `{{ORG_FORM}}` and `{{ORG_FORMED}}` are substituted at build time and a leftover placeholder fails the build. Links inside them are written root-relative (`/about/`) and rewritten to the page's own depth. |
 | `style.css` | The whole stylesheet. System font stack; light/dark via `prefers-color-scheme`, with a `[data-theme]` override block kept for the day something can set it. Nothing sets it today — there is no script, by constraint — so in practice the OS decides. |
 | `src/4a-privacy-policy.md` | A **snapshot** of `docs/legal/privacy-policy.md` from the [foray repo](https://github.com/JW-Incorporated/foray). See below. |
 | `favicon.svg` | Same-origin SVG favicon, so a first visit does not 404 on `/favicon.ico`. Inverts with the OS theme. |
@@ -182,7 +235,7 @@ answered HTTP 200 to anyone who guessed the path, and it named the wrong company
 four times, which `build.mjs`'s guard could not see because it only inspects
 pages `build.mjs` writes. Keep non-page files out of this repo.
 
-If that trade stops being acceptable, the fix is to move the fifteen generated
+If that trade stops being acceptable, the fix is to move the generated
 pages plus `style.css`, `favicon.svg`, `CNAME` and `.nojekyll` into a served
 subdirectory and re-point Pages at it — then `build.mjs`, `src/`, `docs/` and this
 README stop being served at all. It was not done here because re-pointing the
@@ -192,7 +245,8 @@ that review depends on. Note the name collision if you do: Pages'
 
 ## longlive has no privacy policy on this site, on purpose
 
-`/longlive/` is one sentence and a link to `longlivets.com`. longlive has its own
+`/longlive/` describes the timeline's features from what `longlivets.com` itself
+publishes, and links out. longlive has its own
 domain, so its legal documents belong there. Nobody here knows its data
 practices, and **a privacy policy that is wrong is worse than one that is absent,**
 because it is submitted to a store as a factual declaration. Do not add one here.

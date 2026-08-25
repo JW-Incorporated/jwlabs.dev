@@ -15,9 +15,10 @@
 <p class="brand"><a class="home" href="../">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span><span class="crumb">· Company</span></p>
 <nav class="nav" aria-label="Primary">
   <a href="../about/" aria-current="page">Company</a>
+  <a href="../services/">Services</a>
   <a href="../4a/">4a</a>
   <a href="../longlive/">longlive</a>
-  <a href="../engineering/">Engineering</a>
+  <a href="../status/">What is built</a>
   <a href="../contact/">Contact</a>
 </nav>
 </div>
@@ -26,23 +27,28 @@
 <h1 id="the-company">The company</h1>
 <p class="lede">JW Labs LLC is a California limited liability company, formed on July 26, 2026. It builds software, it owns and operates this domain, and &quot;JW Labs&quot; is the short form of its name. There is one company on this page and it is the same one in every sentence.</p>
 <h2 id="what-it-does">What it does</h2>
-<p>JW Labs builds software that takes a large, messy body of real source material and makes it navigable — while keeping every claim attached to the thing it came from.</p>
-<p>That is not a slogan looking for a product. It is the description that fell out of building two of them:</p>
-<p><strong><a href="../4a/">4a</a></strong> is a podcast curator. Its raw material is 82,043 episodes across 220 curated shows: hours of unindexed speech, with no reliable table of contents and, on two shows out of three, no stable timeline either. 4a's job is to turn that into four things worth a listener's attention today, and — when it assembles a run of segments cut out of several episodes — to know exactly which words bound each cut, so that a boundary is a claim about <em>content</em> rather than a guess at a clock reading. It never rehosts, transforms or modifies a publisher's audio. The <a href="../engineering/">engineering notes</a> are mostly about how hard that turned out to be.</p>
-<p><strong><a href="../longlive/">longlive</a></strong> is a scrubbable timeline of Taylor Swift's career across twelve eras. Its raw material is a career's worth of scattered reporting, and its discipline is the same one: every moment is sourced and dated, and where a narrative is a widely-held fan interpretation rather than a confirmed fact, the site says so on the moment itself rather than in a disclaimer nobody reads.</p>
-<p>Same shape, different subject. Both products are about provenance under load: a lot of source material, a reader who wants a path through it, and a hard rule that nothing gets asserted more confidently than its source supports. That rule is why 4a will skip a segment rather than play it forty seconds off, and why the <a href="../engineering/">engineering notes</a> label every number measured, estimated, projected or designed.</p>
+<p>JW Labs builds software that takes a large, messy body of real source material and makes it navigable — while keeping every claim attached to the thing it came from. And it takes on <a href="../services/">engineering and app development work</a> for other people, where the problem is that shape.</p>
+<p>That is not a slogan looking for a product. It is the description that fell out of building two of them.</p>
+<p><strong><a href="../4a/">4a</a></strong> is a daily podcast picker. Four topic queues a day rather than one endless feed, one of them deliberately outside your usual subjects, drawn from a library of hundreds of curated shows and tens of thousands more at breadth. It is also building towards something harder: a <strong>foray</strong>, a named sequence assembled from stretches of several episodes and played as one run. <a href="../4a/sample/">Three real ones are published here in full</a> — the clearest way to see what the product is for.</p>
+<p><strong><a href="../longlive/">longlive</a></strong> is a scrubbable timeline of Taylor Swift's career across twelve eras, filterable down to music, tour, fashion or lore. Every moment is sourced and dated, and where a narrative is a widely-held fan interpretation rather than a confirmed fact, the site marks it on the moment itself rather than in a disclaimer nobody reads.</p>
+<p>Same shape, different subject. Both are about provenance under load: a lot of source material, a reader who wants a path through it, and a hard rule that nothing gets asserted more confidently than its source supports.</p>
 <h2 id="how-it-works">How it works</h2>
-<p>JW Labs LLC is <strong>two founders and a fleet of AI agents. There is no other staff.</strong> Worth stating plainly, because it explains several things about this site that would otherwise look like omissions: there is no team page, no office photograph, no press list and no phone tree, and the contact address goes to a person rather than to a queue.</p>
-<p>It also explains what the company organises itself around. Two people cannot out-staff anybody, so the work goes where being small and being careful beats being large: reading a problem all the way to the bottom, writing down what was actually measured, and refusing to ship the version that only looks finished. The <a href="../engineering/">engineering notes</a> are the evidence for that claim, and they are the reason this section is short — a description of a working method is worth much less than five worked examples of it.</p>
+<p>JW Labs LLC is <strong>two founders and a fleet of AI agents. There is no other staff.</strong></p>
+<p>Worth stating plainly, because it explains several things about this site that would otherwise look like omissions: there is no team page, no office photograph, no press list and no phone tree, and the contact address goes to a person rather than to a queue.</p>
+<p>It also explains what the company organises itself around. Two people cannot out-staff anybody, so the work goes where being small and being careful beats being large: reading a problem all the way to the bottom, and refusing to ship the version that only looks finished.</p>
 <h2 id="what-we-will-not-do">What we will not do</h2>
-<p>These are product principles, not aspirations. Several of them are enforced by tests that fail the build.</p>
-<p><strong>Legally boring.</strong> 4a never rehosts, proxies, transforms or modifies podcast audio. Playback is a seek and a stop against the publisher's own file, served from the publisher's own host. There is no derived audio artefact at any point in the pipeline, and a feature request that would produce one goes to legal review before it goes to a sprint. We also do not detect, skip or strip advertising — not as a courtesy, but as an architectural commitment that shapes the entire design. The <a href="../engineering/segment-anchoring/">segment anchoring note</a> is fifteen hundred words on how expensive that commitment is and why we keep it anyway.</p>
-<p><strong>No engagement dark patterns.</strong> No streaks, no infinite scroll, no autoplay chains, no notification bait. Discovery keeps a hard exploration floor of roughly thirty per cent, which is the opposite of what an engagement metric would ask for.</p>
+<p>These are product principles, not aspirations. Several of them are the reason other things are harder, and several are enforced by tests that fail the build.</p>
+<p><strong>Legally boring.</strong> 4a never rehosts, proxies, transforms or modifies podcast audio. Playback is a seek and a stop against the publisher's own file, served from the publisher's own host, and there is no derived audio artefact at any point. We also do not detect, skip or strip advertising — not as a courtesy, but as a commitment that shapes the entire design. <a href="../4a/for-podcasters/">The page for podcasters</a> is the full statement, including how to have a show removed.</p>
+<p><strong>No engagement dark patterns.</strong> No streaks, no infinite scroll, no autoplay chains, no notification bait. Discovery keeps a hard exploration floor, which is the opposite of what an engagement metric would ask for — and the exploratory queue <a href="../4a/#the-stretch-queue">deliberately ignores your skip rate</a>, because a slot that backs off when ignored is a slower route to the same three shows.</p>
 <p><strong>State observed, never declared.</strong> If the software can watch something, it does not ask. There is no settings screen where a listener has to describe themselves before the product works.</p>
-<p><strong>No third-party SDKs.</strong> 4a contains no advertising code, no ad identifier, no analytics library and no crash reporter. Its Content Security Policy names exactly two origins it may send data to, which is the structural reason that is a fact rather than a promise. <a href="../engineering/privacy-by-construction/">Privacy by construction</a> shows the policy and then argues against our own claim, because the same policy is not as tight as it first looks and a reader deserves to know where.</p>
-<p><strong>Say less than is true, never more.</strong> Every number we publish is labelled measured, estimated, projected or designed, and the four are not interchangeable. Nothing on this website describes an unbuilt feature in the present tense. Where we have measured our own assumption and found it wrong we publish that too — there are five such cases in the <a href="../engineering/measurement/">measurement note</a>, including one where a metric read a perfect score because it was silently computing something else.</p>
+<p><strong>No third-party SDKs.</strong> 4a contains no advertising code, no ad identifier, no analytics library and no crash reporter. None, rather than few. Most of what it knows <a href="../4a/your-data/">never leaves the device</a>, and the account it does keep holds no name, email or phone number.</p>
+<p><strong>Say less than is true, never more.</strong> Nothing on this website describes an unbuilt feature in the present tense, and <a href="../status/">one page</a> lists what is built, what is designed and not built, and what has not been verified. Where a decision has not been made — a data-retention period, a compliance position — the documents record the silence rather than filling it in, because silence with a reason is an omission and a sentence we cannot support is a false statement.</p>
 <h2 id="where-things-stand">Where things stand</h2>
 <p>4a's web app is deployed and works, at <a href="https://jw-incorporated.github.io/foray/">jw-incorporated.github.io/foray/</a>, with no signup and no password. Native iOS and Android shells are built from the same code; the iOS build has been launched on the simulator, the Android build has been compiled but never run, and neither is in a store. Nothing JW Labs LLC makes is currently distributed through the App Store or Google Play. longlive is live on its own domain.</p>
+<p><a href="../status/">What is built and what is not</a> is the full inventory, including the things that are designed and not built and the one thing that is written and not yet verified.</p>
+<h2 id="working-with-us">Working with us</h2>
+<p>JW Labs LLC takes on outside engineering work: apps people use on a phone, products with a lot of real data underneath them, software that has to be careful with people's data, and front ends built to still work in five years.</p>
+<p><a href="../services/what-we-build/">What we build</a> describes each of those properly, including where the honest edge of the capability is. <a href="../services/how-we-work/">How working with us goes</a> covers the rest, including what we will not quote for and the fact that there is no published client work to show you yet.</p>
 <h2 id="contact">Contact</h2>
 <p>One address, read by a person: <a href="mailto:help@jwlabs.dev">help@jwlabs.dev</a>. The <a href="../contact/">contact page</a> says what to include and how long to expect to wait. There is no postal address on this site and no telephone line; email is the channel, and it reaches the company.</p>
 </main>
@@ -53,9 +59,12 @@ a California limited liability company. <a itemprop="url" href="../">jwlabs.dev<
 <span itemprop="alternateName">JW Labs</span> is the short form of the same
 company, not a separate one.</p>
 <p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
-<p class="fnav"><a href="../about/">Company</a> · <a href="../contact/">Contact</a> ·
-<a href="../terms/">Terms of use</a> · <a href="../privacy/">Website privacy</a> ·
-<a href="../4a/privacy/">4a privacy policy</a></p>
+<p class="fnav"><a href="../about/">Company</a> · <a href="../services/">Services</a> ·
+<a href="../status/">What is built</a> · <a href="../4a/sample/">Sample content</a> ·
+<a href="../glossary/">Glossary</a> · <a href="../contact/">Contact</a></p>
+<p class="fnav"><a href="../terms/">Terms of use</a> · <a href="../privacy/">Website privacy</a> ·
+<a href="../4a/privacy/">4a privacy policy</a> · <a href="../security/">Security</a> ·
+<a href="../accessibility/">Accessibility</a></p>
 </div>
 </footer>
 </body>

@@ -3,8 +3,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>4a — a podcast curator · JW Labs</title>
-<meta name="description" content="4a is a podcast curator. It picks four topic queues for you every day, one of them deliberately unlike the others.">
+<title>4a - a daily podcast picker · JW Labs</title>
+<meta name="description" content="4a is a daily podcast picker. Four topic queues a day, one of them deliberately unlike the others, with no signup.">
 <meta name="author" content="JW Labs LLC">
 <link rel="stylesheet" href="../style.css">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -15,109 +15,58 @@
 <p class="brand"><a class="home" href="../">JW Labs</a> <span class="tag"><strong>JW Labs LLC</strong> · a software studio</span><span class="crumb">· 4a</span></p>
 <nav class="nav" aria-label="Primary">
   <a href="../about/">Company</a>
+  <a href="../services/">Services</a>
   <a href="../4a/" aria-current="page">4a</a>
   <a href="../longlive/">longlive</a>
-  <a href="../engineering/">Engineering</a>
+  <a href="../status/">What is built</a>
   <a href="../contact/">Contact</a>
 </nav>
 </div>
 </header>
 <main id="main">
-
-<h1>4a</h1>
-<p class="lede">4a is a podcast curator. It picks four topic queues for you every
-day — and makes one of them deliberately unlike the other three, so the thing you
-did not know to ask for still reaches you.</p>
-
-<h2>What you actually get today</h2>
-<p>The daily picks are the app. You open it, you get four cards, you play or save
-what looks good, and 4a learns from what you take and what you skip. There is no
-feed to scroll and nothing to configure first.</p>
-<p>4a is also built to assemble episodes into a <em>foray</em> — an ordered
-sequence of segments cut from several episodes and played as one run. That player
-is written and works, but <strong>no foray is published yet</strong>, so it is not
-something a visitor can open today. We would rather say that here than let the
-word appear on this page as though it were a feature waiting for you.</p>
-
-<h2>Where it runs</h2>
-<p>4a is a deployed web app at <a href="https://jw-incorporated.github.io/foray/">https://jw-incorporated.github.io/foray/</a>. It needs no
-signup and no password, it works on a phone, and it can be added to a home
-screen. The app shell and its catalogue are cached, so it opens and renders in a
-dead zone; audio is never cached, so playing something needs a connection.</p>
-<p>Native shells for iOS and Android are built from the same code — the same
-HTML, the same player, copied at build time and never forked. The iOS build has
-been launched on the simulator; the Android build compiles and has never been
-run. <strong>Neither is in a store, and there is no date.</strong> The web app is
-the shipping version today.</p>
-<p>It is early software, and the <a href="../4a/support/">support page</a> says so
-plainly rather than pretending otherwise.</p>
-
-<h2>Two words, and which is which</h2>
-<p><strong>4a</strong> is the app. A <strong>foray</strong> is a thing the app
-makes — one assembled run of segments. It is a common noun, lowercase, and there
-can be many of them.</p>
-<p>The app was previously called Foray, which is why that word still appears in
-the web app's URL and in the names of its local database and its cache bucket.
-Renaming those would orphan data already sitting on a listener's device, so they
-keep the old name on purpose.</p>
-
-<h2>How playback works</h2>
-<p>Audio plays straight from each publisher's own servers. 4a never rehosts,
-proxies or transforms podcast audio, and there is no 4a server in the path
-between a listener and an episode. It can also hand an episode off to whichever
-podcast app a listener prefers.</p>
-<p>That design has a consequence worth stating on the way in rather than burying:
-because the request goes directly to the publisher's host, that host — and any
-measurement or ad-attribution service the publisher has put in front of their own
-audio — sees the listener's IP address and user-agent, and 4a never does.
-<a href="../4a/privacy/">§4 of the privacy policy</a> is exact about this,
-including who those third parties actually are and why the alternative would be
-worse.</p>
-
-<h2>What 4a keeps</h2>
-<p>Most of what 4a knows about a listener never leaves the device: topic
-interests, play positions, history, playlists and settings are stored locally
-and are not transmitted. Five kinds of event are sent to our database, against
-an anonymous account holding no name, email or phone number. There is no
-advertising, no ad tracking, no analytics SDK and no crash reporter in the app,
-and no third-party SDK of any kind.</p>
-<p>The <a href="../4a/privacy/">privacy policy</a> lists every stored key, every
-transmitted field and every host a device contacts. It is not written for this
-site: it is converted, word for word, from a snapshot of the copy that lives in
-the same repository that builds the app.</p>
-
-<h2>How it decides what to show you</h2>
-<p>Three of the four queues come from topics you have demonstrated an interest
-in. The fourth is drawn from <em>next to</em> your demonstrated interests rather
-than inside them, it carries a visible <strong>Stretch</strong> badge, and it
-ignores your historical skip rate for the region it explores — because exploration
-is the point, and a slot that backs off when skipped is just a slower route to the
-same three shows. A Stretch pick also has to state its bridge: the reason this is
-next to that, in eighteen words or fewer.</p>
-<p>There is no infinite scroll, no streak, no autoplay chain and no notification
-bait. Each of those raises time-in-app at the cost of the thing the app is for.
-<a href="../engineering/curation/">The curation note</a> is the long version,
-including the classifier that confidently filed a general-audience science show
-under medicine, and how that was fixed.</p>
-
-<h2>The hard part, written up</h2>
-<p>Assembling a run of segments out of real episodes turns out to be difficult for
-one specific reason: podcast advertising is stitched in per request, so the same
-episode is a different file — minutes longer or shorter — for every listener. A
-timestamp written down anywhere else is a claim about a copy nobody will ever hear
-again.</p>
-<ul>
-  <li><a href="../engineering/segment-anchoring/">Anchoring a segment in audio nobody else receives</a></li>
-  <li><a href="../engineering/transcripts/">Where the transcripts are, and where they are not</a></li>
-  <li><a href="../engineering/privacy-by-construction/">Privacy by construction</a></li>
-</ul>
-
-<h2>Pages a store needs</h2>
-<ul>
-  <li><a href="../4a/privacy/">Privacy policy</a></li>
-  <li><a href="../4a/support/">Support</a> — contact and FAQ</li>
-</ul>
-
+<h1 id="4a">4a</h1>
+<p class="lede">4a is a daily podcast picker. Every day it gives you <strong>four topic queues</strong> — not one endless feed — and it makes one of them deliberately unlike the other three, so the thing you did not know to ask for still reaches you.</p>
+<p>It runs in a browser right now, with no signup and no password: <strong><a href="https://jw-incorporated.github.io/foray/">open 4a</a></strong>.</p>
+<h2 id="the-problem-it-is-for">The problem it is for</h2>
+<p>You have eleven podcasts you like and about forty minutes. The apps you already have are very good at two things: playing a show you have already chosen, and showing you a list of the most popular shows in a category. Neither of those is the question you actually have, which is <em>what should I listen to right now.</em></p>
+<p>The usual answer to that question is a feed. A feed hands the work back to you: scroll, read, judge, scroll again, give up, replay something you have heard. 4a takes a position instead. It picks four things, tells you why it picked each one, and gets out of the way.</p>
+<h2 id="what-you-see-when-you-open-it">What you see when you open it</h2>
+<p>Four cards. Each card is a <strong>queue on one subject</strong>, not a single episode, and each one tells you what it is before you tap:</p>
+<ul><li><strong>How many episodes are in it, and how long they run in total</strong> — so you can match a queue to the time you actually have.</li><li><strong>Which shows it draws from</strong>, named. If it is all from one show, it says so. If it is drawn from four, it says which two and how many more.</li><li><strong>What it starts with</strong> — the title of the first episode, quoted, so the card is never a mystery box.</li></ul>
+<p>Three of the four are subjects you have shown an interest in. <strong>The fourth is badged <code>Stretch</code>, and it is deliberately something else.</strong> Tap a card and you get the queue.</p>
+<p>There is a refresh control if none of the four appeal. There is no infinite scroll, no &quot;for you&quot; river, and nothing that gets longer the more you look at it.</p>
+<h2 id="the-stretch-queue">The Stretch queue</h2>
+<p>This is the part of 4a that a metrics-driven product would delete.</p>
+<p>The fourth queue is drawn from <em>next to</em> your demonstrated interests rather than inside them. It carries a visible badge that says, in as many words, <strong>&quot;Outside your usual topics, on purpose&quot;</strong> — because the alternative is a recommender quietly sneaking something past you and hoping.</p>
+<p>Two rules make it real rather than decorative:</p>
+<p><strong>It does not back off when you skip it.</strong> A slot that shrinks whenever it is ignored is just a slower route back to the same three shows you already listen to. Exploration that gives up is not exploration.</p>
+<p><strong>It has to say what the bridge is</strong> — the reason this is next to that, in a single short line. A recommendation that cannot explain itself in eighteen words has not earned the slot.</p>
+<p>The honest cost: some Stretch picks will be wrong for you, and that is the design working rather than failing. What we ask in return is that you tell it — see <a href="../4a/features/#telling-it-when-it-is-wrong">how it learns</a>.</p>
+<h2 id="ask-for-a-queue-in-your-own-words">Ask for a queue in your own words</h2>
+<p>Underneath the four cards there is one text field: <strong>build me a playlist.</strong></p>
+<p>Type what you actually want — a subject, a mood, a constraint, a mix — and 4a interprets it against the library and assembles a queue. It relaxes the query if it has to, and it tells you which of three things happened:</p>
+<ul><li>It found a good queue.</li><li>It found a <strong>thin</strong> one, and says so rather than padding it out with filler.</li><li>It found nothing, in which case it <strong>suggests adjacent subjects</strong> that do have something in them, instead of shrugging.</li></ul>
+<p>Queues you build are saved as playlists, and the five most recent are one tap away in the menu.</p>
+<h2 id="it-plays-into-whichever-app-you-already-use">It plays into whichever app you already use</h2>
+<p>By default, tapping an episode hands it off to the podcast app you already have — Apple Podcasts, or a show page in another player — and you can change which one in the settings. Your subscriptions, your queue, your history: 4a is not trying to replace any of that.</p>
+<p>4a also has its own player, used for assembled runs of segments. Either way, <strong>audio comes straight from the publisher's own servers.</strong> 4a never rehosts, proxies or transforms podcast audio, and there is no 4a server sitting between you and an episode.</p>
+<p>That has a consequence we would rather state on the way in than bury: because the request goes directly to the publisher's host, that host — and any measurement service the publisher has put in front of their own audio — sees your IP address and browser, and 4a never does. <a href="../4a/your-data/">What 4a knows about you</a> is the plain-language version, and <a href="../4a/privacy/">the privacy policy</a> is the exact one.</p>
+<h2 id="where-it-runs">Where it runs</h2>
+<p><strong>A web app, today.</strong> No signup, no password, no email address. It works on a phone, it can be added to your home screen and behaves like an app once it is there, and the app itself is cached — so it opens and renders even with no connection. (Audio is never cached, so <em>playing</em> something needs a connection.)</p>
+<p><strong>Native iOS and Android shells exist</strong> and are built from the same code as the web app. Neither is in a store, and there is no date. <a href="../status/">What is built and what is not</a> is the honest inventory.</p>
+<h2 id="two-words-and-which-is-which">Two words, and which is which</h2>
+<p><strong>4a</strong> is the app.</p>
+<p>A <strong>foray</strong> is a thing the app makes: one assembled run of segments, cut from several episodes and played as a single sequence, with controls to jump to the next or previous segment. The player is written and works, but <strong>no foray is published yet</strong>, so it is not something you can open today. We would rather say that here than let the word sit on this page as though it were a feature waiting for you.</p>
+<p>The app used to be called Foray, which is why the word still appears in the web app's address and in the names of its on-device storage. Renaming those would break saved links and orphan data already on people's devices, so they keep the old name on purpose.</p>
+<h2 id="what-4a-will-not-do">What 4a will not do</h2>
+<p>These are not aspirations. Several of them are the reason other things are harder.</p>
+<p><strong>No engagement dark patterns.</strong> No streaks, no infinite scroll, no autoplay chains, no notification bait. Each of those raises time-in-app at the cost of the thing the app is for.</p>
+<p><strong>No advertising, and no ad tracking.</strong> There is no ad code, no ad identifier and no advertising SDK in 4a. There is also no analytics library and no crash reporter, and no third-party SDK of any kind.</p>
+<p><strong>No account, unless you want one.</strong> No signup, no password, no email, no profile.</p>
+<p><strong>We do not skip or strip advertising in anyone else's audio.</strong> Not as a courtesy — as a commitment that shapes the whole product. Playback is a seek and a stop against the publisher's own file.</p>
+<p><strong>We do not ask you to describe yourself.</strong> There is no questionnaire to fill in before the app works. It watches what you open and what you skip.</p>
+<h2 id="more">More</h2>
+<div class=scroll><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="../4a/features/">Every feature, in detail</a></td><td>The full tour, including the settings people actually change</td></tr><tr><td><a href="../4a/getting-started/">Getting started</a></td><td>Opening it, adding it to a home screen, and the first week</td></tr><tr><td><a href="../4a/library/">What is in the library</a></td><td>What kinds of shows are in it, and how something gets added</td></tr><tr><td><a href="../4a/your-data/">What 4a knows about you</a></td><td>Plain language, and how to delete all of it</td></tr><tr><td><a href="../4a/faq/">Questions</a></td><td>The ones people actually ask</td></tr><tr><td><a href="../4a/support/">Support</a></td><td>How to get help, and what to include</td></tr><tr><td><a href="../4a/for-podcasters/">For podcasters</a></td><td>If your show is in the library, or you would rather it were not</td></tr><tr><td><a href="../4a/privacy/">Privacy policy</a></td><td>The exact document</td></tr></tbody></table></div>
 </main>
 <footer>
 <div class="wrap" itemscope itemtype="https://schema.org/Organization">
@@ -126,9 +75,12 @@ a California limited liability company. <a itemprop="url" href="../">jwlabs.dev<
 <span itemprop="alternateName">JW Labs</span> is the short form of the same
 company, not a separate one.</p>
 <p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
-<p class="fnav"><a href="../about/">Company</a> · <a href="../contact/">Contact</a> ·
-<a href="../terms/">Terms of use</a> · <a href="../privacy/">Website privacy</a> ·
-<a href="../4a/privacy/">4a privacy policy</a></p>
+<p class="fnav"><a href="../about/">Company</a> · <a href="../services/">Services</a> ·
+<a href="../status/">What is built</a> · <a href="../4a/sample/">Sample content</a> ·
+<a href="../glossary/">Glossary</a> · <a href="../contact/">Contact</a></p>
+<p class="fnav"><a href="../terms/">Terms of use</a> · <a href="../privacy/">Website privacy</a> ·
+<a href="../4a/privacy/">4a privacy policy</a> · <a href="../security/">Security</a> ·
+<a href="../accessibility/">Accessibility</a></p>
 </div>
 </footer>
 </body>
