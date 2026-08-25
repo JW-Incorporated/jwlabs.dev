@@ -36,8 +36,8 @@ The GitHub **organisation** is separately named `JW-Incorporated`, so repository
 and Pages URLs legitimately contain that spelling. The build's check is for the
 spaced form only.
 
-**[`the foray repo's `docs/apple-enrollment-website.md``](the foray repo's `docs/apple-enrollment-website.md`) is the
-brief for this whole site**: Apple's verbatim requirements, the 15-item checklist
+**The brief for this whole site lives in the foray repo**, at
+`docs/apple-enrollment-website.md`: Apple's verbatim requirements, the 15-item checklist
 derived from them, what Apple does *not* require (no postal address — and there
 must never be one on this site), the facts still wanted from the founder, and the
 post-deploy verification commands. Read it before adding, removing or rewriting a
@@ -176,11 +176,11 @@ source confirms the disclosure rather than contradicting it.
 
 Every other `src/*.md` is now served the same way, and that part is harmless —
 they are the same prose as the rendered pages, minus the chrome. The `docs/`
-directory is served too, which means
-`the foray repo's `docs/apple-enrollment-website.md`` — an internal working document about an Apple
-rejection — is fetchable. Nothing links to it, and its content is candid rather
-than embarrassing, but be aware of it before writing anything in there you would
-not want a reviewer to read.
+directory is served too. **In this repository every file is a URL.** That is why
+the Apple working note now lives in the foray repo instead: served from here it
+answered HTTP 200 to anyone who guessed the path, and it named the wrong company
+four times, which `build.mjs`'s guard could not see because it only inspects
+pages `build.mjs` writes. Keep non-page files out of this repo.
 
 If that trade stops being acceptable, the fix is to move the fifteen generated
 pages plus `style.css`, `favicon.svg`, `CNAME` and `.nojekyll` into a served
