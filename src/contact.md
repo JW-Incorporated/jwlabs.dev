@@ -1,7 +1,7 @@
 # Contact
 
-One address, for everything: [{{MAIL}}](mailto:{{MAIL}}). It is a real mailbox on
-this domain, and what you send reaches the people who build the software.
+One address, for everything: [{{MAIL}}](mailto:{{MAIL}}). It is a real mailbox
+rather than a form, and what you send reaches the people who build the software.
 
 Support for [4a](/4a/), a bug report, a security finding, a podcast you would like
 added or removed, a question about privacy, or

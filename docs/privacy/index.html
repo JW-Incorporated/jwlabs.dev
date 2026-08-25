@@ -25,7 +25,7 @@
 </header>
 <main id="main">
 <h1 id="website-privacy-notice">Website privacy notice</h1>
-<p class="lede"><strong>Effective August 25, 2026.</strong> This notice covers <strong>this website</strong>, <code>jwlabs.dev</code>, operated by JW Labs LLC, a California limited liability company.</p>
+<p class="lede"><strong>Effective August 25, 2026.</strong> This notice covers <strong>this website</strong>, <code>jwlabs.ai</code>, operated by JW Labs LLC, a California limited liability company.</p>
 <p>It does not cover the 4a app, which has its own, much longer and much more exact policy: <strong><a href="../4a/privacy/">4a's privacy policy</a></strong>. That document lists every key the app stores on a device, every field it transmits and every host a device contacts, and it is published from the same repository that builds the app so the two cannot drift. If your question is about the app, that is the page you want.</p>
 <p>longlive is not covered either. It has its own privacy policy at <a href="https://longlivets.com/">longlivets.com</a>.</p>
 <h2 id="the-short-version">The short version</h2>
@@ -35,7 +35,7 @@
 <ul><li><strong>There is no <code>&lt;script&gt;</code> tag on any page of this site.</strong> Not a deferred one, not an inline one, not one from a content delivery network. The build script that generates these pages <em>fails</em> if a script tag appears in its output, and it fails again if any element on a page would fetch anything from another host.</li><li><strong>Nothing on a page is loaded from another origin.</strong> No web fonts, no hosted icons, no tracking pixel, no embedded video. The only things a page pulls are one stylesheet and one favicon, both from this domain. Every external URL on this site is an ordinary link you have to choose to follow.</li><li><strong>Therefore there is no consent banner</strong>, because there is nothing to consent to. A cookie notice on this site would be theatre.</li></ul>
 <p>The reason for that discipline is not privacy marketing: 4a ships a strict Content Security Policy that blocks remote scripts and fonts, and this site holds the same line so the two cannot drift into different rules. Privacy is the side effect, and we will take it.</p>
 <h2 id="what-our-hosting-providers-see">What our hosting providers see</h2>
-<p>We do not have a server. This site is served as static files by <strong>GitHub Pages</strong>, with <strong>Cloudflare</strong> in front of it terminating TLS. Cloudflare is not optional here — GitHub never issued a certificate for this domain, so Cloudflare is what makes <code>https://jwlabs.dev</code> reachable at all.</p>
+<p>We do not have a server. This site is served as static files by <strong>GitHub Pages</strong>, with <strong>Cloudflare</strong> in front of it terminating TLS. Cloudflare is not incidental here — it is the edge that answers <code>https://jwlabs.ai</code>, so it sees every request before GitHub does.</p>
 <p>Like every web server on the internet, those two receive what your browser sends in order to answer the request: your IP address, your user agent, the page you asked for, the time, and a referrer if your browser sent one. They are our service providers, they process that data to deliver and secure the site, and their own privacy terms apply to their handling of it.</p>
 <p>To be precise about our own access rather than flattering:</p>
 <ul><li><strong>We have no per-visitor record and no way to build one.</strong> There is no analytics script, no cookie, no identifier and no log we retain or query.</li><li><strong>Cloudflare's dashboard does show the account aggregate traffic counts for this domain</strong> — requests, bandwidth, cached-versus-uncached, rough geography — the way it does for any zone. That is a count, not a profile, and it exists whether we look at it or not. We are telling you because &quot;we collect nothing&quot; would be a slightly better sentence and a slightly less true one.</li></ul>
@@ -55,7 +55,7 @@
 <footer>
 <div class="wrap" itemscope itemtype="https://schema.org/Organization">
 <p class="assoc">This website is operated by <strong itemprop="name">JW Labs LLC</strong>,
-a California limited liability company. <a itemprop="url" href="../">jwlabs.dev</a> is its domain, and
+a California limited liability company. <a itemprop="url" href="../">jwlabs.ai</a> is its domain, and
 <span itemprop="alternateName">JW Labs</span> is the short form of the same
 company, not a separate one.</p>
 <p>Contact <a itemprop="email" href="mailto:help@jwlabs.dev">help@jwlabs.dev</a></p>
