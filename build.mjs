@@ -583,7 +583,7 @@ for (const [path, opts] of pages) {
      repository and Pages URLs, so this checks for the SPACED form only -- the
      one that could only be prose about a company. */
   if (/JW\s+Incorporated/.test(html))
-    throw new Error(`${path}: names "JW Incorporated", which is not the legal entity (see docs/apple-enrollment-website.md)`);
+    throw new Error(`${path}: names "JW Incorporated", which is not the legal entity. The entity is JW Labs LLC; see the foray repo docs/apple-enrollment-website.md`);
   if (html.includes("{{")) throw new Error(`${path}: an unsubstituted placeholder survived`);
 
   mkdirSync(dirname(path), { recursive: true });

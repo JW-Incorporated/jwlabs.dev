@@ -36,7 +36,7 @@ The GitHub **organisation** is separately named `JW-Incorporated`, so repository
 and Pages URLs legitimately contain that spelling. The build's check is for the
 spaced form only.
 
-**[`docs/apple-enrollment-website.md`](docs/apple-enrollment-website.md) is the
+**[`the foray repo's `docs/apple-enrollment-website.md``](the foray repo's `docs/apple-enrollment-website.md`) is the
 brief for this whole site**: Apple's verbatim requirements, the 15-item checklist
 derived from them, what Apple does *not* require (no postal address — and there
 must never be one on this site), the facts still wanted from the founder, and the
@@ -177,7 +177,7 @@ source confirms the disclosure rather than contradicting it.
 Every other `src/*.md` is now served the same way, and that part is harmless —
 they are the same prose as the rendered pages, minus the chrome. The `docs/`
 directory is served too, which means
-`docs/apple-enrollment-website.md` — an internal working document about an Apple
+`the foray repo's `docs/apple-enrollment-website.md`` — an internal working document about an Apple
 rejection — is fetchable. Nothing links to it, and its content is candid rather
 than embarrassing, but be aware of it before writing anything in there you would
 not want a reviewer to read.
