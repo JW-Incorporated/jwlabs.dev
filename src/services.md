@@ -10,9 +10,9 @@ address reaches the people who would do the work, not a form.
 ## How we deliver
 
 **No delivery layer between the person you email and the person who writes the
-code.** No account managers, no relay, no handover. The work is heavily leveraged
-with a fleet of AI agents under close direction, which is what makes the path from
-a decision to working software short.
+code.** No account managers, no relay, no handover. The work is heavily automated
+behind the scenes, which is what makes the path from a decision to working software
+short.
 
 That shape is the offer. The conversation about what to build and the work of
 building it happen in the same place, a change of direction costs a conversation

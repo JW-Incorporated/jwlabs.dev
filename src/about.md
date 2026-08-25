@@ -35,8 +35,8 @@ asserted more confidently than its source supports.
 
 ## How it works
 
-{{ORG}} builds with **a short path from decision to shipped code**, heavily
-leveraged with a fleet of AI agents under close direction.
+{{ORG}} builds with **a short path from decision to shipped code**, and invests
+heavily in the tooling and automation that keeps it short.
 
 Whoever decides what to build is whoever writes it. A change of direction costs a
 conversation rather than a planning cycle, a question about the software is answered
