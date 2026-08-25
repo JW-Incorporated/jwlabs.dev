@@ -175,10 +175,12 @@ const NAV = [
    fronts ships a strict CSP, and the site holds the same line.
 
    `base` is a RELATIVE prefix ("./", "../", "../../"), not "/". Root-relative
-   paths would break every link and the stylesheet at
-   jw-incorporated.github.io/jwlabs.dev/, which is where the site lives until the
-   apex DNS records exist -- so the site would be unverifiable exactly during the
-   window when you most want to look at it.
+   paths would break every link and the stylesheet under any prefix other than a
+   domain apex -- local review from the filesystem, a directory-scoped preview, or
+   jw-incorporated.github.io/jwlabs.dev/ (the Pages URL, which keeps the
+   repository's spelling and now 301s to the custom domain). Serving at the
+   jwlabs.ai apex would tolerate "/"-rooted paths; nothing else here would, which
+   is why the relative prefix stays.
 
    The Organization microdata in the footer is the one machine-readable
    statement that this domain belongs to this legal entity. It is attributes

@@ -11,15 +11,30 @@ The **repository** is still named `jwlabs.dev`, so repository and Pages URLs
 legitimately keep that spelling, the same way the GitHub organisation is
 legitimately spelled `JW-Incorporated`.
 
-**The contact address is still `help@jwlabs.ai`, deliberately.** Cloudflare
-Email Routing is configured on the `jwlabs.dev` zone only, so `help@jwlabs.ai`
-would accept nothing and drop mail silently. An address that discards what is
-sent to it is worse than an address whose domain does not match the website's, so
-`MAIL` in `build-md.mjs` was left alone at cutover and the site publishes a
-`.dev` address on a `.ai` site on purpose. Moving it is a **follow-up gated on
-Email Routing existing on the `jwlabs.ai` zone** and on somebody having sent a
-test message to it and received it — not on this cutover, and not on anybody's
-sense of tidiness.
+**The contact address is `help@jwlabs.ai`, and that is what the site publishes.**
+Cloudflare Email Routing is provisioned on the **`jwlabs.ai`** zone — MX
+(`route1/2/3.mx.cloudflare.net`) and SPF (`v=spf1 include:_spf.mx.cloudflare.net
+~all`) both resolve, and the zone reports `status: ready`. `MAIL` in
+`build-md.mjs` is `help@jwlabs.ai`, and every built page carries it, so the
+published address is on the same domain the site is served from.
+
+**Do not "restore" a `.dev` address here.** An earlier revision of this file said
+Email Routing existed on the `jwlabs.dev` zone only, that `help@jwlabs.ai` would
+therefore drop mail silently, and that publishing a `.dev` address on a `.ai` site
+was a deliberate mismatch to leave alone. That was true before routing was
+provisioned on the new zone; **it is false now**, and acting on it would undo a
+finished fix. `help@jwlabs.dev` does still accept mail, and should keep doing so
+while documents already in the wild name it — but that is a property of the old
+zone, not a reason to publish the old address.
+
+**What is still unticked is delivery, and it is not a formality.** DNS proves the
+zone is *configured*; it does not prove a routing rule exists with a *verified*
+destination, and Cloudflare publishes MX and reports a zone ready before that is
+true. In that state mail to `help@jwlabs.ai` is rejected or dropped. **Step 13 of
+the runbook — send a real message to `help@jwlabs.ai` from outside and confirm it
+arrives — is the check that settles it, and it has not been done.** Do it. If it
+fails, fix the routing rule; the answer is still not to republish a `.dev`
+address.
 
 **`docs/` is public. The root of this repository is not.** Every file under
 `docs/` is a URL on jwlabs.ai; nothing outside it is served at all. That
@@ -397,9 +412,14 @@ state; `node build.mjs` will be green throughout.
     Cloudflare is answering from somewhere that is not the origin.
 
 13. **Send a test message to `help@jwlabs.ai` and confirm it arrives.** The
-    address did not change, but the account it is routed through did just have its
-    zones rearranged around it, and a silently dead contact address on a site whose
-    purpose is to be contactable is the worst outcome available here.
+    published address **did** change at the cutover — `help@jwlabs.dev` →
+    `help@jwlabs.ai` — onto Email Routing newly provisioned on a newly created
+    zone. So this is the mailbox's first real delivery, not a re-check of a
+    long-lived one, and DNS cannot stand in for it: Cloudflare publishes MX and
+    reports a zone ready before a routing rule with a verified destination exists,
+    and in that window mail is rejected or dropped. A silently dead contact address
+    on a site whose purpose is to be contactable is the worst outcome available
+    here. **Do not treat this step as a formality, and do not tick it from DNS.**
 
 14. **Update the places that store the old URL.** App Store Connect and the Play
     Console each hold a privacy-policy URL and a support URL, and both are
@@ -422,13 +442,19 @@ state; `node build.mjs` will be green throughout.
   certificate should cover the domain from the moment the zone is active, so this
   should be invisible; if it is not, `.ai` gives a click-through warning rather
   than the unreachable site `.dev` would have given.
-- **`help@jwlabs.ai` is unaffected**, and must stay that way. Email Routing and
-  the MX records are on the old zone, and the old zone keeps them. **Do not delete
-  the `jwlabs.dev` zone.** Deleting it takes out the redirect and the company's
-  only published email address in a single move.
-- **The site will visibly publish a `.dev` address on a `.ai` site** until Email
-  Routing exists on the new zone. That is a deliberate, documented mismatch, not
-  an oversight — see the note at the top of this file before "fixing" it.
+- **`help@jwlabs.ai` is newly provisioned, so it is the thing most worth testing.**
+  Email Routing, MX and SPF exist on the `jwlabs.ai` zone and the published address
+  now matches the site's domain — but this mailbox is new, not carried over, and
+  DNS does not prove delivery. Step 13's test message is its first real exercise.
+- **Do not delete the `jwlabs.dev` zone even so.** It carries the redirect rule,
+  which is the only thing keeping stale `.dev` URLs alive — including the one on
+  the Apple enrollment record — and it carries the `help@jwlabs.dev` alias, which
+  documents already sent elsewhere still name. Deleting the zone takes out both in
+  a single move.
+- **The site publishes `help@jwlabs.ai`, on the same domain it is served from.**
+  An earlier revision of this file called publishing a `.dev` address on a `.ai`
+  site a deliberate mismatch, gated on Email Routing reaching the new zone. That
+  gate has been met. Do not reintroduce the mismatch.
 
 ## What is served, and what is not
 
@@ -590,16 +616,32 @@ site. Verified served through the proxy on 2026-08-25 (`server: cloudflare`,
 with a separate answer, and nobody has looked yet.
 
 **The `jwlabs.dev` zone stays.** It keeps its DNS records, because a Cloudflare
-redirect rule can only fire for a hostname that resolves to Cloudflare, and it
-keeps its MX records, because Email Routing for `help@jwlabs.ai` lives there and
-that is still the published contact address. Deleting the old zone would take out
-the forward and the company's only mailbox at the same time.
+redirect rule can only fire for a hostname that resolves to Cloudflare — so the
+zone is what keeps every stale `.dev` URL in the wild working, including the one
+on the Apple enrollment record. It keeps its MX records too, but **no longer
+because the only mailbox is there**: Email Routing for `help@jwlabs.ai` is now
+provisioned on the `jwlabs.ai` zone, and `help@jwlabs.ai` is the published
+address. What the old zone's MX still serves is the `help@jwlabs.dev` alias,
+which documents already sent elsewhere name.
+
+**The conclusion does not depend on that reason, and has not changed: do not
+delete the old zone.** Deleting it would take out the forward and the legacy
+alias together.
 
 **Nothing on this site depends on the custom domain.** Every path is relative
-(`./`, `../`, `../../`), computed per page by `up()` in `build.mjs`, so the site
-renders identically at `https://jwlabs.ai/` and at
-`https://jw-incorporated.github.io/jwlabs.dev/` — the repository name, which the
-domain change does not touch. That is deliberate: it means the site can be
-reviewed the moment it is pushed rather than only after DNS propagates, and it is
-what makes this cutover a DNS-and-`CNAME` change rather than a content change. Do not "simplify" those to `/`-rooted paths — `build.mjs` asserts
-that no `href="/…"` survives, and will fail the build if one does.
+(`./`, `../`, `../../`), computed per page by `up()` in `build.mjs`, so the built
+HTML is valid under any prefix — `https://jwlabs.ai/` or the Pages URL
+`https://jw-incorporated.github.io/jwlabs.dev/`, whose `jwlabs.dev` is the
+**repository** name and is correct. That portability is what made this cutover a
+DNS-and-`CNAME` change rather than a content change.
+
+One caveat, because this passage used to promise more than it can now deliver:
+**the Pages URL is no longer a preview surface.** Measured 2026-08-25,
+`https://jw-incorporated.github.io/jwlabs.dev/` returns **301 to
+`http://jwlabs.ai/`** — Pages redirects to the configured custom domain. (To
+`http://`, not `https://`: this repository has `https_enforced: false`.) So the
+old claim that the site can be reviewed there the moment it is pushed, before DNS
+propagates, is no longer testable as written. Review the built output locally
+instead. The relative paths keep doing their real job regardless. Do not
+"simplify" them to `/`-rooted paths — `build.mjs` asserts that no `href="/…"`
+survives, and will fail the build if one does.
