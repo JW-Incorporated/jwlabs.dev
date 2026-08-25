@@ -8,6 +8,17 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { mdToHtml, page, MAIL, ORG, STUDIO, ORG_FORM, ORG_FORMED } from "./build-md.mjs";
 
+/* Everything published lives under docs/, and GitHub Pages is pointed at that
+   directory rather than at the branch root. The root of this repository is
+   therefore NOT a public directory: README.md, build*.mjs and src/*.md are not
+   URLs. That is the whole reason for the subdirectory -- Pages serves a tree, so
+   the only reliable way to keep a file unserved is for it to be outside the tree.
+   Run from the repository root: src/ is read relative to the working directory.
+
+   Anything written into docs/ is a public URL. Add nothing here that is not
+   meant to be read by a stranger. */
+const OUT = "docs";
+
 const APP_URL = "https://jw-incorporated.github.io/foray/";
 const FORAY_REPO = "https://github.com/JW-Incorporated/foray";
 /* The commit of docs/legal/privacy-policy.md that src/4a-privacy-policy.md is a
@@ -361,6 +372,12 @@ emit("4a/privacy/index.html", {
   body: mdToHtml(policy),
 });
 
+/* Keyed by SITE path -- "4a/privacy/index.html", not "docs/4a/privacy/index.html".
+   The site path is what a browser resolves an href against, and it is unchanged by
+   which directory Pages is pointed at. Keeping the map in site space is what makes
+   the docs/ move a no-op for every relative link on the site, and it keeps the
+   depth arithmetic in up() honest: docs/ is a serving detail, not a path segment
+   the reader ever sees. OUT is applied at the moment of writing, and nowhere else. */
 const written = new Map();
 for (const [path, opts] of pages) {
   /* Root-relative hrefs are written in the copy above because they read better,
@@ -391,10 +408,11 @@ for (const [path, opts] of pages) {
     throw new Error(`${path}: names "JW Incorporated", which is not the legal entity. The entity is JW Labs LLC; see the foray repo docs/apple-enrollment-website.md`);
   if (html.includes("{{")) throw new Error(`${path}: an unsubstituted placeholder survived`);
 
-  mkdirSync(dirname(path), { recursive: true });
-  writeFileSync(path, html);
+  const file = `${OUT}/${path}`;
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, html);
   written.set(path, html);
-  console.log(`${path}  ${html.length.toLocaleString()} bytes`);
+  console.log(`${file}  ${html.length.toLocaleString()} bytes`);
 }
 
 /* ------------------------------------------------------------- link check ---
@@ -402,7 +420,11 @@ for (const [path, opts] of pages) {
    navigation is the cheapest possible way to fail that. Eyeballing does not
    count, so every internal href is resolved against what was actually written
    to disk, and every fragment is resolved against the ids in its target page.
-   Off-site hrefs are not fetched -- this is a build, not a crawler. */
+   Off-site hrefs are not fetched -- this is a build, not a crawler.
+
+   Resolution happens in site space, which is the space the reader's browser
+   resolves in: docs/ is the served root, so "docs/" is not part of any path a
+   browser ever computes and must not be part of any path checked here. */
 const ids = new Map([...written].map(([p, html]) =>
   [p, new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]))]));
 const resolve = (from, href) => {
@@ -433,3 +455,18 @@ for (const [from, html] of written) {
   }
 }
 console.log(`\n${written.size} pages, ${checked} internal links all resolve, ${offsite} off-site links not fetched.`);
+
+/* ----------------------------------------------------------- served root ---
+   Pages reads CNAME and .nojekyll from the directory it serves, not from the
+   branch root. Both are committed static files rather than build output, so the
+   build does not create them -- but it does refuse to finish without them,
+   because the failure they cause is silent and total: a missing or misplaced
+   CNAME unsets the custom domain, and every jwlabs.dev URL 404s behind
+   Cloudflare with nothing in this repository to show why. */
+for (const [name, want] of [["CNAME", "jwlabs.dev"], [".nojekyll", ""]]) {
+  let got;
+  try { got = readFileSync(`${OUT}/${name}`, "utf8"); }
+  catch { throw new Error(`${OUT}/${name} is missing. Pages reads it from the served root, which is ${OUT}/.`); }
+  if (got.trim() !== want) throw new Error(`${OUT}/${name}: expected ${JSON.stringify(want)}, found ${JSON.stringify(got.trim())}`);
+}
+console.log(`${OUT}/CNAME and ${OUT}/.nojekyll present. Pages source must be set to the ${OUT}/ folder.`);
