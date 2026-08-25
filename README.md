@@ -456,6 +456,38 @@ state; `node build.mjs` will be green throughout.
   site a deliberate mismatch, gated on Email Routing reaching the new zone. That
   gate has been met. Do not reintroduce the mismatch.
 
+## The DNS both zones actually carry
+
+**Read this before recreating either zone.** An earlier version of this section
+listed only the `A` records and `www`, which is the website half. Rebuilding a zone
+from that list would have silently destroyed `help@jwlabs.ai` — the address every
+store listing and legal page points at — because nothing in the website's build or
+tests can see a missing MX record.
+
+Captured from the Cloudflare API, both zones, at the cutover:
+
+```
+jwlabs.ai                                        jwlabs.dev
+  A      -> 185.199.108-111.153  proxied           A      -> 185.199.108-111.153  proxied
+  CNAME  www -> jw-incorporated.github.io          CNAME  www -> jw-incorporated.github.io
+  MX     route1/2/3.mx.cloudflare.net              MX     route1/2/3.mx.cloudflare.net
+  TXT    v=spf1 include:_spf.mx.cloudflare.net     TXT    v=spf1 include:_spf.mx.cloudflare.net
+  TXT    cf2024-1._domainkey (DKIM)                TXT    cf2024-1._domainkey (DKIM)
+                                                   TXT    google-site-verification=...
+```
+
+Three things that are easy to get wrong:
+
+1. **The MX and TXT records must NOT be proxied.** Cloudflare will not offer to, and
+   a proxied MX does not deliver mail. Only the website records are orange.
+2. **`jwlabs.dev`'s records must keep resolving.** Cloudflare can only redirect a
+   hostname that resolves to it, so deleting the old zone's `A` records breaks the
+   301 as thoroughly as deleting the redirect rule would. The old zone also still
+   holds working mail for `help@jwlabs.dev`.
+3. **The `google-site-verification` TXT exists only on `jwlabs.dev`.** Verification
+   tokens are domain-specific, so it cannot be copied — `jwlabs.ai` needs its own
+   from Search Console. This fails silently the day the old zone goes.
+
 ## What is served, and what is not
 
 **`docs/` is public. The root is not.** Pages is pointed at the `docs/` folder,
