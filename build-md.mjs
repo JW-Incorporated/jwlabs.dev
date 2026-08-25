@@ -13,6 +13,11 @@
    file is internal and is not published. */
 import { readFileSync, writeFileSync } from "node:fs";
 
+/* The one public contact address. It lives here rather than in build.mjs
+   because the shared footer below needs it, and a second copy over there is
+   how the two drifted apart the first time. build.mjs imports this. */
+export const MAIL = "help@jwlabs.dev";
+
 export const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
@@ -154,7 +159,7 @@ export function page({ title, base = "./", crumb = "", desc = "", body }) {
 <main>
 ${body}
 </main>
-<footer><p>JW Incorporated · <a href="mailto:wjduvall@gmail.com">wjduvall@gmail.com</a></p></footer>
+<footer><p>JW Incorporated · <a href="mailto:${MAIL}">${MAIL}</a></p></footer>
 </body>
 </html>
 `;

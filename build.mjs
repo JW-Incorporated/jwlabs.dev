@@ -5,10 +5,9 @@
    remote fonts and scripts, and the site holds the same line so the two cannot
    drift into different rules. */
 import { readFileSync, writeFileSync } from "node:fs";
-import { mdToHtml, page } from "./build-md.mjs";
+import { mdToHtml, page, MAIL } from "./build-md.mjs";
 
 const APP_URL = "https://jw-incorporated.github.io/foray/";
-const MAIL = "wjduvall@gmail.com";
 const FORAY_REPO = "https://github.com/JW-Incorporated/foray";
 /* The commit of docs/legal/privacy-policy.md that src/4a-privacy-policy.md is a
    snapshot of. Bump both together, or the header on the published page lies. */
