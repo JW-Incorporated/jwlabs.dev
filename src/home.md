@@ -86,5 +86,4 @@ a store. [More about the company](/about/).
 
 ## Contact
 
-Email [{{MAIL}}](mailto:{{MAIL}}). One address, read by a person, so it may take a
-few days — but it is read. [What to include](/contact/).
+Email [{{MAIL}}](mailto:{{MAIL}}). [What to include](/contact/).
