@@ -4,13 +4,13 @@ If you have found a security problem in anything {{ORG}} runs, we would like to
 hear about it, and this page is how.
 
 **Report it to [{{MAIL}}](mailto:{{MAIL}}).** Put `security` somewhere in the
-subject line. That address is read by a person rather than a queue, so expect days
-rather than hours — and see [what we can and cannot promise](#what-we-promise-and-what-we-do-not)
-below, which is deliberately modest.
+subject line. A report goes straight to the people who can change the code, and
+[what we can and cannot promise](#what-we-promise-and-what-we-do-not) is set out
+below.
 
-There is **no bug bounty and no payment.** We are [two founders](/about/); a
-programme we could not fund would be worse than none. We will credit you by name
-or handle if you want that and are happy to be told not to.
+There is **no bug bounty and no payment.** We would rather run no programme than one
+we could not honour. We will credit you by name or handle if you want that and are
+happy to be told not to.
 
 ## What to include
 
@@ -26,7 +26,7 @@ The same things that make [any report](/contact/) actionable, plus the specifics
 
 Please do not send us the output of an automated scanner with no analysis. We will
 read it, but a list of missing headers on a static site with no script and no
-cookies costs us a day and tells us nothing.
+cookies tells us nothing.
 
 ## In scope
 
@@ -103,14 +103,12 @@ information.
   website, on 4a, or on the repositories. Not "we are between audits" — none has
   happened.
 - **No formal vulnerability disclosure programme, no service-level agreement, and
-  no PGP key.** One email address, read by a person.
+  no PGP key.** One email address, and a direct route from a report to a fix.
 - **No third-party compliance attestation of any kind**, and we do not claim to
   comply with any particular framework. The same rule applies to privacy: see
   [the website privacy notice](/privacy/) and
   [the 4a privacy policy](/4a/privacy/), both of which record what they cannot claim
   rather than claiming it, and [what is not decided yet](/status/).
-- **No security team.** The person who reads the report is the person who writes
-  the fix.
 
 ## What we promise, and what we do not
 
@@ -118,15 +116,15 @@ information.
 we intend to do about it and roughly when, and tell you when it is fixed. If we
 decide not to fix something, we will say that instead of going quiet.
 
-**We will not:** promise a response time we cannot hold, dispute a finding to avoid
-fixing it, or ask you to sign anything before we will read your email.
+**We will not:** dispute a finding to avoid fixing it, or ask you to sign anything
+before we will read your email.
 
 **On legal risk to you:** we have no interest in pursuing anyone who reports a
 problem to us in good faith, and we will not. That is a statement of intent from
 the company, and it is deliberately not dressed up as a legal safe harbour —
-nobody here is a lawyer, [our terms](/terms/) say as much, and a paragraph of
-pseudo-legal comfort language we could not stand behind would be worth less to you
-than this sentence.
+we are engineers rather than lawyers, [our terms](/terms/) say as much, and a
+paragraph of pseudo-legal comfort language we could not stand behind would be worth
+less to you than this sentence.
 
 What "good faith" means here is the ordinary thing: work against your own account
 and your own data, do not degrade the service for anyone else, do not access

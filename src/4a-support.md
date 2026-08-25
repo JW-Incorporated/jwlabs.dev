@@ -4,9 +4,8 @@
 deliberately unlike the others. This page is how you get help with it.
 
 **[{{MAIL}}](mailto:{{MAIL}})** is the address. There is no ticket system and no
-support team — one person reads it and answers, usually within a few days. It is
-not a queue with a robot in front of it, which is the trade: slower than a chat
-widget, and you are talking to somebody who can change the code.
+robot in front of it: what you send is read, and the answer comes from somebody who
+can change the code.
 
 ## Before you write
 
@@ -101,13 +100,11 @@ and there is no date.** We do not publish dates.
 [What is built and what is not](/status/) is the whole inventory, including the
 things that are designed and not built.
 
-## Response times, honestly
+## What happens to your report
 
-There is no service-level agreement and we are not going to invent one. One person
-reads that address. Expect a few days; expect longer if it lands in a bad week.
-
-What we will do: read it, tell you whether we can reproduce it, and tell you what
-we intend to do about it. **If we decide not to fix something, we will say so
+There is no service-level agreement and we are not going to invent one. What we
+will do: read it, tell you whether we can reproduce it, and tell you what we intend
+to do about it. **If we decide not to fix something, we will say so
 rather than going quiet.**
 
 ## It is early software

@@ -87,7 +87,7 @@ information from children.
 
 {{ORG}} is {{ORG_FORM}}. Any question, request or complaint about privacy —
 including anything about the 4a app that its own policy does not answer — goes to
-[{{MAIL}}](mailto:{{MAIL}}) and is read by a person. To delete data 4a holds, use
+[{{MAIL}}](mailto:{{MAIL}}). To delete data 4a holds, use
 the control **inside the app**; §7 of [its policy](/4a/privacy/) explains why that
 reaches more than an email can.
 
@@ -98,7 +98,7 @@ website's public source repository records what changed and when.
 
 ## What this document is, and is not
 
-It was written in-house rather than by a lawyer, and it is accurate about what
+It was written by the people who built this site, and it is accurate about what
 this website does — the claims in "why that is checkable" are enforced by the
 build, not by good intentions. **It has not had legal review**, and it does not
 state a position on any particular privacy regime, because doing so would be

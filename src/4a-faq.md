@@ -1,7 +1,7 @@
 # 4a — questions
 
-The ones people actually ask. If yours is not here,
-[{{MAIL}}](mailto:{{MAIL}}) reaches a person.
+The ones people actually ask. If yours is not here, ask at
+[{{MAIL}}](mailto:{{MAIL}}).
 
 For getting help with a specific problem, [the support page](/4a/support/) says
 what to include so it can be acted on.
@@ -49,7 +49,7 @@ note. The reasons are specific because "not for me" on its own tells a learning
 system almost nothing.
 
 For today's daily cards the fastest route is
-[an email](/4a/support/); a person reads it.
+[an email](/4a/support/).
 
 ### How long before the picks get good?
 

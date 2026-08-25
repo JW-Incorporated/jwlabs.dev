@@ -5,9 +5,8 @@ can use today, which exist and are not finished, and which are plans. It is one 
 so that nobody has to assemble the answer from nine others.
 
 **We do not publish dates.** Not because they are secret — because a date is a
-promise, we are [two founders](/about/), and a missed date on a company website is a
-worse signal than an absent one. Where something has no date it is because nobody
-can honestly give it one.
+promise, and a missed date on a company website is a worse signal than an absent
+one. Where something has no date it is because nobody can honestly give it one.
 
 *Reviewed 2026-08-25. If you are reading this much later and it is unchanged, treat
 the "not built" column as the reliable half — it only ever gets shorter, and nothing
@@ -38,8 +37,7 @@ iOS build has been launched on the simulator. The Android build compiles and has
 never been run. **Neither is in any app store, and there is no date.**
 
 Nothing {{ORG}} makes is currently distributed through the App Store or Google Play.
-That is a fact about a company formed on {{ORG_FORMED}}, and stating it is cheaper
-than the alternative.
+Stating that is cheaper than the alternative.
 
 **4a's foray player** — speed control, next and previous segment, resume at an
 exact position — is written and works.
@@ -57,7 +55,7 @@ run them is built. What is missing is publication.
 
 The fourth is the one we cut: an earlier 61-minute assembly of the barbecue subject
 that wandered off its own topic and was superseded by the 22-minute version.
-[Why that is on the site rather than deleted](/4a/sample/#the-one-we-threw-away).
+[Why that is on the site rather than deleted](/4a/sample/#the-one-we-cut).
 
 ## Designed, and not built
 
@@ -94,8 +92,8 @@ the failure.
 
 - **No claim of compliance with any privacy law.** {{ORG}} is a California company,
   so the question is live and conspicuous. Most of the relevant obligations turn on
-  revenue and data-volume thresholds nobody has assessed for a company this young,
-  and "we comply with X" is a statement of fact about a review that has not happened.
+  revenue and data-volume thresholds that have not been assessed, and "we comply
+  with X" is a statement of fact about a review that has not happened.
   [The privacy notice](/privacy/) describes plainly what the site does and does not
   collect, and stops there.
 - **No stated position on European data-protection obligations.** A US-only listing

@@ -125,7 +125,7 @@ in plain English rather than in a font size designed to discourage reading.
 
 ## Who we are
 
-[{{ORG}}](/about/) is {{ORG_FORM}}. Two founders, no advertising business, no data
-brokerage, and one email address that reaches a person. That last part is the
-reason this page can promise a same-week answer to a removal request: there is no
-queue in front of it.
+[{{ORG}}](/about/) is {{ORG_FORM}}. No advertising business, no data brokerage, and
+one email address that goes straight to the people who can act on it. That last part
+is the reason this page can promise a same-week answer to a removal request: there
+is no queue in front of it.

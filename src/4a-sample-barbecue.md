@@ -18,7 +18,7 @@ That is the whole editorial decision. An earlier assembly of the same subject ra
 61 minutes across 32 stretches and tried to cover everything the sources could
 support; it wandered into griddle cookery and eighteenth-century tavern dinners and
 stopped being about barbecue.
-[The story of why it was cut](/4a/sample/#the-one-we-threw-away) is on the index
+[The story of why it was cut](/4a/sample/#the-one-we-cut) is on the index
 page. Twenty-two minutes that stay on topic beat sixty-one that do not.
 
 ## The sequence

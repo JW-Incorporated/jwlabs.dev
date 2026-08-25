@@ -1,8 +1,8 @@
 # How working with us goes
 
-Small companies usually describe their process in a way that could describe any
-company. This is the specific version, including the parts that are inconvenient
-for us to say.
+Most companies describe their process in a way that could describe any company.
+This is the specific version, including the parts that are inconvenient for us to
+say.
 
 [What we build](/services/what-we-build/) is the capability side.
 [{{MAIL}}](mailto:{{MAIL}}) is how to start.
@@ -17,10 +17,9 @@ and what is forcing the timing — a launch, a contract, a platform deadline, a 
 that is currently done by hand. A paragraph is plenty. A specification is welcome
 and not expected.
 
-**What happens next:** you get a real answer, usually within a few days, from
-someone who has read it. That answer is either "yes, and here is what we would want
-to know next", or "no, and here is why, and here is the shape of company that does
-this well."
+**What happens next:** you get a real answer from someone who has read it. That
+answer is either "yes, and here is what we would want to know next", or "no, and
+here is why, and here is the shape of company that does this well."
 
 ## We tell you no, quickly
 
@@ -55,9 +54,8 @@ purpose is to have happened.
 The trade is real and you should weigh it. **What you get:** the person answering
 your question is the person who wrote the code, so the answer is the actual answer
 and not a relayed one, and a decision does not have to travel through anybody. **What
-you give up:** the reassurance apparatus. No dashboard with a green light on it, no
-account team, and no illusion that the work continues at full speed while somebody
-is ill.
+you give up:** the reassurance apparatus — no dashboard with a green light on it,
+and no account team whose job is to tell you it is going well.
 
 ## What you hear from us while it is happening
 
@@ -68,9 +66,9 @@ That last one is the load-bearing part and it is the same standard the rest of t
 site is held to. This website publishes
 [which of our own products are not built](/status/),
 [which accessibility work has not been done](/accessibility/), and
-[the fact that nothing we own has ever been security-audited](/security/). We are
-not going to hold our own shop window to that standard and then send you a status
-report with the difficult column removed.
+[what the security page will not claim](/security/). We are not going to hold our
+own shop window to that standard and then send you a status report with the
+difficult column removed.
 
 **And if a date is going to slip, you hear it when we know**, not on the date. A
 schedule is a forecast; the useful thing about a forecast is how early it updates.
@@ -110,8 +108,8 @@ someone who was not in the room. The
 is part of the same instinct — a build that needs four hundred packages and a
 specific machine is a build you cannot take anywhere.
 
-That matters more than usual with a company this size, and we would rather you
-raise it than worry about it.
+It is worth raising early rather than worrying about later, and we will give you a
+straight answer about it.
 
 ## What we will not do in your product
 
@@ -138,20 +136,19 @@ better to read it here than to discover it during a submission.
 call in most time zones with a bit of notice.
 
 **How to reach us.** [{{MAIL}}](mailto:{{MAIL}}), which is the only channel — no
-phone line and no chat widget. [The contact page](/contact/) says what to include
-and how long to expect to wait.
+phone line and no chat widget. [The contact page](/contact/) says what to include.
 
 **Rates and terms.** Not published, because they depend entirely on the work. Ask,
 and you will get a straight answer rather than a brochure.
 
 ## The honest summary
 
-{{ORG}} was formed on {{ORG_FORMED}}. It has two real products you can open right
-now — [4a](https://jw-incorporated.github.io/foray/) and
-[longlive](https://longlivets.com/) — **and no published client work.**
+{{ORG}} has two real products you can open right now —
+[4a](https://jw-incorporated.github.io/foray/) and
+[longlive](https://longlivets.com/).
 
-We are not going to dress that up. What we can offer instead of a reference list is
-software you can inspect yourself, a website that publishes its own gaps, and a
-first email that gets a real answer from the person who would do the work.
+What that gets you is software you can inspect yourself rather than a description of
+it, a website that publishes its own gaps, and a first email that gets a real answer
+from the person who would do the work.
 
 **[{{MAIL}}](mailto:{{MAIL}})**

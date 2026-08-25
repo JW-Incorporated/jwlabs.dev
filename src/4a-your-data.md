@@ -138,9 +138,8 @@ job, there will be a period. [What is built and what is not](/status/) tracks it
 
 **We do not claim compliance with any particular privacy law.** {{ORG}} is a
 California company, so the question is live and conspicuous — and most of the
-relevant obligations turn on thresholds nobody has assessed for a company this
-young. "We comply with X" is a statement of fact about a review that has not
-happened. So the policy describes exactly what the app does and stops there.
+relevant obligations turn on thresholds that have not been assessed. "We comply with
+X" is a statement of fact about a review that has not happened. So the policy describes exactly what the app does and stops there.
 
 ## Asking us instead
 

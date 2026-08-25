@@ -2,8 +2,7 @@
 
 **Effective August 25, 2026.**
 
-These terms are an agreement between you and **{{ORG}}**, {{ORG_FORM}} formed on
-{{ORG_FORMED}} ("we", "us", "our"). They govern your use of this website,
+These terms are an agreement between you and **{{ORG}}**, {{ORG_FORM}} ("we", "us", "our"). They govern your use of this website,
 `jwlabs.dev`, and of **4a**, our podcast curator. By using either one you accept
 them. If you do not accept them, do not use them.
 
@@ -177,7 +176,7 @@ Notices and questions under these terms:
 
 ## What this document is, and is not
 
-It was written in-house, by the people who wrote the software, and it is accurate
+It was written by the people who wrote the software, and it is accurate
 about how that software behaves — section 3 in particular is a description of the
 code and not a hope about it. **It has not been reviewed by a lawyer**, and it is
 not a professional opinion about its own sufficiency under any particular law. We

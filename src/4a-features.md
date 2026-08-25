@@ -147,8 +147,7 @@ subject you get tomorrow and the other should not.
 run, and **no such run is published yet**, so this is a feature of the player
 rather than of today's daily cards. For the daily picks, what teaches the app is
 what you open, what you skip, what you save, and what you mark done. If a pick was
-wrong and you want to say so in words, [email us](/4a/support/) — a person reads
-it.
+wrong and you want to say so in words, [email us](/4a/support/).
 
 **The note is stored on our server.** It is free text you wrote, so do not type
 anything into it you would not want kept. [What 4a knows about you](/4a/your-data/)
