@@ -28,10 +28,11 @@ const POLICY_SNAPSHOT = "2026-08-24";
 
 const crumb = (...parts) => parts.map((p) => `<span class="crumb">· ${p}</span>`).join("");
 const link = (href, text) => `<a href="${href}">${text}</a>`;
-/* Pages are addressed relatively so the site works both at jwlabs.ai and at
-   jw-incorporated.github.io/jwlabs.dev/ -- the repository is still named
-   jwlabs.dev, so the Pages URL keeps that spelling -- before the apex DNS
-   records for the new domain exist. */
+/* Pages are addressed relatively so the built HTML is valid under any prefix:
+   jwlabs.ai, and jw-incorporated.github.io/jwlabs.dev/ -- the repository is still
+   named jwlabs.dev, so the Pages URL keeps that spelling. Note that Pages URL is
+   no longer a preview surface: measured 2026-08-25 it 301s to the custom domain.
+   The relative paths are what keep the output portable and reviewable locally. */
 const up = (depth) => (depth === 0 ? "./" : "../".repeat(depth));
 
 /* ---------------------------------------------------------------- privacy ---
