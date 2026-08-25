@@ -1,7 +1,15 @@
 # jwlabs.dev
 
-The company website for **JW Labs LLC**, served by GitHub Pages from this
-repository's default branch root.
+The company website for **JW Labs LLC**, served by GitHub Pages from the
+**`docs/` folder** of this repository's default branch.
+
+**`docs/` is public. The root of this repository is not.** Every file under
+`docs/` is a URL on jwlabs.dev; nothing outside it is served at all. That
+division is load-bearing — see [What is served, and what is
+not](#what-is-served-and-what-is-not) — and the rule for anything you add is the
+short version of it: **if you put a file in `docs/`, you have published it.**
+
+The URLs, all of which are `docs/<path>/index.html` on disk:
 
 ```
 /                                          the company, what it makes, and why
@@ -102,9 +110,18 @@ page.
 node build.mjs
 ```
 
-No dependencies, no `package.json`, no lockfile, no CI step. `build.mjs` writes
-every `index.html` in place and they are committed, because GitHub Pages serves the
-branch and there is no build server in the path.
+Run it from the repository root; `src/` is read relative to the working
+directory. No dependencies, no `package.json`, no lockfile, no CI step.
+`build.mjs` writes every `index.html` into **`docs/`** and they are committed,
+because GitHub Pages serves committed files and there is no build server in the
+path.
+
+`OUT` at the top of `build.mjs` is the only place the output directory is named.
+Page paths are handled in *site* space throughout — `4a/privacy/index.html`, not
+`docs/4a/privacy/index.html` — because that is the space a browser resolves an
+href in, and `docs/` is a serving detail the reader never sees. `OUT` is applied
+at the moment of writing and nowhere else, which is why the link checker and the
+relative-depth arithmetic in `up()` were unaffected by the move.
 
 The build is also the test suite. It fails, rather than publishing, on: a
 `<script>` tag; any element that would fetch a subresource from another origin; a
@@ -113,10 +130,14 @@ unsubstituted `{{PLACEHOLDER}}`; a shape change in the upstream privacy policy;
 **a dead internal link; or a fragment link pointing at an id that does not
 exist.** The last two matter because Apple's enrollment requirement is that the
 site be "functional", and a 404 behind the navigation is the cheapest possible way
-to fail that. The final line of output is the count:
+to fail that. It also fails on **a missing or wrong `docs/CNAME` or
+`docs/.nojekyll`** — Pages reads both from the directory it serves, and losing
+the first unsets the custom domain and 404s every URL. The last two lines of
+output are the count and that check:
 
 ```
 26 pages, 739 internal links all resolve, 76 off-site links not fetched.
+docs/CNAME and docs/.nojekyll present. Pages source must be set to the docs/ folder.
 ```
 
 Off-site links are counted, not fetched — this is a build, not a crawler.
@@ -129,7 +150,7 @@ build otherwise. The reason is not taste: the app this site fronts ships a stric
 CSP that blocks remote fonts and scripts, and the site holds the same line so the
 two cannot drift into different rules.
 
-## How this is served, and the two settings that matter
+## How this is served, and the three settings that matter
 
 GitHub Pages is the origin. **Cloudflare sits in front of it, and that is not
 optional** — GitHub never issued a certificate for `jwlabs.dev` (five days at
@@ -138,16 +159,27 @@ still presents `CN=*.github.io`. Cloudflare terminates TLS with a real
 certificate for the domain instead. `.dev` is HSTS-preloaded, so a certificate
 error here is not a click-through warning: the site is simply unreachable.
 
-Two zone settings are therefore load-bearing, and neither is visible from this
-repository:
+Three settings are load-bearing — the first on GitHub, the other two consequences
+of the arrangement above, on Cloudflare — and **none of them is visible from this
+repository.** Nothing you can read here will tell you one is wrong; the site is
+just down, or quietly serving something it should not:
 
-1. **DNS records proxied (orange cloud), SSL/TLS mode `Full`.** Not `Flexible`
+1. **GitHub Pages source: branch `main`, folder `/docs`.** Not `/ (root)`. On
+   root, every file in the repository answers HTTP 200 — see [What is served,
+   and what is not](#what-is-served-and-what-is-not) for the three exposures that
+   caused. This setting and `docs/CNAME` are a pair: Pages reads `CNAME` from the
+   directory it serves, so pointing the source at root while the file sits in
+   `docs/` unsets the custom domain, and every jwlabs.dev URL 404s behind
+   Cloudflare with nothing in this repository to explain why. `node build.mjs`
+   asserts the file is in the right place; it cannot see the setting.
+
+2. **DNS records proxied (orange cloud), SSL/TLS mode `Full`.** Not `Flexible`
    — Cloudflare would speak HTTP to Pages, Pages redirects to HTTPS, and the
    result is a redirect loop. Not `Full (strict)` — it validates the origin
    certificate, sees `*.github.io` against `jwlabs.dev`, and returns 526. Turning
    the clouds grey brings back `ERR_CERT_COMMON_NAME_INVALID`.
 
-2. **Scrape Shield → Email Address Obfuscation OFF.** On, it rewrites every
+3. **Scrape Shield → Email Address Obfuscation OFF.** On, it rewrites every
    `mailto:` into a `/cdn-cgi/l/email-protection#<hex>` link, replaces the visible
    address with the literal text `[email protected]`, **and injects a `<script>`
    tag** to decode it at runtime. That defeats the no-script rule above from
@@ -163,19 +195,73 @@ To check the served page rather than the built one:
 ```
 curl -sS https://jwlabs.dev/ | grep -c '<script'          # must be 0
 curl -sS https://jwlabs.dev/ | grep -o 'mailto:[^"]*'     # must be the real address
+curl -so /dev/null -w '%{http_code}\n' https://jwlabs.dev/README.md   # must be 404
 ```
+
+## What is served, and what is not
+
+**`docs/` is public. The root is not.** Pages is pointed at the `docs/` folder,
+so the served tree is exactly the 26 pages plus `style.css`, `favicon.svg`,
+`CNAME` and `.nojekyll`. `README.md`, `build.mjs`, `build-md.mjs` and `src/*.md`
+are not URLs.
+
+The rule, and it is the whole of the rule: **anything you put in `docs/` is a
+public URL.** There is no half-served file and no directory Pages politely skips.
+If a file should not be readable by a stranger who guesses a path, it goes at the
+root — or, if it is not about this site at all, in the foray repo.
+
+**This used to be the other way round, and it cost three exposures.** Pages
+served the branch root, which made every file in the repository a public URL:
+
+1. An internal working note about the 2026-08-24 Apple enrollment rejection was
+   readable at `/docs/apple-enrollment-website.md`. It named the wrong company
+   four times — which `build.mjs`'s `JW Incorporated` guard could not catch,
+   because that guard only inspects pages `build.mjs` writes. It now lives in the
+   foray repo.
+2. This README was readable at `/README.md`, discussing the Apple rejection, the
+   wrong-company-name history, and the guard that forbids the string.
+3. `src/4a-privacy-policy.md` was readable at `/src/4a-privacy-policy.md`,
+   `Status: DRAFT` banner and nine `TODO(founder)` notes intact — five of them
+   unresolved internal decisions — which is precisely the text `publishPolicy()`
+   strips from `/4a/privacy/`. The transform cleaned the page; nothing cleaned the
+   raw file, because it was served as-is.
+
+Patching each instance was losing. Every fix was a new file to remember about,
+and the guard that could have caught the first one was structurally unable to see
+it. Making the root not a public directory fixes the class: the question stops
+being "is this file safe to serve?" and becomes "is this file in `docs/`?", which
+`git ls-files docs/` answers.
+
+Two things follow. Non-page files still do not belong in this repository if they
+belong somewhere else — the Apple note is better off in foray whatever Pages is
+pointed at, since that is where the work it describes lives. And the `docs/`
+name is now taken: it is the served root, so it can never hold internal notes.
 
 ## Files
 
+Ordered by the only distinction that matters: served or not.
+
+**Not served — the repository root.** These are the source of the site and the
+notes about it, and none of them is reachable over HTTP.
+
 | File | What it is |
 |---|---|
+| `README.md` | This file. |
 | `build.mjs` | The generator. Holds structure and metadata only -- titles, descriptions, breadcrumbs, emit order -- pulls every page's prose out of `src/*.md`, runs the privacy-policy publication transform, asserts everything listed above, and link-checks the result. No prose lives in this file. |
 | `build-md.mjs` | Dependency-free Markdown→HTML for the subset these documents use. Escapes anything it does not understand, so an unhandled construct degrades to visible text rather than to injected markup. Relative links deliberately degrade to plain text rather than to a 404. Also holds the shared chrome (`page()`) and the four single-source facts: `MAIL`, `ORG`, `ORG_FORM`, `ORG_FORMED`. |
 | `src/*.md` (except `4a-privacy-policy.md`) | Every page's prose, one file per page. Rendered by the same `mdToHtml` the privacy policy uses, so there is one renderer and not two. `{{MAIL}}`, `{{ORG}}`, `{{STUDIO}}`, `{{ORG_FORM}}` and `{{ORG_FORMED}}` are substituted at build time and a leftover placeholder fails the build. Links inside them are written root-relative (`/about/`) and rewritten to the page's own depth. |
-| `style.css` | The whole stylesheet. System font stack; light/dark via `prefers-color-scheme`, with a `[data-theme]` override block kept for the day something can set it. Nothing sets it today — there is no script, by constraint — so in practice the OS decides. |
-| `src/4a-privacy-policy.md` | A **snapshot** of `docs/legal/privacy-policy.md` from the [foray repo](https://github.com/JW-Incorporated/foray). See below. |
-| `favicon.svg` | Same-origin SVG favicon, so a first visit does not 404 on `/favicon.ico`. Inverts with the OS theme. |
-| `CNAME`, `.nojekyll` | Pages configuration. |
+| `src/4a-privacy-policy.md` | A **snapshot** of `docs/legal/privacy-policy.md` from the [foray repo](https://github.com/JW-Incorporated/foray), carried verbatim — `Status: DRAFT` banner, nine `TODO(founder)` notes and all. See below. |
+| `.gitattributes` | `* text=auto eol=lf`. The checkout is on Windows; the committed pages are LF. |
+
+**Served — `docs/`.** Twenty-six generated pages plus four static files. Nothing
+else belongs here, and anything added here is a public URL.
+
+| File | What it is |
+|---|---|
+| `docs/**/index.html` | The 26 pages, generated by `build.mjs` and committed. Do not hand-edit; edit `src/*.md` and rebuild. |
+| `docs/style.css` | The whole stylesheet. System font stack; light/dark via `prefers-color-scheme`, with a `[data-theme]` override block kept for the day something can set it. Nothing sets it today — there is no script, by constraint — so in practice the OS decides. |
+| `docs/favicon.svg` | Same-origin SVG favicon, so a first visit does not 404 on `/favicon.ico`. Inverts with the OS theme. |
+| `docs/CNAME`, `docs/.nojekyll` | Pages configuration, and it has to be **here** rather than at the root: Pages reads both from the directory it serves. `build.mjs` asserts it. |
 
 ## The privacy policy is converted, not written here
 
@@ -216,32 +302,21 @@ wrong document through:
 Google Play's declaration form and is **deliberately not published here.** The
 policy links to it; `build-md.mjs` renders that relative link as plain text.
 
-### One known wart: the snapshot is served
+### The snapshot stays faithful, and it is not served
 
-Pages serves the branch root, so `src/4a-privacy-policy.md` is fetchable at
-`https://jwlabs.dev/src/4a-privacy-policy.md` — **including its `Status: DRAFT`
-banner and its nine `TODO(founder)` notes**, which is exactly the text
-`publishPolicy()` exists to keep off the published page. Accepted rather than
-fixed, on three grounds: the repository is public, so that text is readable at a
-`github.com` URL either way; nothing links to the path; and the published page's
-provenance blockquote already states which notes were removed, so finding the
-source confirms the disclosure rather than contradicting it.
+`src/4a-privacy-policy.md` keeps its `Status: DRAFT` banner and all nine
+`TODO(founder)` notes, verbatim, and **that is deliberate.** `publishPolicy()`
+asserts it removes exactly one banner and exactly nine blocks; deleting them from
+the source, or softening them, would make those assertions pass against nothing —
+a green build that has stopped checking anything. The snapshot is an input to a
+transform, not a page. Do not tidy it.
 
-Every other `src/*.md` is now served the same way, and that part is harmless —
-they are the same prose as the rendered pages, minus the chrome. The `docs/`
-directory is served too. **In this repository every file is a URL.** That is why
-the Apple working note now lives in the foray repo instead: served from here it
-answered HTTP 200 to anyone who guessed the path, and it named the wrong company
-four times, which `build.mjs`'s guard could not see because it only inspects
-pages `build.mjs` writes. Keep non-page files out of this repo.
-
-If that trade stops being acceptable, the fix is to move the generated
-pages plus `style.css`, `favicon.svg`, `CNAME` and `.nojekyll` into a served
-subdirectory and re-point Pages at it — then `build.mjs`, `src/`, `docs/` and this
-README stop being served at all. It was not done here because re-pointing the
-Pages source while an enrollment re-review is pending risks breaking the one URL
-that review depends on. Note the name collision if you do: Pages'
-`source.path: "/docs"` option cannot be used while `docs/` holds internal notes.
+It used to be served, because Pages served the branch root: the banner and the
+nine notes — the exact text `publishPolicy()` exists to keep off the published
+page — answered HTTP 200 at `/src/4a-privacy-policy.md`. That is fixed
+structurally rather than by editing the file. `src/` is outside `docs/`, so it is
+not served, and the faithful snapshot and the clean published page can both be
+true at once.
 
 ## longlive has no privacy policy on this site, on purpose
 
@@ -253,7 +328,7 @@ because it is submitted to a store as a factual declaration. Do not add one here
 
 ## DNS
 
-`CNAME` claims the apex `jwlabs.dev`. The zone is on Cloudflare and points at
+`docs/CNAME` claims the apex `jwlabs.dev`. The zone is on Cloudflare and points at
 GitHub Pages' four apex addresses, plus a `www` alias:
 
 ```
