@@ -29,6 +29,42 @@ build otherwise. The reason is not taste: the app this site fronts ships a stric
 CSP that blocks remote fonts and scripts, and the site holds the same line so the
 two cannot drift into different rules.
 
+## How this is served, and the two settings that matter
+
+GitHub Pages is the origin. **Cloudflare sits in front of it, and that is not
+optional** — GitHub never issued a certificate for `jwlabs.dev` (five days at
+`authorization_created`, and remove/re-add did not shake it loose), so the origin
+still presents `CN=*.github.io`. Cloudflare terminates TLS with a real
+certificate for the domain instead. `.dev` is HSTS-preloaded, so a certificate
+error here is not a click-through warning: the site is simply unreachable.
+
+Two zone settings are therefore load-bearing, and neither is visible from this
+repository:
+
+1. **DNS records proxied (orange cloud), SSL/TLS mode `Full`.** Not `Flexible`
+   — Cloudflare would speak HTTP to Pages, Pages redirects to HTTPS, and the
+   result is a redirect loop. Not `Full (strict)` — it validates the origin
+   certificate, sees `*.github.io` against `jwlabs.dev`, and returns 526. Turning
+   the clouds grey brings back `ERR_CERT_COMMON_NAME_INVALID`.
+
+2. **Scrape Shield → Email Address Obfuscation OFF.** On, it rewrites every
+   `mailto:` into a `/cdn-cgi/l/email-protection#<hex>` link, replaces the visible
+   address with the literal text `[email protected]`, **and injects a `<script>`
+   tag** to decode it at runtime. That defeats the no-script rule above from
+   outside the repo, where `build.mjs`'s assertion cannot see it — the build stays
+   green while the served page has a script in it. Worse, the contact address
+   disappears without JavaScript, and `/4a/privacy/` and `/4a/support/` exist
+   precisely so an App Store reviewer can find that address.
+
+   **Rocket Loader** must stay off for the same reason.
+
+To check the served page rather than the built one:
+
+```
+curl -sS https://jwlabs.dev/ | grep -c '<script'          # must be 0
+curl -sS https://jwlabs.dev/ | grep -o 'mailto:[^"]*'     # must be the real address
+```
+
 ## Files
 
 | File | What it is |
