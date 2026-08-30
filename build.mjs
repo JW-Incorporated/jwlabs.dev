@@ -291,6 +291,14 @@ emit("4a/support/index.html", {
   body: doc("4a-support"),
 });
 
+emit("4a/delete-my-data/index.html", {
+  title: `4a - delete your data · ${STUDIO}`,
+  nav: "4a",
+  crumb: crumb(link("/4a/", "4a"), "Delete your data"),
+  desc: "How to delete everything 4a holds about you, what the control reaches, and what it cannot.",
+  body: doc("4a-delete-my-data"),
+});
+
 emit("4a/for-podcasters/index.html", {
   title: `4a - for podcasters · ${STUDIO}`,
   nav: "4a",
