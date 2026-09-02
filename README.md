@@ -61,9 +61,11 @@ The URLs, all of which are `docs/<path>/index.html` on disk:
 /4a/your-data/                             plain-language privacy, and deletion
 /4a/faq/                                   the questions people actually ask
 /4a/support/                               how to get help          (Apple-required URL)
+/4a/age-rating/                            content and age suitability  (store-required URL)
 /4a/for-podcasters/                        publishers: what we do, and removal
 /4a/privacy/                               4a's privacy policy      (store-required URL)
 /longlive/                                 longlive, linking out to longlivets.com
+/longlive/age-rating/                      content and age suitability  (store-required URL)
 /status/                                   what is built and what is not
 /contact/                                  the one address, and what to include
 /glossary/                                 terms a user would meet

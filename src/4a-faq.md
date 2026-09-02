@@ -145,9 +145,9 @@ statement in a document store reviewers read. We would rather record the silence
 
 ### When are the iOS and Android apps out?
 
-No date. Shells for both are built from the same code as the web app; the iOS
-build has run on the simulator and the Android build has been compiled. **Neither
-is in a store.** The web app is the shipping version today and works on a phone.
+Both are built from the same code as the web app, and store releases are being
+prepared. We announce them when they land rather than before. The web app is the
+shipping version today and works on a phone.
 
 We do not publish dates. A missed date on a company website is a worse signal than
 an absent one.

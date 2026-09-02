@@ -33,11 +33,9 @@ product and form your own opinion in ten seconds.
 
 **Native iOS and Android shells** are built from the same code as 4a's web app —
 the same interface, the same player, copied at build time rather than forked. The
-iOS build has been launched on the simulator. The Android build compiles and has
-never been run. **Neither is in any app store, and there is no date.**
-
-Nothing {{ORG}} makes is currently distributed through the App Store or Google Play.
-Stating that is cheaper than the alternative.
+Both build, and **store releases are being prepared.** Until one lands, the web app
+is the shipping version — this page says so rather than implying a store link that
+does not exist yet.
 
 **4a's foray player** — speed control, next and previous segment, resume at an
 exact position — is written and works.
