@@ -309,7 +309,7 @@ emit("4a/age-rating/index.html", {
   title: `4a - content and age suitability · ${STUDIO}`,
   nav: "4a",
   crumb: crumb(link("/4a/", "4a"), "Age suitability"),
-  desc: "What is actually in 4a, who it suits, what Family mode does and does not catch, and what the app deliberately does not contain.",
+  desc: "What is actually in 4a, who it suits, why there is no content filter, and what the app deliberately does not contain.",
   body: doc("4a-age-rating"),
 });
 
