@@ -299,6 +299,20 @@ emit("4a/delete-my-data/index.html", {
   body: doc("4a-delete-my-data"),
 });
 
+/* The store-form answer to "where is your content/age suitability description?".
+   It deliberately claims NO store rating: as of 2026-09-01 neither store has
+   assigned one, and the foray repo's privacy policy still carries a
+   TODO(founder) for which rating to declare. Same discipline as the policy
+   conversion above -- silent beats wrong. When the ratings are filed, add them
+   here rather than letting this page and the listings disagree. */
+emit("4a/age-rating/index.html", {
+  title: `4a - content and age suitability · ${STUDIO}`,
+  nav: "4a",
+  crumb: crumb(link("/4a/", "4a"), "Age suitability"),
+  desc: "What is actually in 4a, who it suits, what Family mode does and does not catch, and what the app deliberately does not contain.",
+  body: doc("4a-age-rating"),
+});
+
 emit("4a/for-podcasters/index.html", {
   title: `4a - for podcasters · ${STUDIO}`,
   nav: "4a",
@@ -319,6 +333,20 @@ emit("longlive/index.html", {
   crumb: crumb("longlive"),
   desc: "longlive is a time machine through Taylor Swift's twelve eras: a scrubbable, filterable timeline where every moment is sourced and dated. It lives at longlivets.com.",
   body: doc("longlive"),
+});
+
+/* Sourced from longlive's OWN store filings, not inferred here -- the absences
+   (no ads, no purchases, no UGC, no free-text entry in the app) are its
+   documented declarations. That is the bar the note above sets: this page states
+   what longlive itself asserts about its app, and stops. It claims no store
+   rating, for the same reason 4a's does not. Its privacy policy and terms stay
+   on longlivets.com; only the suitability description lives here. */
+emit("longlive/age-rating/index.html", {
+  title: `longlive - content and age suitability · ${STUDIO}`,
+  nav: "longlive",
+  crumb: crumb(link("/longlive/", "longlive"), "Age suitability"),
+  desc: "What is in the longlive timeline, who it suits, and what the app deliberately does not contain.",
+  body: doc("longlive-age-rating"),
 });
 
 /* --------------------------------------------------- company-wide pages --- */
