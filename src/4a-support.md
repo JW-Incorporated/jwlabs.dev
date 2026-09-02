@@ -93,9 +93,8 @@ how to have your show removed. The answer is yes.
 **The web app is the shipping version.** It works on a phone, needs no signup, and
 can be added to a home screen.
 
-**Native iOS and Android shells are built** from the same code. The iOS build has
-run on the simulator; the Android build has been compiled. **Neither is in a store,
-and there is no date.** We do not publish dates.
+**Native iOS and Android apps are built** from the same code, and store releases
+are being prepared. We announce them when they land rather than before.
 
 [What is built and what is not](/status/) is the whole inventory, including the
 things that are designed and not built.

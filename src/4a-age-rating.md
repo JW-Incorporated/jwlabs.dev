@@ -38,25 +38,21 @@ plays as its publisher made it. That is a deliberate rule about respecting
 publishers' work, and one of its consequences is that we cannot clean up an episode
 even if we wanted to.
 
-## Family mode, and its honest limits
+## There is no content filter
 
-4a has a **Family mode** in the menu. Turned on, it hides episodes their publisher
-has flagged as explicit, and it hides the comedy category entirely.
+**4a does not filter its library by content, and it has no parental controls.**
+Everything in the library is available to anyone using the app.
 
-It is a local setting on your device. It collects nothing and sends nothing, and it
-is off by default.
+That is worth saying plainly, because the machinery to do it well does not exist.
+Podcast feeds carry an "explicit" flag their publisher can set, but most never set
+it: of the 220 shows in the library, **7 declare one; the rest say nothing either
+way** *(measured, 2026-09-01)*. A filter built on a signal that is usually absent
+would catch a little and imply it caught everything, which is worse than not
+offering one.
 
-**Here is the part most apps would not tell you.** The explicit flag comes from the
-publisher's own feed, and most publishers never set it. Of the 220 shows in the
-library, **7 carry an explicit flag; the rest declare nothing either way**
-*(measured, 2026-09-01)*. Family mode filters on a signal that is usually absent.
-
-So: Family mode reliably removes the material that was *declared* explicit, and it
-removes comedy, which is where most of the strong language sits. **It is not a
-guarantee, it is not a parental control, and it should not be relied on as one.**
-An episode whose publisher never rated it will pass straight through.
-
-We would rather say that plainly than let the toggle imply a promise it cannot keep.
+So the honest description is the one at the top of this page: 4a is a
+general-audience app for listeners 13 and over, and an adult deciding whether it
+suits a younger listener should read this page rather than trust a toggle.
 
 ## What is not in the app
 
@@ -99,10 +95,10 @@ the app, in our own words, at more length than a rating badge can carry.
 
 Tell us: **[{{MAIL}}](mailto:{{MAIL}})**.
 
-That includes an episode you think should not be in a general-audience library, a
-show whose category is wrong, and an explicit episode that reached you with Family
-mode on. The last one is genuinely useful — it usually means a publisher's feed is
-not declaring something, and we can act on it for everyone.
+That includes an episode you think should not be in a general-audience library and a
+show whose category is wrong. Both are genuinely useful: an episode that landed
+somewhere it does not belong is usually a signal about the show around it, and we
+can act on that for everyone rather than only for you.
 
 We read what arrives, and we will tell you what we decide, including when we decide
 to leave something as it is.

@@ -86,11 +86,8 @@ a sentence we cannot support is a false statement.
 
 4a's web app is deployed and works, at
 [jw-incorporated.github.io/foray/](https://jw-incorporated.github.io/foray/), with
-no signup and no password. Native iOS and Android shells are built from the same
-code; the iOS build has been launched on the simulator, the Android build has been
-compiled but never run, and neither is in a store. Nothing {{ORG}} makes is
-currently distributed through the App Store or Google Play. longlive is live on its
-own domain.
+no signup and no password. Native iOS and Android apps are built from the same
+code, and store releases are being prepared. longlive is live on its own domain.
 
 [What is built and what is not](/status/) is the full inventory, including the
 things that are designed and not built and the one thing that is written and not yet

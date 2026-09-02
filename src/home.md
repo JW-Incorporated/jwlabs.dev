@@ -80,9 +80,9 @@ short path from decision to shipped code: whoever decides what to build is whoev
 writes it, so a change of direction costs a conversation rather than a planning
 cycle.
 
-Nothing we make is in the App Store or Google Play yet. 4a's web app is deployed and
-works; native iOS and Android shells are built from the same code and neither is in
-a store. [More about the company](/about/).
+4a's web app is deployed and works today; native iOS and Android apps are built from
+the same code and store releases are being prepared. [More about the
+company](/about/).
 
 ## Contact
 
