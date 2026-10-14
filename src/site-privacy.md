@@ -95,8 +95,9 @@ information, so this section says exactly what, where it is kept, and for how lo
 - the **city you typed**, and the **place it resolved to** — its name, region,
   country, coordinates and time zone — which decides the local news and weather
   in your copy;
-- a **one-way hash of your IP address**, mixed with a value that changes every
-  day so it cannot be reversed into the address or matched across days. It is
+- a **one-way hash of your IP address** (for an IPv6 address, of its network
+  prefix), mixed with a value that changes every day so it cannot be reversed into
+  the address or matched across days. It is
   used only to limit how many signups can come from one place, which is how we
   keep the form from being abused;
 - the **status** of your subscription (waiting for confirmation, or active) and
@@ -129,9 +130,13 @@ goes only to Cloudflare, to deliver the email.
 **How long.**
 
 - A signup that is **never verified is deleted after 7 days**, from our database
-  and from Cloudflare's list.
-- When you **unsubscribe**, your address is removed from Cloudflare's list and your
-  record, including its send records, is deleted.
+  and from Cloudflare's list — including one that is still waiting for its
+  verification email to be sent.
+- When you **unsubscribe**, sending stops at once, your address is removed from
+  Cloudflare's list, and your record, including its send records, is deleted. If
+  Cloudflare cannot be reached at that moment, we keep only your address and the
+  fact that you unsubscribed until the removal goes through, retrying every hour;
+  nothing is sent to you in the meantime.
 - Otherwise we keep your record for as long as you are subscribed.
 
 **No sharing.** We do not sell, rent, share or disclose your email address or
