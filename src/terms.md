@@ -1,6 +1,6 @@
 # Terms of use
 
-**Effective August 25, 2026.**
+**Effective October 14, 2026.**
 
 These terms are an agreement between you and **{{ORG}}**, {{ORG_FORM}} ("we", "us", "our"). They govern your use of this website,
 `jwlabs.ai`, and of **4a**, our podcast curator. By using either one you accept
@@ -14,7 +14,9 @@ They do **not** govern longlive. longlive is published at
 This website is informational. 4a is software we make available free of charge,
 without an account, a password or a subscription. Neither is sold to you, and
 nothing here is a contract to deliver a service to a standard, on a schedule, or
-at all.
+at all. **The Daily Brief**, our weekday news email, is a free informational email
+provided as is, and you can stop it at any time with the unsubscribe link in every
+issue.
 
 **4a is early software and we say so everywhere.** Features change, the catalogue
 changes, and things break. We may add, alter, suspend or discontinue any part of

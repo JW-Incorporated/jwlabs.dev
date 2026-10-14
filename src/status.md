@@ -8,7 +8,7 @@ so that nobody has to assemble the answer from nine others.
 promise, and a missed date on a company website is a worse signal than an absent
 one. Where something has no date it is because nobody can honestly give it one.
 
-*Reviewed 2026-08-25. If you are reading this much later and it is unchanged, treat
+*Reviewed 2026-10-14. If you are reading this much later and it is unchanged, treat
 the "not built" column as the reliable half — it only ever gets shorter, and nothing
 in the "you can use this" column has ever moved backwards.*
 
@@ -25,7 +25,11 @@ no connection — though playing audio needs one.
 [longlivets.com](https://longlivets.com/) — the scrubbable timeline, the category
 filters, and the threads.
 
-Those two sentences are the whole "available today" list, and the first is the
+**[The Daily Brief](https://jwlabs.ai/dailybrief/) is live.** Sign up with an email
+address and a city; the first issue arrives the next weekday morning after you
+confirm your address.
+
+Those three sentences are the whole "available today" list, and the first is the
 reason this website leads with a link rather than a screenshot: you can open the
 product and form your own opinion in ten seconds.
 
