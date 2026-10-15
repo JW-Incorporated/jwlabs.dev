@@ -120,6 +120,9 @@ the library work that gives the next one better raw material.
 **For [longlive](/longlive/):** more of the timeline, sourced and dated to the same
 standard, with fan interpretation marked as interpretation on the moment itself.
 
+**For The Daily Brief:** local news for each new town a reader signs up from, to
+the same rule as the rest of the issue — every claim linked to its source.
+
 **For the company:** [outside engineering work](/services/), where the problem is
 the kind of problem we are good at.
 

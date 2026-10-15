@@ -26,6 +26,10 @@ saved links and orphan data already on people's devices.
 domain. Previously called swift2, which is why that name turns up in older
 references. See [longlive](/longlive/).
 
+**The Daily Brief** — a free weekday morning news email from dailybrief@jwlabs.ai,
+with local news and weather for the reader's own town. Written by Claude from the
+sources it links. [Sign up](https://jwlabs.ai/dailybrief/).
+
 **{{STUDIO}} / {{ORG}}** — the same company. "{{STUDIO}}" is the short form of the
 legal name and not a separate entity, a brand of a parent, or a trading name.
 [The company page](/about/).

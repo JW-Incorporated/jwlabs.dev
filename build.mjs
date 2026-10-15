@@ -159,7 +159,7 @@ const emit = (path, opts) => pages.push([path, opts]);
 emit("index.html", {
   title: `${STUDIO} - ${ORG}`,
   nav: "",
-  desc: `${ORG} is ${ORG_FORM}. It builds 4a, a daily podcast picker, and longlive, a sourced timeline of Taylor Swift's twelve eras, and takes on engineering and app development work.`,
+  desc: `${ORG} is ${ORG_FORM}. It builds 4a, a daily podcast picker; longlive, a sourced timeline of Taylor Swift's twelve eras; and The Daily Brief, a weekday morning news email — and takes on engineering and app development work.`,
   body: doc("home"),
 });
 
