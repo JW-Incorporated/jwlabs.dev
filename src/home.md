@@ -16,7 +16,7 @@ through all twelve of them. Live on its own domain at
 [longlivets.com](https://longlivets.com/).
 
 **[The Daily Brief](https://jwlabs.ai/dailybrief/)** is a weekday morning news
-email you can read in about three minutes: the lead stories, then the nation, the
+email you can read in about two minutes: the lead stories, then the nation, the
 world, money, and science and tech, at most two short sentences an item, every
 claim linked to the source it came from — and the weather and local news for your
 own town. It is free, it is written by Claude from the linked sources and says so
