@@ -110,33 +110,32 @@ information, so this section says exactly what, where it is kept, and for how lo
 Nothing else. No name, no age, no tracking pixel in the email, no record of
 whether or when you open it, and no record of which links you click.
 
-**Where it is kept.** In a **Cloudflare D1** database that we operate, and —
-your email address only — in the **destination address list of Cloudflare Email
-Routing**, the service that delivers the email. Cloudflare is a US-based provider
-acting for us, and its own privacy terms apply to its handling of that data.
+**Where it is kept.** In a **Cloudflare D1** database that we operate. The email
+itself is delivered by **Resend**, which receives your address and the message
+each time we send you one, and keeps a log of what it sent (recipient, subject,
+delivery status) for up to 30 days. Cloudflare and Resend are US-based providers
+acting for us, and their own privacy terms apply to their handling of that data.
+Resend's open and click tracking is switched off, so it records nothing about
+whether you open an issue or what you click.
 
-**Who sends the confirmation.** Cloudflare only delivers our mail to an address
-that has confirmed it wants it, so when you sign up **Cloudflare sends you a
-verification email**, not us. Your subscription starts when you click Verify in
-it; until then nothing else is sent to you.
+**The confirmation.** When you sign up we email you a link, and your
+subscription starts only when you open it and press Confirm; until then nothing
+else is sent to you.
 
 **Who else sees what.** To turn the city you typed into a place, that text — not
 your email address — is looked up with Open-Meteo's geocoding service; for a place
 in the United States its coordinates are also looked up with the National Weather
 Service. Each issue's local news and weather are prepared per place, not per
 person, from a list of places that contains no email addresses. Your email address
-goes only to Cloudflare, to deliver the email.
+goes only to Cloudflare, where it is stored, and to Resend, to deliver the email.
 
 **How long.**
 
-- A signup that is **never verified is deleted after 7 days**, from our database
-  and from Cloudflare's list — including one that is still waiting for its
-  verification email to be sent.
-- When you **unsubscribe**, sending stops at once, your address is removed from
-  Cloudflare's list, and your record, including its send records, is deleted. If
-  Cloudflare cannot be reached at that moment, we keep only your address and the
-  fact that you unsubscribed until the removal goes through, retrying every hour;
-  nothing is sent to you in the meantime.
+- A signup that is **never confirmed is deleted after 7 days** — including one
+  that is still waiting for its confirmation email to be sent.
+- When you **unsubscribe**, sending stops at once and your record, including its
+  send records, is deleted. Resend's log of emails already sent ages out within
+  30 days.
 - Otherwise we keep your record for as long as you are subscribed.
 
 **No sharing.** We do not sell, rent, share or disclose your email address or
