@@ -13,7 +13,7 @@ from. And it takes on
 problem is that shape.
 
 That is not a slogan looking for a product. It is the description that fell out of
-building two of them.
+building three of them.
 
 **[4a](/4a/)** is a daily podcast picker. Four topic queues a day rather than one
 endless feed, one of them deliberately outside your usual subjects, drawn from a
@@ -29,7 +29,12 @@ sourced and dated, and where a narrative is a widely-held fan interpretation rat
 than a confirmed fact, the site marks it on the moment itself rather than in a
 disclaimer nobody reads.
 
-Same shape, different subject. Both are about provenance under load: a lot of source
+**[The Daily Brief](https://jwlabs.ai/dailybrief/)** is a free weekday morning news email: the day's
+consequential stories at most two short sentences each, every claim linked to the
+source it came from, and the weather and local news for the reader's own town.
+Claude writes it from the linked sources, and every issue says so.
+
+Same shape, different subject. All three are about provenance under load: a lot of source
 material, a reader who wants a path through it, and a hard rule that nothing gets
 asserted more confidently than its source supports.
 
@@ -88,6 +93,8 @@ a sentence we cannot support is a false statement.
 [jw-incorporated.github.io/foray/](https://jw-incorporated.github.io/foray/), with
 no signup and no password. Native iOS and Android apps are built from the same
 code, and store releases are being prepared. longlive is live on its own domain.
+The Daily Brief goes out every weekday morning; [sign up](https://jwlabs.ai/dailybrief/) with an email
+address and a town.
 
 [What is built and what is not](/status/) is the full inventory, including the
 things that are designed and not built and the one thing that is written and not yet

@@ -59,7 +59,8 @@ curated shows and tens of thousands more at breadth, ingested from public feeds 
 directories, with search that reports a thin result as thin and offers adjacent
 subjects when it finds nothing. [longlive](/longlive/) is a decade of scattered
 material presented as one scrubbable timeline with every entry dated and
-attributed.
+attributed. The Daily Brief turns each morning's reporting into a short email in
+which every claim links to its source.
 
 **Where the honest edge is.** The discipline above is what keeps a dataset correct
 as it grows, which is a different problem from operating a system already under

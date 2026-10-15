@@ -41,9 +41,9 @@ episodes asked.
 
 That page is the fastest route to *oh, that is what this is for.*
 
-## The same problem twice
+## The same problem, three ways
 
-Both products take a large, messy body of real source material and make it
+All three products take a large, messy body of real source material and make it
 navigable — while keeping every claim attached to the thing it came from.
 
 For **4a** the material is podcast audio: hours of speech with no table of contents,
@@ -54,6 +54,11 @@ For **longlive** it is a decade of scattered reporting, where the interesting
 difficulty is that some of it is confirmed fact and some is widely-held fan
 interpretation — so the timeline marks which is which **on the moment itself**, not
 in a disclaimer at the bottom of the page.
+
+For **The Daily Brief** it is the morning's news: far more reporting than anyone
+could read, a good deal of it written to provoke. The brief keeps the stories that
+matter, says each in at most two sentences, links every claim to its source, and
+leaves out what is only outrage.
 
 Different subjects, one shape: a lot of source material, a reader who wants a path
 through it, and a hard rule that nothing gets asserted more confidently than its
@@ -68,6 +73,8 @@ chains, no notification bait.
 
 **No advertising, no ad identifiers, and no third-party SDKs.** 4a contains no
 advertising code, no analytics library and no crash reporter — none, rather than few.
+The Daily Brief carries no advertising and no tracking pixel, and records nothing
+about whether you open it.
 
 **We never rehost, transform or modify a publisher's audio, and we never strip
 advertising.** [The page for podcasters](/4a/for-podcasters/) is the full statement,
@@ -88,8 +95,8 @@ writes it, so a change of direction costs a conversation rather than a planning
 cycle.
 
 4a's web app is deployed and works today; native iOS and Android apps are built from
-the same code and store releases are being prepared. [More about the
-company](/about/).
+the same code and store releases are being prepared. The Daily Brief goes out
+every weekday morning. [More about the company](/about/).
 
 ## Contact
 

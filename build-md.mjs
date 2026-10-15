@@ -166,6 +166,9 @@ const NAV = [
   ["services/", "Services", "services"],
   ["4a/", "4a", "4a"],
   ["longlive/", "longlive", "longlive"],
+  // Served by the Daily Brief Worker, not this build, so it is absolute: the dead-link
+  // check only knows the pages built here.
+  ["https://jwlabs.ai/dailybrief/", "The Daily Brief", "dailybrief"],
   ["status/", "What is built", "status"],
   ["contact/", "Contact", "contact"],
 ];
@@ -188,7 +191,7 @@ const NAV = [
 export function page({ title, base = "./", crumb = "", desc = "", body, nav = "" }) {
   const b = esc(base);
   const links = NAV.map(([href, label, key]) =>
-    `<a href="${b}${href}"${key === nav ? ' aria-current="page"' : ""}>${label}</a>`).join("\n  ");
+    `<a href="${/^https:/.test(href) ? href : b + href}"${key === nav ? ' aria-current="page"' : ""}>${label}</a>`).join("\n  ");
   return `<!doctype html>
 <html lang="en">
 <meta charset="utf-8">

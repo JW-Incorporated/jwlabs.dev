@@ -1,7 +1,7 @@
 # Engineering and app development
 
-{{ORG}} builds software. Mostly we build it for ourselves — [4a](/4a/) and
-[longlive](/longlive/) are ours — and we take on outside work where the problem is
+{{ORG}} builds software. Mostly we build it for ourselves — [4a](/4a/),
+[longlive](/longlive/) and [The Daily Brief](https://jwlabs.ai/dailybrief/) are ours — and we take on outside work where the problem is
 the kind of problem we are good at.
 
 **If you have something to build, write to [{{MAIL}}](mailto:{{MAIL}}).** That
@@ -56,6 +56,10 @@ reports honestly when it cannot finish.
 
 **[longlive](https://longlivets.com/) is live** on its own domain — a scrubbable,
 filterable timeline over a decade of sourced material.
+
+**[The Daily Brief](https://jwlabs.ai/dailybrief/) is live** — a weekday news email researched and
+written by Claude from linked sources, with each reader's copy carrying the weather
+and local news for their own town, delivered at 6 a.m. their time.
 
 **This website** is the same taste at its simplest: no script, no dependencies, no
 external requests, built by one file.

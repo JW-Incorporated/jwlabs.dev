@@ -82,6 +82,12 @@ site sets no cookie, runs no script and has no analytics.
 including a correction to something on its timeline — belongs there. Company-level
 correspondence about it can come to the address above.
 
+## Writing about The Daily Brief
+
+To correct something in an issue, or to tell us what you think of it, reply to the
+issue; replies come to us. To change your town or unsubscribe, use the links at the
+bottom of any issue.
+
 ## Legal and business correspondence
 
 The same address reaches {{ORG}}, {{ORG_FORM}}. Our [terms of use](/terms/) name

@@ -143,9 +143,10 @@ and you will get a straight answer rather than a brochure.
 
 ## The honest summary
 
-{{ORG}} has two real products you can open right now —
-[4a](https://jw-incorporated.github.io/foray/) and
-[longlive](https://longlivets.com/).
+{{ORG}} has three real products you can use right now —
+[4a](https://jw-incorporated.github.io/foray/),
+[longlive](https://longlivets.com/) and
+[The Daily Brief](https://jwlabs.ai/dailybrief/).
 
 What that gets you is software you can inspect yourself rather than a description of
 it, a website that publishes its own gaps, and a first email that gets a real answer

@@ -37,6 +37,8 @@ cookies tells us nothing.
 - **[longlive](/longlive/)** — reports can come to the same address and we will
   route them. Anything specific to that timeline's own content or corrections
   belongs on its own site.
+- **[The Daily Brief](https://jwlabs.ai/dailybrief/)** — the signup, confirmation, manage and
+  unsubscribe pages under `/dailybrief/`, and the email itself.
 - **The public repositories** the products are built from.
 
 ## Out of scope, and where those reports should go instead
